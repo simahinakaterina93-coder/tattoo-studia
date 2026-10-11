@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ALYWAWES — Вход</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    rgba(0, 8, 30, 0.72),
+                    rgba(0, 10, 35, 0.82)
+                ),
+                url("images/ocean.jpg") center / cover no-repeat;
+
+            color: white;
+
+            font-family: "Cormorant Garamond", serif;
+        }
+
+
+        .auth-container {
+            width: 620px;
+
+            padding: 35px 55px 45px;
+
+            background: rgba(2, 8, 35, 0.78);
+
+            border: 1px solid #2d75b8;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 0 35px rgba(0, 130, 210, 0.15);
+        }
+
+
+        .logo {
+            display: block;
+
+            text-align: center;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 42px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .line {
+            width: 100%;
+
+            height: 1px;
+
+            background: #2874b8;
+
+            margin-bottom: 30px;
+        }
+
+
+        h1 {
+            margin: 0 0 30px;
+
+            text-align: center;
+
+            font-size: 36px;
+
+            font-weight: 400;
+        }
+
+
+        /* КНОПКИ ВХОД / РЕГИСТРАЦИЯ */
+
+        .tabs {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 35px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .tab {
+            border: none;
+
+            background: none;
+
+            color: #ffffff;
+
+            font-family: inherit;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            padding-bottom: 6px;
+
+            border-bottom: 1px solid transparent;
+        }
+
+
+        .tab.active {
+            color: #55c9e3;
+
+            border-bottom-color: #55c9e3;
+        }
+
+
+        /* ПОЛЯ */
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 25px;
+        }
+
+
+        input {
+            width: 100%;
+
+            height: 58px;
+
+            padding: 10px 15px;
+
+            background: rgba(0, 5, 30, 0.45);
+
+            border: 1px solid #2874b8;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 22px;
+
+            outline: none;
+        }
+
+
+        input:focus {
+            border-color: #55c9e3;
+
+            box-shadow:
+                0 0 10px rgba(85, 201, 227, 0.2);
+        }
+
+
+        /* КНОПКА */
+
+        .submit-btn {
+            display: block;
+
+            width: 350px;
+
+            height: 58px;
+
+            margin: 35px auto 20px;
+
+            border: 1px solid #4d9ddd;
+
+            border-radius: 14px;
+
+            background: #315587;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 27px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .submit-btn:hover {
+            background: #3d679d;
+
+            box-shadow:
+                0 0 20px rgba(65, 160, 220, 0.3);
+        }
+
+
+        .forgot {
+            display: block;
+
+            text-align: center;
+
+            color: white;
+
+            font-size: 23px;
+
+            text-decoration: none;
+
+            margin-top: 15px;
+        }
+
+
+        .forgot:hover {
+            color: #55c9e3;
+        }
+
+
+        .message {
+            min-height: 25px;
+
+            text-align: center;
+
+            color: #55c9e3;
+
+            font-size: 20px;
+
+            margin-top: 10px;
+        }
+
+
+        .back {
+            display: block;
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #8eb7ca;
+
+            text-decoration: none;
+
+            font-size: 19px;
+        }
+
+
+        .back:hover {
+            color: white;
+        }
+
+
+        @media (max-width: 700px) {
+
+            .auth-container {
+                width: 90%;
+
+                padding: 30px;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="auth-container">
+
+    <a href="index.html" class="logo">
+        ALYWAWES
+    </a>
+
+    <div class="line"></div>
+
+
+    <h1 id="formTitle">
+        Вход в аккаунт
+    </h1>
+
+
+    <div class="tabs">
+
+        <button
+            class="tab active"
+            id="loginTab"
+            onclick="showLogin()">
+            Вход
+        </button>
+
+        <button
+            class="tab"
+            id="registerTab"
+            onclick="showRegister()">
+            Регистрация
+        </button>
+
+    </div>
+
+
+    <!-- =================
+         ФОРМА ВХОДА
+    ================= -->
+
+    <form id="loginForm">
+
+        <div class="form-group">
+
+            <label>
+                Логин
+            </label>
+
+            <input
+                type="text"
+                id="loginUsername"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Пароль
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                required
+            >
+
+        </div>
+
+
+        <a href="#" class="forgot">
+            Забыли пароль?
+        </a>
+
+
+        <button
+            type="submit"
+            class="submit-btn">
+            Войти
+        </button>
+
+    </form>
+
+
+    <!-- =================
+         ФОРМА РЕГИСТРАЦИИ
+    ================= -->
+
+    <form id="registerForm" style="display: none;">
+
+        <div class="form-group">
+
+            <label>
+                Имя
+            </label>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Введите ваше имя"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Логин
+            </label>
+
+            <input
+                type="text"
+                id="registerUsername"
+                placeholder="Придумайте логин"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Пароль
+            </label>
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Придумайте пароль"
+                required
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="submit-btn">
+            Зарегистрироваться
+        </button>
+
+    </form>
+
+
+    <div
+        class="message"
+        id="message">
+    </div>
+
+
+    <a href="index.html" class="back">
+        Вернуться на сайт
+    </a>
+
+</div>
+
+
+
+<script>
+
+    /* =========================
+       ПЕРЕКЛЮЧЕНИЕ ФОРМ
+    ========================= */
+
+    function showLogin() {
+
+        document.getElementById("loginForm").style.display = "block";
+
+        document.getElementById("registerForm").style.display = "none";
+
+        document.getElementById("formTitle").textContent =
+            "Вход в аккаунт";
+
+        document.getElementById("loginTab").classList.add("active");
+
+        document.getElementById("registerTab").classList.remove("active");
+
+        document.getElementById("message").textContent = "";
+    }
+
+
+    function showRegister() {
+
+        document.getElementById("loginForm").style.display = "none";
+
+        document.getElementById("registerForm").style.display = "block";
+
+        document.getElementById("formTitle").textContent =
+            "Регистрация";
+
+        document.getElementById("loginTab").classList.remove("active");
+
+        document.getElementById("registerTab").classList.add("active");
+
+        document.getElementById("message").textContent = "";
+    }
+
+
+    /* =========================
+       РЕГИСТРАЦИЯ
+    ========================= */
+
+    document.getElementById("registerForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById("registerName").value.trim();
+
+            const username =
+                document.getElementById("registerUsername").value.trim();
+
+            const password =
+                document.getElementById("registerPassword").value;
+
+
+            if (!name || !username || !password) {
+
+                document.getElementById("message").textContent =
+                    "Заполните все поля.";
+
+                return;
+            }
+
+
+            const user = {
+
+                name: name,
+
+                username: username,
+
+                password: password,
+
+                appointments: []
+
+            };
+
+
+            localStorage.setItem(
+                "alywawesUser",
+                JSON.stringify(user)
+            );
+
+
+            localStorage.setItem(
+                "alywawesLoggedIn",
+                "true"
+            );
+
+
+            window.location.href = "profile.html";
+
+        });
+
+
+
+    /* =========================
+       ВХОД
+    ========================= */
+
+    document.getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            const username =
+                document.getElementById("loginUsername").value.trim();
+
+            const password =
+                document.getElementById("loginPassword").value;
+
+
+            const savedUser =
+                JSON.parse(
+                    localStorage.getItem("alywawesUser")
+                );
+
+
+            if (!savedUser) {
+
+                document.getElementById("message").textContent =
+                    "Аккаунт не найден. Сначала зарегистрируйтесь.";
+
+                return;
+            }
+
+
+            if (
+                username === savedUser.username &&
+                password === savedUser.password
+            ) {
+
+                localStorage.setItem(
+                    "alywawesLoggedIn",
+                    "true"
+                );
+
+                window.location.href = "profile.html";
+
+            } else {
+
+                document.getElementById("message").textContent =
+                    "Неверный логин или пароль.";
+
+            }
+
+        });
+
+</script>
+
+</body>
+</html>
