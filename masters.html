@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALYWAWES — Мастера</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: #02091d;
+      color: #f5f7ff;
+      font-family: "Cormorant Garamond", serif;
+      overflow-x: hidden;
+    }
+
+    /* ================= HEADER ================= */
+    .header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 90px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(3, 12, 36, 0.94);
+      border-bottom: 1px solid rgba(86, 176, 220, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      width: min(1400px, 95%);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 2.5vw, 45px);
+    }
+
+    .nav-right { justify-content: flex-end; }
+
+    .nav a {
+      position: relative;
+      color: #f3f4f8;
+      text-decoration: none;
+      font-size: 22px;
+      white-space: nowrap;
+      transition: color .3s ease;
+      cursor: pointer;
+    }
+
+    .nav a:hover { color: #51c5e9; }
+
+    .nav a.active::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -12px;
+      height: 1px;
+      background: #e7e9ef;
+    }
+
+    .logo {
+      text-align: center;
+      line-height: 1;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .logo-small {
+      display: block;
+      margin-bottom: 2px;
+      color: #f1f2f5;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: lowercase;
+    }
+
+    .logo-main {
+      display: block;
+      color: #42afd4;
+      font-size: 34px;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    /* ================= ОСНОВНОЙ БЛОК ================= */
+    .masters-page {
+      position: relative;
+      min-height: 100vh;
+      padding: 130px 5% 80px;
+      overflow: hidden;
+
+      /* Базовая тёмная подложка */
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(10, 50, 100, 0.4), transparent 60%),
+        #02091d;
+    }
+
+    /* Левый sketch.png (декоративный, полупрозрачный) */
+    .sketch-left {
+      position: absolute;
+      top: 150px;
+      left: -80px;
+      width: 480px;
+      max-width: 40vw;
+      opacity: 0.18;
+      filter: blur(0.5px);
+      pointer-events: none;
+      z-index: 0;
+      /* ВАЖНО: путь к картинке — замените, если у вас локально */
+      background-image: url("images/sketch.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      aspect-ratio: 1 / 1;
+    }
+
+    /* Правый sketch.png (отражённый) */
+    .sketch-right {
+      position: absolute;
+      top: 150px;
+      right: -80px;
+      width: 480px;
+      max-width: 40vw;
+      opacity: 0.18;
+      filter: blur(0.5px);
+      transform: scaleX(-1);
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("images/sketch.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      aspect-ratio: 1 / 1;
+    }
+
+    /* Контент поверх фона */
+    .masters-content {
+      position: relative;
+      z-index: 2;
+      width: min(1250px, 100%);
+      margin: 0 auto;
+    }
+
+    .masters-content h1 {
+      text-align: center;
+      font-size: 54px;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 60px;
+      font-family: "Cormorant Garamond", serif;
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ================= СЕТКА МАСТЕРОВ ================= */
+    .masters-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 55px;
+      align-items: start;
+    }
+
+    .master-card {
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    /* Фото + имя в одной строке */
+    .master-top {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .master-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      background-color: #0a2a4a;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 2px rgba(81, 197, 233, 0.3);
+    }
+
+    /* Фото Лины */
+    .master-photo.lina {
+      background-image: url("lina.jpg");
+    }
+
+    /* Фото Даниила */
+    .master-photo.daniil {
+      background-image: url("danill.jpg");
+    }
+
+    /* Фото Лилии — заглушка (можно заменить) */
+    .master-photo.liliya {
+      background-image: url("liliya.jpg");
+      background-color: #1e3a5f;
+    }
+
+    .master-name {
+      text-align: left;
+      color: #5bc7e6;
+      font-size: 30px;
+      line-height: 1.1;
+      font-weight: 500;
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    /* Разделительная линия под именем */
+    .master-line {
+      width: 100%;
+      height: 1px;
+      background: rgba(200, 220, 240, 0.45);
+      margin: 0 0 20px;
+    }
+
+    /* Описание мастера */
+    .master-desc {
+      color: #e6eefb;
+      font-size: 22px;
+      line-height: 1.5;
+      text-align: left;
+      margin-bottom: 25px;
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    /* Кнопка «Записаться» */
+    .btn-book {
+      display: inline-block;
+      padding: 12px 32px;
+      border: 1px solid #5bc7e6;
+      background: transparent;
+      color: #ffffff;
+      font-size: 22px;
+      font-family: "Cormorant Garamond", serif;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-book:hover {
+      background: #5bc7e6;
+      color: #06121f;
+      box-shadow: 0 0 20px rgba(91, 199, 230, 0.5);
+    }
+
+    /* ================= АДАПТИВ ================= */
+    @media (max-width: 1000px) {
+      .masters-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+
+      .master-top {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .header { height: 70px; }
+      .nav-left, .nav-right { display: none; }
+      .nav { display: flex; justify-content: center; }
+      .logo-main { font-size: 28px; }
+      .logo-small { font-size: 11px; }
+      .masters-page { padding-top: 100px; }
+      .masters-content h1 { font-size: 40px; margin-bottom: 40px; }
+      .sketch-left, .sketch-right { opacity: 0.1; }
+    }
+
+    @media (max-width: 500px) {
+      .master-name { font-size: 26px; }
+      .master-desc { font-size: 19px; }
+      .btn-book { font-size: 19px; padding: 10px 26px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= ШАПКА ================= -->
+<header class="header">
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html">Главная</a>
+      <a href="services.html">Услуги</a>
+      <a href="masters.html" class="active">Мастера</a>
+    </div>
+
+    <a href="#" id="logoLink" class="logo">
+      <span class="logo-small">студия татуировки</span>
+      <span class="logo-main">ALYWAWES</span>
+    </a>
+
+    <div class="nav-right">
+      <a href="services.html">Цены</a>
+      <a href="#contacts">Контакты</a>
+      <a href="#faq">FAQ⌒</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= КОНТЕНТ ================= -->
+<div class="masters-page">
+  <!-- Фоновые изображения -->
+  <div class="sketch-left"></div>
+  <div class="sketch-right"></div>
+
+  <div class="masters-content">
+    <h1>Мастера</h1>
+
+    <div class="masters-grid">
+
+      <!-- МАСТЕР 1: ЛИНА -->
+      <div class="master-card">
+        <div class="master-top">
+          <div class="master-photo lina"></div>
+          <div class="master-name">Лина<br>Лифонова</div>
+        </div>
+        <div class="master-line"></div>
+        <p class="master-desc">
+          Мастер, владеющий многими видами нанесения татуировок,
+          а также имеет индивидуальные стили нанесения, создаёт
+          картины на коже клиента. Опыт более 4 лет.
+        </p>
+        <a class="btn-book" href="services.html">Записаться</a>
+      </div>
+
+      <!-- МАСТЕР 2: ДАНИИЛ -->
+      <div class="master-card">
+        <div class="master-top">
+          <div class="master-photo daniil"></div>
+          <div class="master-name">Даниил<br>Киров</div>
+        </div>
+        <div class="master-line"></div>
+        <p class="master-desc">
+          Мастер, который создаёт индивидуальные проекты на вашей коже,
+          большой опыт в создании эскизов, которые подчеркнут вас.
+          Опыт более 5 лет.
+        </p>
+        <a class="btn-book" href="services.html">Записаться</a>
+      </div>
+
+      <!-- МАСТЕР 3: ЛИЛИЯ -->
+      <div class="master-card">
+        <div class="master-top">
+          <div class="master-photo liliya"></div>
+          <div class="master-name">Лилия<br>Белова</div>
+        </div>
+        <div class="master-line"></div>
+        <p class="master-desc">
+          Мастер, создающая лёгкие и изящные линии, владеет выверенной
+          техникой. Её задача — сделать работу, которая подчеркнёт вашу
+          индивидуальность и будет радовать каждый день. Опыт более 6 лет.
+        </p>
+        <a class="btn-book" href="services.html">Записаться</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ========================
+     ЛОГОТИП: профиль или вход
+  ======================== */
+  const isLogged = localStorage.getItem("alywawesLoggedIn") === "true";
+  document.getElementById("logoLink").href = isLogged
+    ? "profile.html"
+    : "auth.html";
+</script>
+
+</body>
+</html>
