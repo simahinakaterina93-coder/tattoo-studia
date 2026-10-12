@@ -457,6 +457,10 @@
       } else {
         header.style.background = "rgba(3, 12, 36, 0.94)";
       }
+      // Показываем ссылку "Профиль" только если пользователь залогинен
+    if (localStorage.getItem("alywawesLoggedIn") === "true") {
+      document.getElementById("profileLink").style.display = "inline-block";
+    }
     });
   </script>
 
