@@ -643,55 +643,7 @@
      СТАРТ
   ======================== */
   });
-    /* ========================
-     РЕДАКТИРОВАНИЕ ПРОФИЛЯ
-  ======================== */
-  function openEditModal() {
-    if (!user) return;
-    document.getElementById("editName").value     = user.name     || "";
-    document.getElementById("editUsername").value = user.username || "";
-    document.getElementById("editPassword").value = "";
-    document.getElementById("editMessage").textContent = "";
-    document.getElementById("editModal").style.display = "flex";
-  }
 
-  function closeEditModal() {
-    document.getElementById("editModal").style.display = "none";
-  }
-
-  function saveProfile() {
-    const newName     = document.getElementById("editName").value.trim();
-    const newUsername = document.getElementById("editUsername").value.trim();
-    const newPassword = document.getElementById("editPassword").value;
-    const msg         = document.getElementById("editMessage");
-
-    if (!newName || !newUsername) {
-      msg.textContent = "Имя и логин не могут быть пустыми.";
-      return;
-    }
-
-    // Проверка: не занят ли логин другим "пользователем" (у нас один — просто меняем)
-    user.name     = newName;
-    user.username = newUsername;
-
-    if (newPassword) {
-      if (newPassword.length < 3) {
-        msg.textContent = "Пароль слишком короткий.";
-        return;
-      }
-      user.password = newPassword;
-    }
-
-    save();
-    render();
-    msg.style.color = "#7dffb3";
-    msg.textContent = "Сохранено!";
-    setTimeout(closeEditModal, 600);
-  }
-
-  // Закрытие модалки по клику на фон
-  document.getElementById("editModal").addEventListener("click", function(e) {
-    if (e.target === this) closeEditModal();
   render();
 </script>
 
