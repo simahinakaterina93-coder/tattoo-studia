@@ -16,7 +16,324 @@
       margin: 0;
       padding: 0;
     }
+    /* ================= ПРОФИЛЬ (ДИЗАЙН СО СКРИНШОТА) ================= */
+    
+    /* Скрываем профиль по умолчанию */
+    #profile-page {
+      display: none;
+      position: relative;
+      z-index: 200;
+      background: #02091d;
+      min-height: 100vh;
+      padding-top: 162px; /* Отступ под шапку */
+      font-family: "Cormorant Garamond", serif;
+      color: #fff;
+    }
 
+    /* Контейнер профиля */
+    .profile-container {
+      display: grid;
+      grid-template-columns: 280px 1fr 320px;
+      gap: 30px;
+      width: min(1400px, 95%);
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* Левая колонка (Меню) */
+    .profile-sidebar {
+      background: rgba(5, 25, 50, 0.6);
+      border: 1px solid rgba(86, 176, 220, 0.2);
+      border-radius: 15px;
+      padding: 30px 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .profile-sidebar h3 {
+      font-size: 26px;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+
+    .profile-role {
+      color: #51c5e9;
+      font-size: 16px;
+      font-family: "Inter", sans-serif;
+      margin-bottom: 30px;
+      display: block;
+    }
+
+    .profile-menu {
+      list-style: none;
+    }
+
+    .profile-menu li {
+      padding: 15px 0;
+      font-size: 22px;
+      color: #a0b4c8;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: 0.3s;
+    }
+
+    .profile-menu li:hover, .profile-menu li.active {
+      color: #fff;
+      padding-left: 10px;
+      border-left: 3px solid #51c5e9;
+    }
+
+    /* Центральная колонка (Контент) */
+    .profile-main h1 {
+      font-size: 42px;
+      margin-bottom: 5px;
+    }
+
+    .profile-greeting {
+      color: #51c5e9;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .profile-card {
+      display: flex;
+      gap: 30px;
+      background: rgba(5, 25, 50, 0.4);
+      border: 1px solid rgba(86, 176, 220, 0.2);
+      border-radius: 15px;
+      padding: 30px;
+      align-items: center;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .profile-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #0a2a4a;
+      border: 2px solid #51c5e9;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #51c5e9;
+    }
+
+    .upload-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #51c5e9;
+      border: none;
+      color: #02091d;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .upload-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .profile-info h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .profile-info p {
+      font-size: 18px;
+      color: #a0b4c8;
+      font-family: "Inter", sans-serif;
+      margin-bottom: 5px;
+    }
+
+    .edit-link {
+      color: #51c5e9;
+      font-size: 16px;
+      text-decoration: underline;
+      margin-top: 10px;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    /* Плашки статистики */
+    .stats-row {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .stat-box {
+      background: rgba(5, 25, 50, 0.4);
+      border: 1px solid rgba(86, 176, 220, 0.2);
+      border-radius: 12px;
+      padding: 15px 25px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: #a0b4c8;
+    }
+
+    /* Правая колонка */
+    .profile-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .promo-box, .quick-actions {
+      background: rgba(5, 25, 50, 0.6);
+      border: 1px solid rgba(86, 176, 220, 0.2);
+      border-radius: 15px;
+      padding: 25px;
+    }
+
+    .promo-box h4 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .promo-box p {
+      font-size: 18px;
+      color: #a0b4c8;
+      line-height: 1.4;
+    }
+
+    .quick-actions h4 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .btn-action {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: rgba(86, 176, 220, 0.15);
+      border: 1px solid rgba(86, 176, 220, 0.4);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: left;
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    .btn-action:hover {
+      background: #51c5e9;
+      color: #02091d;
+    }
+
+    /* Список услуг в профиле */
+    .my-services-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-item-profile {
+      background: rgba(81, 197, 233, 0.1);
+      border: 1px solid #51c5e9;
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .service-item-profile span {
+      font-size: 20px;
+    }
+
+    .service-item-profile .price {
+      color: #51c5e9;
+      font-weight: bold;
+    }
+
+    /* Страница Услуг (скрытая) */
+    #services-page {
+      display: none;
+      position: relative;
+      z-index: 200;
+      background: #02091d;
+      min-height: 100vh;
+      padding-top: 162px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      width: min(1200px, 90%);
+      margin: 40px auto;
+    }
+
+    .service-card {
+      background: rgba(5, 25, 50, 0.6);
+      border: 1px solid rgba(86, 176, 220, 0.3);
+      border-radius: 15px;
+      padding: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .service-card:hover {
+      border-color: #51c5e9;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(81, 197, 233, 0.2);
+    }
+
+    .service-card h3 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .service-card p {
+      color: #a0b4c8;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .service-card .price {
+      font-size: 24px;
+      color: #51c5e9;
+      font-weight: bold;
+    }
+
+    /* Адаптив для профиля */
+    @media (max-width: 1100px) {
+      .profile-container {
+        grid-template-columns: 1fr;
+      }
+      .profile-sidebar {
+        display: none;
+      }
+    }
     html {
       scroll-behavior: smooth;
     }
@@ -395,7 +712,103 @@
   <!-- ================= HERO ================= -->
 
   <main>
+    <!-- ================= СТРАНИЦА ПРОФИЛЯ ================= -->
+    <div id="profile-page">
+      <div class="profile-container">
+        <!-- Левая колонка -->
+        <aside class="profile-sidebar">
+          <h3>Личный кабинет</h3>
+          <span class="profile-role">Клиент</span>
+          <ul class="profile-menu">
+            <li class="active" onclick="showProfileTab('profile')">Профиль</li>
+            <li onclick="showProfileTab('records')">Мои записи</li>
+            <li>Чат с мастером</li>
+            <li>Избранные мастера</li>
+          </ul>
+        </aside>
 
+        <!-- Центральная колонка -->
+        <section class="profile-main">
+          <div id="profile-tab-content">
+            <h1>Мой профиль</h1>
+            <p class="profile-greeting">Привет, <span id="greetingName">Екатерина</span></p>
+
+            <div class="profile-card">
+              <div class="avatar-wrapper">
+                <div class="profile-avatar" id="avatarDisplay">👤</div>
+                <input type="file" id="avatarInput" accept="image/*" style="display:none;" onchange="uploadAvatar(event)">
+                <button class="upload-btn" onclick="document.getElementById('avatarInput').click()">📷</button>
+              </div>
+              <div class="profile-info">
+                <h2 id="displayFullName">Екатерина Симахина</h2>
+                <p id="displayEmail">vashapochta@mail.com</p>
+                <p id="displayPhone">+79806545342</p>
+                <span class="edit-link">Редактировать профиль</span>
+              </div>
+            </div>
+
+            <div class="stats-row">
+              <div class="stat-box">
+                <span class="stat-value" id="activeCount">0</span>
+                <span class="stat-label">активных записей</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Ближайшая запись:</span>
+                <span class="stat-value" id="nextDate">--.--.--</span>
+              </div>
+            </div>
+
+            <!-- Список услуг -->
+            <div id="myServicesContainer" style="margin-top: 30px;">
+              <h3 style="color: #51c5e9; margin-bottom: 15px;">Мои услуги</h3>
+              <div class="my-services-list" id="myServicesList">
+                <p style="color: #a0b4c8; font-style: italic;">У вас пока нет записей. Выберите услугу в разделе "Услуги".</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Правая колонка -->
+        <aside class="profile-right">
+          <div class="promo-box">
+            <h4>ALYWAWES</h4>
+            <p>Создаем тату, которые остаются с тобой навсегда</p>
+          </div>
+          <div class="quick-actions">
+            <h4>Быстрые действия</h4>
+            <button class="btn-action" onclick="showPage('services')">Запись на тату</button>
+            <button class="btn-action">Создать эскиз</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ================= СТРАНИЦА УСЛУГ ================= -->
+    <div id="services-page">
+      <h2 style="text-align: center; font-size: 48px; margin-top: 40px; color: #fff;">Наши Услуги</h2>
+      <div class="services-grid">
+        <div class="service-card" onclick="addService('Татуировка (малая)', '5000 ₽')">
+          <h3>Татуировка (малая)</h3>
+          <p>До 10 см. Идеально для первых работ.</p>
+          <span class="price">5000 ₽</span>
+        </div>
+        <div class="service-card" onclick="addService('Татуировка (средняя)', '12000 ₽')">
+          <h3>Татуировка (средняя)</h3>
+          <p>От 10 до 20 см. Детальная проработка.</p>
+          <span class="price">12000 ₽</span>
+        </div>
+        <div class="service-card" onclick="addService('Перекрытие (Cover-up)', '15000 ₽')">
+          <h3>Перекрытие (Cover-up)</h3>
+          <p>Сложная работа по перекрытию старых тату.</p>
+          <span class="price">15000 ₽</span>
+        </div>
+        <div class="service-card" onclick="addService('Консультация', '0 ₽')">
+          <h3>Консультация</h3>
+          <p>Обсуждение эскиза и места нанесения.</p>
+          <span class="price">Бесплатно</span>
+        </div>
+      </div>
+    </div>
     <section class="hero">
 
       <div class="hero-content">
