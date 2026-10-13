@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALYWAWES — Создание эскиза</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: #02091d;
+      color: #f5f7ff;
+      font-family: "Cormorant Garamond", serif;
+      overflow-x: hidden;
+    }
+
+    /* ================= HEADER ================= */
+    .header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 90px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(3, 12, 36, 0.94);
+      border-bottom: 1px solid rgba(86, 176, 220, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      width: min(1400px, 95%);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 2.5vw, 45px);
+    }
+
+    .nav-right { justify-content: flex-end; }
+
+    .nav a {
+      color: #f3f4f8;
+      text-decoration: none;
+      font-size: 22px;
+      white-space: nowrap;
+      transition: color .3s ease;
+      cursor: pointer;
+    }
+
+    .nav a:hover { color: #51c5e9; }
+
+    .logo { text-align: center; line-height: 1; text-decoration: none; }
+    .logo-small {
+      display: block;
+      color: #c9d6e5;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+    .logo-main {
+      display: block;
+      color: #42afd4;
+      font-size: 34px;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    /* ================= ОСНОВНОЙ КАРКАС ================= */
+    .sketch-page {
+      position: relative;
+      min-height: 100vh;
+      padding: 120px 5% 40px;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(1, 7, 26, .75),
+          rgba(0, 20, 55, .55) 45%,
+          rgba(1, 6, 24, .9)
+        ),
+        radial-gradient(circle at 50% 20%, #062a52 0%, #02122e 60%, #010822 100%);
+    }
+
+    /* Фоновый sketch.png */
+    .bg-sketch {
+      position: absolute;
+      top: 90px;
+      right: -100px;
+      width: 780px;
+      max-width: 60vw;
+      height: 100%;
+      background: url("images/sketch.png") center top / contain no-repeat;
+      opacity: 0.28;
+      filter: blur(0.4px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: min(1300px, 100%);
+      margin: 0 auto;
+    }
+
+    /* ================= ПРОГРЕСС-БАР ================= */
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(120, 180, 220, 0.15);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 20%;
+      background: linear-gradient(90deg, #2a6aa4, #51c5e9);
+      border-radius: 6px;
+      transition: width .5s ease;
+    }
+
+    .progress-text {
+      color: #7ba7c4;
+      font-size: 22px;
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    /* ================= ЗАГОЛОВОК ШАГА ================= */
+    .step-title {
+      font-size: 34px;
+      line-height: 1.25;
+      color: #dbeafe;
+      font-weight: 500;
+      margin-bottom: 35px;
+      max-width: 620px;
+    }
+
+    /* ================= СЕТКА ВАРИАНТОВ ================= */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 200px);
+      gap: 25px 30px;
+      margin-bottom: 40px;
+    }
+
+    .option {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .option-img {
+      width: 200px;
+      height: 155px;
+      border-radius: 14px;
+      background-color: #d9d9d9;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 3px solid transparent;
+      transition: .25s;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .option.selected .option-img {
+      border-color: #51c5e9;
+      box-shadow: 0 0 25px rgba(81, 197, 233, 0.55);
+    }
+
+    .option-label {
+      margin-top: 10px;
+      font-size: 20px;
+      color: #e0eaff;
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    /* Вариант «Другое» — просто плашка */
+    .option-other .option-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #2a6aa4;
+      font-family: "Cormorant Garamond", serif;
+      background: #e6e6e6;
+      font-weight: 500;
+    }
+
+    /* ================= ТЕКСТОВОЕ ПОЛЕ ================= */
+    .idea-box {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      height: 360px;
+      background: rgba(40, 60, 85, 0.85);
+      border: 2px solid rgba(86, 176, 220, 0.35);
+      border-radius: 16px;
+      padding: 20px 22px 45px;
+      color: #fff;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 20px;
+      line-height: 1.4;
+      resize: none;
+      outline: none;
+      margin-bottom: 30px;
+    }
+
+    .idea-box::placeholder {
+      color: rgba(220, 230, 245, 0.4);
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+    }
+
+    .char-counter {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      color: #8ba3b8;
+      font-size: 18px;
+      font-family: "Cormorant Garamond", serif;
+      pointer-events: none;
+    }
+
+    .idea-wrapper {
+      position: relative;
+      max-width: 640px;
+    }
+
+    /* ================= КНОПКА «ДАЛЕЕ» ================= */
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 14px 40px;
+      border: 1px solid rgba(115, 215, 248, 0.5);
+      border-radius: 14px;
+      background: rgba(60, 110, 165, 0.7);
+      color: #eaf6ff;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      cursor: pointer;
+      transition: .3s;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-next:hover {
+      background: #4d8ec4;
+      box-shadow: 0 12px 32px rgba(0, 140, 210, 0.35);
+    }
+
+    .btn-next .arrow {
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    /* ================= ФИНАЛЬНЫЙ ЭКРАН: МАСТЕР ================= */
+    .result-master {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .master-card-result {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      background: rgba(5, 25, 50, 0.55);
+      border: 1px solid rgba(86, 176, 220, 0.3);
+      border-radius: 16px;
+      padding: 25px 35px;
+      backdrop-filter: blur(10px);
+    }
+
+    .master-card-result .big-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #51c5e9;
+      flex-shrink: 0;
+      background-color: #0a2a4a;
+    }
+
+    .master-card-result .master-info h3 {
+      font-size: 30px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .master-card-result .master-info p {
+      color: #a0b4c8;
+      font-size: 18px;
+      font-family: "Inter", sans-serif;
+      max-width: 520px;
+      line-height: 1.45;
+    }
+
+    /* ================= АДАПТИВ ================= */
+    @media (max-width: 900px) {
+      .header { height: 70px; }
+      .nav-left, .nav-right { display: none; }
+      .nav { display: flex; justify-content: center; }
+      .logo-main { font-size: 26px; }
+      .logo-small { font-size: 11px; }
+      .sketch-page { padding-top: 100px; }
+
+      .options-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .option-img { width: 100%; height: 140px; }
+
+      .step-title { font-size: 26px; }
+
+      .btn-next { font-size: 22px; padding: 12px 28px; }
+
+      .bg-sketch { opacity: 0.15; right: -150px; }
+    }
+
+    @media (max-width: 500px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .option-img { height: 110px; }
+      .option-label { font-size: 16px; }
+      .step-title { font-size: 22px; }
+      .idea-box { height: 260px; font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= ШАПКА ================= -->
+<header class="header">
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html">Главная</a>
+      <a href="services.html">Услуги</a>
+      <a href="masters.html">Мастера</a>
+    </div>
+
+    <a href="profile.html" class="logo">
+      <span class="logo-small">студия татуировки</span>
+      <span class="logo-main">ALYWAWES</span>
+    </a>
+
+    <div class="nav-right">
+      <a href="services.html">Цены</a>
+      <a href="#contacts">Контакты</a>
+      <a href="#faq">FAQ⌒</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= ОСНОВНОЙ БЛОК ================= -->
+<div class="sketch-page">
+  <div class="bg-sketch"></div>
+
+  <div class="container">
+
+    <!-- Прогресс -->
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 20%;"></div>
+      </div>
+      <span class="progress-text" id="progressText">1/5</span>
+    </div>
+
+    <!-- ============ ШАГ 1: СТИЛЬ ============ -->
+    <section id="step-1" class="step">
+      <h2 class="step-title">Какой стиль татуировки тебе ближе?</h2>
+
+      <div class="options-grid">
+        <div class="option" data-value="Dotwork" onclick="pickOption(this, 1)">
+          <div class="option-img" style="background-image:url('images/dotwork.jpg');"></div>
+          <div class="option-label">Dotwork</div>
+        </div>
+
+        <div class="option" data-value="Blackwork" onclick="pickOption(this, 1)">
+          <div class="option-img" style="background-image:url('images/blackwork.jpg');"></div>
+          <div class="option-label">Blackwork</div>
+        </div>
+
+        <div class="option" data-value="Realism" onclick="pickOption(this, 1)">
+          <div class="option-img" style="background-image:url('images/realism.jpg');"></div>
+          <div class="option-label">Realism</div>
+        </div>
+
+        <div class="option" data-value="Trible" onclick="pickOption(this, 1)">
+          <div class="option-img" style="background-image:url('images/trible.jpg');"></div>
+          <div class="option-label">Trible</div>
+        </div>
+
+        <div class="option" data-value="Linework Graphic Portrait" onclick="pickOption(this, 1)">
+          <div class="option-img" style="background-image:url('images/linework.jpg');"></div>
+          <div class="option-label">Linework Graphic Portrait</div>
+        </div>
+
+        <div class="option" data-value="Sumi-e" onclick="pickOption(this, 1)">
+          <div class="option-img" style="background-image:url('images/simi-e.jpg');"></div>
+          <div class="option-label">Sumi-e</div>
+        </div>
+
+        <div class="option option-other" data-value="Другое" onclick="pickOption(this, 1)">
+          <div class="option-img">Другое..</div>
+        </div>
+      </div>
+
+      <button class="btn-next" onclick="nextStep(1)">
+        Далее <span class="arrow">→</span>
+      </button>
+    </section>
+
+    <!-- ============ ШАГ 2: МЕСТО ============ -->
+    <section id="step-2" class="step" style="display:none;">
+      <h2 class="step-title">Выбери место, где ты хочешь сделать татуировку</h2>
+
+      <div class="options-grid">
+        <div class="option" data-value="Рука" onclick="pickOption(this, 2)">
+          <div class="option-img" style="background-image:url('images/hand.jpg');"></div>
+          <div class="option-label">Рука</div>
+        </div>
+
+        <div class="option" data-value="Нога" onclick="pickOption(this, 2)">
+          <div class="option-img" style="background-image:url('images/leg.jpg');"></div>
+          <div class="option-label">Нога</div>
+        </div>
+
+        <div class="option" data-value="Кисть" onclick="pickOption(this, 2)">
+          <div class="option-img" style="background-image:url('images/brush.jpg');"></div>
+          <div class="option-label">Кисть</div>
+        </div>
+
+        <div class="option" data-value="Спина" onclick="pickOption(this, 2)">
+          <div class="option-img" style="background-image:url('images/back.jpg');"></div>
+          <div class="option-label">Спина</div>
+        </div>
+
+        <div class="option" data-value="Ребра" onclick="pickOption(this, 2)">
+          <div class="option-img" style="background-image:url('images/ribs.jpg');"></div>
+          <div class="option-label">Ребра</div>
+        </div>
+
+        <div class="option" data-value="Грудная клетка" onclick="pickOption(this, 2)">
+          <div class="option-img" style="background-image:url('images/breast.jpg');"></div>
+          <div class="option-label">Грудная клетка</div>
+        </div>
+
+        <div class="option option-other" data-value="Другое" onclick="pickOption(this, 2)">
+          <div class="option-img">Другое..</div>
+        </div>
+      </div>
+
+      <button class="btn-next" onclick="nextStep(2)">
+        Далее <span class="arrow">→</span>
+      </button>
+    </section>
+
+    <!-- ============ ШАГ 3: РАЗМЕР ============ -->
+    <section id="step-3" class="step" style="display:none;">
+      <h2 class="step-title">Какой размер татуировки тебе подходит?</h2>
+
+      <div class="options-grid">
+        <div class="option" data-value="Маленькая (до 5 см)" onclick="pickOption(this, 3)">
+          <div class="option-img" style="background-image:url('images/small.jpg');"></div>
+          <div class="option-label">Маленькая<br>(до 5 см)</div>
+        </div>
+
+        <div class="option" data-value="Средняя (5–15 см)" onclick="pickOption(this, 3)">
+          <div class="option-img" style="background-image:url('images/average.jpg');"></div>
+          <div class="option-label">Средняя<br>(5–15 см)</div>
+        </div>
+
+        <div class="option" data-value="Большая (15–30 см)" onclick="pickOption(this, 3)">
+          <div class="option-img" style="background-image:url('images/big.jpg');"></div>
+          <div class="option-label">Большая<br>(15–30 см)</div>
+        </div>
+
+        <div class="option" data-value="Очень большая (30 см и более)" onclick="pickOption(this, 3)">
+          <div class="option-img" style="background-image:url('images/verybig.jpg');"></div>
+          <div class="option-label">Очень большая<br>(30 см и более)</div>
+        </div>
+
+        <div class="option" data-value="Хочу проект" onclick="pickOption(this, 3)">
+          <div class="option-img" style="background-image:url('images/project.jpg');"></div>
+          <div class="option-label">Хочу проект</div>
+        </div>
+      </div>
+
+      <button class="btn-next" onclick="nextStep(3)">
+        Далее <span class="arrow">→</span>
+      </button>
+    </section>
+
+    <!-- ============ ШАГ 4: ИДЕЯ ============ -->
+    <section id="step-4" class="step" style="display:none;">
+      <h2 class="step-title">
+        Опиши идею или ключевые элементы, которые ты бы хотел увидеть в проекте
+      </h2>
+
+      <div class="idea-wrapper">
+        <textarea id="ideaText" class="idea-box" maxlength="500"
+                  placeholder="Введите текст..."></textarea>
+        <span class="char-counter"><span id="charCount">0</span>/500</span>
+      </div>
+
+      <button class="btn-next" onclick="nextStep(4)">
+        Далее <span class="arrow">→</span>
+      </button>
+    </section>
+
+    <!-- ============ ШАГ 5: МАСТЕР ============ -->
+    <section id="step-5" class="step" style="display:none;">
+      <h2 class="step-title">Твой идеальный мастер:</h2>
+
+      <div class="result-master">
+        <div class="master-card-result">
+          <div class="big-photo" id="resultMasterPhoto"></div>
+          <div class="master-info">
+            <h3 id="resultMasterName">—</h3>
+            <p id="resultMasterDesc">—</p>
+          </div>
+        </div>
+
+        <button class="btn-next" onclick="goToChat()">
+          Обсудить эскиз <span class="arrow">→</span>
+        </button>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  /* ========================
+     ЗАЩИТА СТРАНИЦЫ
+  ======================== */
+  if (localStorage.getItem("alywawesLoggedIn") !== "true") {
+    window.location.href = "auth.html";
+  }
+
+  /* ========================
+     ДАННЫЕ
+  ======================== */
+  const answers = {
+    style:  null,  // шаг 1
+    place:  null,  // шаг 2
+    size:   null,  // шаг 3
+    idea:   "",    // шаг 4
+    master: null   // шаг 5
+  };
+
+  // Мастера: фото + описание
+  const MASTERS = [
+    {
+      id: "lina",
+      name: "Лина Лифонова",
+      photo: "lina.jpg",
+      desc: "Мастер, владеющий многими видами нанесения татуировок. Создаёт картины на коже клиента. Опыт более 4 лет."
+    },
+    {
+      id: "daniil",
+      name: "Даниил Киров",
+      photo: "danill.jpg",
+      desc: "Мастер, который создаёт индивидуальные проекты на вашей коже. Большой опыт в создании эскизов. Опыт более 5 лет."
+    },
+    {
+      id: "liliya",
+      name: "Лилия Белова",
+      photo: "liliya.jpg",
+      desc: "Мастер, создающая лёгкие и изящные линии, владеет выверенной техникой. Опыт более 6 лет."
+    }
+  ];
+
+  /* ========================
+     ВЫБОР ВАРИАНТА
+  ======================== */
+  function pickOption(el, step) {
+    // Снять подсветку у соседей по шагу
+    const parent = el.parentElement;
+    parent.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+
+    // Подсветить выбранный
+    el.classList.add("selected");
+
+    // Запомнить значение
+    const value = el.dataset.value;
+    if (step === 1) answers.style = value;
+    if (step === 2) answers.place = value;
+    if (step === 3) answers.size  = value;
+  }
+
+  /* ========================
+     ПЕРЕХОД К СЛЕДУЮЩЕМУ ШАГУ
+  ======================== */
+  function nextStep(from) {
+    // Проверки
+    if (from === 1 && !answers.style) return alert("Выберите стиль татуировки.");
+    if (from === 2 && !answers.place) return alert("Выберите место для татуировки.");
+    if (from === 3 && !answers.size)  return alert("Выберите размер татуировки.");
+
+    if (from === 4) {
+      // Сохраняем текст
+      answers.idea = document.getElementById("ideaText").value.trim();
+
+      // Генерируем случайного мастера
+      answers.master = MASTERS[Math.floor(Math.random() * MASTERS.length)];
+
+      // Показываем финальный экран
+      showStep(5);
+      fillMasterResult();
+      return;
+    }
+
+    showStep(from + 1);
+  }
+
+  /* ========================
+     ПОКАЗ ШАГА
+  ======================== */
+  function showStep(num) {
+    // Скрыть все
+    document.querySelectorAll(".step").forEach(s => s.style.display = "none");
+
+    // Показать нужный
+    const target = document.getElementById("step-" + num);
+    if (target) target.style.display = "block";
+
+    // Прогресс-бар
+    const fill = document.getElementById("progressFill");
+    const text = document.getElementById("progressText");
+    const percent = (num / 5) * 100;
+
+    fill.style.width = percent + "%";
+    text.textContent = num + "/5";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ========================
+     ФИНАЛЬНЫЙ ЭКРАН
+  ======================== */
+  function fillMasterResult() {
+    const m = answers.master;
+    if (!m) return;
+
+    document.getElementById("resultMasterName").textContent = m.name;
+    document.getElementById("resultMasterDesc").textContent = m.desc;
+
+    const photoEl = document.getElementById("resultMasterPhoto");
+    photoEl.style.backgroundImage = `url(${m.photo})`;
+  }
+
+  /* ========================
+     ОБСУДИТЬ ЭСКИЗ → ЧАТ С МАСТЕРОМ
+  ======================== */
+  function goToChat() {
+    if (!answers.master) return;
+
+    // Сохраним краткую сводку по эскизу, чтобы её можно было показать в чате
+    localStorage.setItem("alywawes_lastSketch", JSON.stringify(answers));
+
+    // Переходим в чат, сразу указав нужного мастера
+    window.location.href = "chat.html?master=" + answers.master.id;
+  }
+
+  /* ========================
+     СЧЁТЧИК СИМВОЛОВ
+  ======================== */
+  document.addEventListener("DOMContentLoaded", () => {
+    const ta = document.getElementById("ideaText");
+    const counter = document.getElementById("charCount");
+
+    if (ta && counter) {
+      ta.addEventListener("input", () => {
+        counter.textContent = ta.value.length;
+      });
+    }
+  });
+
+  /* ========================
+     СТАРТ
+  ======================== */
+  showStep(1);
+</script>
+
+</body>
+</html>
