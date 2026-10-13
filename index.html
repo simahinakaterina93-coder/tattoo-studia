@@ -345,7 +345,7 @@
       }
     }
 
-    @media (max-width: 500px) {
+   script00px) {
       .hero h1 {
         font-size: 43px;
       }
@@ -361,6 +361,105 @@
         font-size: 23px;
       }
     }
+  /* ================= FAQ ================= */
+
+    .faq {
+        background: #03141F;
+        padding: 120px 10%;
+        min-height: 700px;
+    }
+
+    .faq-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .faq-title span {
+        width: 180px;
+        height: 1px;
+        background: #73E6F2;
+        opacity: 0.5;
+    }
+
+    .faq-title h2 {
+        color: #73E6F2;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 64px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .faq-subtitle {
+        text-align: center;
+        color: #8FAAB5;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 24px;
+        margin: 15px 0 60px;
+    }
+
+    .faq-list {
+        max-width: 950px;
+        margin: 0 auto;
+    }
+
+    .faq-item {
+        border-bottom: 1px solid rgba(115, 230, 242, 0.35);
+    }
+
+    .faq-question {
+        width: 100%;
+        padding: 25px 10px;
+        background: none;
+        border: none;
+        color: #F2FAFC;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 27px;
+        text-align: left;
+        cursor: pointer;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        transition: 0.3s;
+    }
+
+    .faq-question span {
+        color: #73E6F2;
+        font-size: 35px;
+        font-weight: 300;
+        transition: 0.3s;
+    }
+
+    .faq-question:hover {
+        color: #73E6F2;
+    }
+
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+
+    .faq-answer p {
+        color: #B8CBD3;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 21px;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0 50px 25px 10px;
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 300px;
+    }
+
+    .faq-item.active .faq-question span {
+        transform: rotate(45deg);
+    }
+
   </style>
 </head>
 
@@ -444,10 +543,115 @@
       <p>Здесь разместим адрес, телефон, соцсети и карту.</p>
     </section>
 
-    <section class="about" id="faq">
-      <h2>FAQ</h2>
-      <p>Ответы на часто задаваемые вопросы.</p>
-    </section>
+   <section class="faq" id="faq">
+
+    <div class="faq-title">
+        <span></span>
+        <h2>FAQ</h2>
+        <span></span>
+    </div>
+
+    <p class="faq-subtitle">
+        Ответы на часто задаваемые вопросы
+    </p>
+
+    <div class="faq-list">
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Как подготовиться к сеансу?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Перед сеансом хорошо выспитесь, поешьте и пейте достаточно воды.
+                    Не употребляйте алкоголь перед процедурой.
+                    Также рекомендуется заранее продумать место и размер татуировки.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Сколько времени занимает нанесение татуировки?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Время зависит от размера, сложности и места нанесения.
+                    Небольшая татуировка может занять около часа,
+                    а большая и сложная работа — несколько часов.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Можно ли прийти со своей идеей?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Конечно. Вы можете показать мастеру понравившиеся изображения,
+                    рассказать свою идею и вместе обсудить будущую татуировку.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Можно ли изменить готовый эскиз?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Да. Эскиз обсуждается с мастером, поэтому до начала работы
+                    можно внести необходимые изменения.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Как записаться на сеанс?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Выберите подходящую услугу в разделе «Услуги»,
+                    зарегистрируйтесь или войдите в личный кабинет,
+                    после чего выберите свободную дату и время.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Можно ли свести татуировку?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Да, в студии доступна услуга сведения татуировки.
+                    Перед процедурой проводится первичная консультация.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
 
     <section class="about" id="booking">
       <h2>Запись</h2>
@@ -455,7 +659,7 @@
     </section>
 
   </main>
-
+ 
   <script>
     // Небольшой эффект при прокрутке:
     // шапка становится чуть темнее.
@@ -472,7 +676,23 @@
       document.getElementById("profileLink").style.display = "inline-block";
     }
     });
-  </script>
+ 
+  /* ================= FAQ ================= */
+
+    document.querySelectorAll(".faq-question").forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            const item = button.parentElement;
+
+            item.classList.toggle("active");
+
+        });
+
+    });
+
+</script>
 
 </body>
 </html>
+
