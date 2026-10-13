@@ -460,6 +460,82 @@
         transform: rotate(45deg);
     }
 
+    
+    /* ================= ЦЕНЫ ================= */
+
+.prices {
+    background: #030a21;
+    padding: 120px 8%;
+    min-height: 700px;
+}
+
+.prices-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.prices-title span {
+    width: 180px;
+    height: 1px;
+    background: #73e6f2;
+    opacity: 0.5;
+}
+
+.prices-title h2 {
+    color: #73e6f2;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 64px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.prices-subtitle {
+    text-align: center;
+    color: #8faab5;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    margin: 15px 0 60px;
+}
+
+.prices-list {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.price-category {
+    margin-bottom: 45px;
+}
+
+.price-category h3 {
+    color: #73e6f2;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 34px;
+    font-weight: 500;
+    margin: 0 0 10px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 10px;
+
+    border-bottom: 1px solid rgba(115, 230, 242, 0.3);
+
+    color: #f2fafc;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 25px;
+}
+
+.price-row span:last-child {
+    color: #73e6f2;
+    white-space: nowrap;
+}
+    
+
   </style>
 </head>
 
@@ -533,10 +609,76 @@
   <a href="masters.html" class="booking-btn" style="margin-top:40px; position:static; top:0;">Смотреть мастеров</a>
 </section>
 
-    <section class="about" id="prices">
-      <h2>Цены</h2>
-      <p>Здесь будет раздел с услугами и стоимостью.</p>
-    </section>
+  <section class="prices" id="prices">
+
+    <div class="prices-title">
+        <span></span>
+        <h2>Цены</h2>
+        <span></span>
+    </div>
+
+    <p class="prices-subtitle">
+        Выберите услугу и узнайте её стоимость
+    </p>
+
+    <div class="prices-list">
+
+        <!-- НАНЕСЕНИЕ ТАТУ -->
+        <div class="price-category">
+
+            <h3>Нанесение тату</h3>
+
+            <div class="price-row">
+                <span>Нанесение татуировки</span>
+                <span>от 2500 р</span>
+            </div>
+
+            <div class="price-row">
+                <span>Коррекция татуировки</span>
+                <span>от 2500 р</span>
+            </div>
+
+        </div>
+
+
+        <!-- СВЕДЕНИЕ ТАТУ -->
+        <div class="price-category">
+
+            <h3>Сведение татуировки</h3>
+
+            <div class="price-row">
+                <span>Первичная консультация</span>
+                <span>500 р</span>
+            </div>
+
+            <div class="price-row">
+                <span>Сведение тату</span>
+                <span>от 2500 р</span>
+            </div>
+
+        </div>
+
+
+        <!-- ЭСКИЗ -->
+        <div class="price-category">
+
+            <h3>Создание индивидуального эскиза</h3>
+
+            <div class="price-row">
+                <span>Первичная консультация</span>
+                <span>от 500 р</span>
+            </div>
+
+            <div class="price-row">
+                <span>Создание эскиза поэтапно</span>
+                <span>от 2000 р</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
     <section class="about" id="contacts">
       <h2>Контакты</h2>
