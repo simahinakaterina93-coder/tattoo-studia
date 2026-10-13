@@ -588,11 +588,21 @@
       '"': "&quot;", "'": "&#39;"
     }[s]));
   }
+  /* ========================
+     ПОДДЕРЖКА ?master=... ИЗ URL
+  ======================== */
+  const urlParams = new URLSearchParams(window.location.search);
+  const masterFromUrl = urlParams.get("master");
 
+  if (masterFromUrl && MASTERS[masterFromUrl]) {
+    // Если пришли из эскиза — открываем соответствующего мастера
+    selectMaster(masterFromUrl);
+  } else {
+    selectMaster("lina");
+  }
   /* ========================
      СТАРТ
   ======================== */
-  selectMaster("lina");
 </script>
 
 </body>
