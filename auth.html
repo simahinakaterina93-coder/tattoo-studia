@@ -93,7 +93,7 @@
         }
 
 
-        /* КНОПКИ ВХОД / РЕГИСТРАЦИЯ */
+        /* ВХОД / РЕГИСТРАЦИЯ */
 
         .tabs {
             display: flex;
@@ -119,9 +119,14 @@
 
             cursor: pointer;
 
-            padding-bottom: 6px;
+            padding: 0 0 6px;
 
             border-bottom: 1px solid transparent;
+        }
+
+
+        .tab:hover {
+            color: #55c9e3;
         }
 
 
@@ -174,6 +179,11 @@
 
             box-shadow:
                 0 0 10px rgba(85, 201, 227, 0.2);
+        }
+
+
+        input::placeholder {
+            color: #7e8495;
         }
 
 
@@ -287,31 +297,40 @@
 
 <body>
 
-
 <div class="auth-container">
+
+    <!-- ЛОГОТИП -->
 
     <a href="index.html" class="logo">
         ALYWAWES
     </a>
 
+
     <div class="line"></div>
 
+
+    <!-- ЗАГОЛОВОК -->
 
     <h1 id="formTitle">
         Вход в аккаунт
     </h1>
 
 
+    <!-- ПЕРЕКЛЮЧАТЕЛЬ -->
+
     <div class="tabs">
 
         <button
+            type="button"
             class="tab active"
             id="loginTab"
             onclick="showLogin()">
             Вход
         </button>
 
+
         <button
+            type="button"
             class="tab"
             id="registerTab"
             onclick="showRegister()">
@@ -321,15 +340,15 @@
     </div>
 
 
-    <!-- =================
+    <!-- =========================
          ФОРМА ВХОДА
-    ================= -->
+    ========================== -->
 
     <form id="loginForm">
 
         <div class="form-group">
 
-            <label>
+            <label for="loginUsername">
                 Логин
             </label>
 
@@ -344,7 +363,7 @@
 
         <div class="form-group">
 
-            <label>
+            <label for="loginPassword">
                 Пароль
             </label>
 
@@ -371,15 +390,17 @@
     </form>
 
 
-    <!-- =================
+    <!-- =========================
          ФОРМА РЕГИСТРАЦИИ
-    ================= -->
+    ========================== -->
 
-    <form id="registerForm" style="display: none;">
+    <form
+        id="registerForm"
+        style="display: none;">
 
         <div class="form-group">
 
-            <label>
+            <label for="registerName">
                 Имя
             </label>
 
@@ -395,7 +416,7 @@
 
         <div class="form-group">
 
-            <label>
+            <label for="registerUsername">
                 Логин
             </label>
 
@@ -411,7 +432,7 @@
 
         <div class="form-group">
 
-            <label>
+            <label for="registerPassword">
                 Пароль
             </label>
 
@@ -434,11 +455,15 @@
     </form>
 
 
+    <!-- СООБЩЕНИЯ -->
+
     <div
         class="message"
         id="message">
     </div>
 
+
+    <!-- НАЗАД -->
 
     <a href="index.html" class="back">
         Вернуться на сайт
@@ -447,94 +472,210 @@
 </div>
 
 
-
 <script>
 
-    /* =========================
-       ПЕРЕКЛЮЧЕНИЕ ФОРМ
-    ========================= */
+function showLogin() {
 
-    function showLogin() {
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("registerForm").style.display = "none";
 
-        document.getElementById("loginForm").style.display = "block";
+    document.getElementById("formTitle").textContent =
+        "Вход в аккаунт";
 
-        document.getElementById("registerForm").style.display = "none";
+    document.getElementById("loginTab").classList.add("active");
+    document.getElementById("registerTab").classList.remove("active");
 
-        document.getElementById("formTitle").textContent =
-            "Вход в аккаунт";
-
-        document.getElementById("loginTab").classList.add("active");
-
-        document.getElementById("registerTab").classList.remove("active");
-
-        document.getElementById("message").textContent = "";
-    }
+    document.getElementById("message").textContent = "";
+}
 
 
-    function showRegister() {
+function showRegister() {
 
-        document.getElementById("loginForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "block";
 
-        document.getElementById("registerForm").style.display = "block";
+    document.getElementById("formTitle").textContent =
+        "Регистрация";
 
-        document.getElementById("formTitle").textContent =
-            "Регистрация";
+    document.getElementById("loginTab").classList.remove("active");
+    document.getElementById("registerTab").classList.add("active");
 
-        document.getElementById("loginTab").classList.remove("active");
-
-        document.getElementById("registerTab").classList.add("active");
-
-        document.getElementById("message").textContent = "";
-    }
+    document.getElementById("message").textContent = "";
+}
 
 
-    /* =========================
-       РЕГИСТРАЦИЯ
-    ========================= */
+// =============================
+// РЕГИСТРАЦИЯ
+// =============================
 
-    document.getElementById("registerForm")
-        .addEventListener("submit", function(event) {
+document
+    .getElementById("registerForm")
+    .addEventListener("submit", async function(event) {
 
-            event.preventDefault();
+        event.preventDefault();
+
+        const name =
+            document.getElementById("registerName").value.trim();
+
+        const username =
+            document.getElementById("registerUsername").value.trim();
+
+        const password =
+            document.getElementById("registerPassword").value;
+
+        const message =
+            document.getElementById("message");
 
 
-            const name =
-                document.getElementById("registerName").value.trim();
+        if (!name || !username || !password) {
 
-            const username =
-                document.getElementById("registerUsername").value.trim();
+            message.textContent =
+                "Заполните все поля.";
 
-            const password =
-                document.getElementById("registerPassword").value;
+            return;
+        }
 
 
-            if (!name || !username || !password) {
+        if (password.length < 6) {
 
-                document.getElementById("message").textContent =
-                    "Заполните все поля.";
+            message.textContent =
+                "Пароль должен содержать минимум 6 символов.";
+
+            return;
+        }
+
+
+        message.textContent =
+            "Регистрация...";
+
+
+        try {
+
+            const response = await fetch(
+                "/api/register",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        name: name,
+                        username: username,
+                        password: password
+                    })
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.message || "Ошибка регистрации.";
 
                 return;
             }
 
 
-            const user = {
-
-                name: name,
-
-                username: username,
-
-                password: password,
-
-                appointments: []
-
-            };
+            message.textContent =
+                "Регистрация прошла успешно!";
 
 
-            localStorage.setItem(
-                "alywawesUser",
-                JSON.stringify(user)
+            document.getElementById("registerForm").reset();
+
+
+            setTimeout(function() {
+
+                showLogin();
+
+            }, 1000);
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.textContent =
+                "Не удалось подключиться к серверу.";
+
+        }
+
+});
+
+
+// =============================
+// ВХОД
+// =============================
+
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const username =
+            document.getElementById("loginUsername").value.trim();
+
+        const password =
+            document.getElementById("loginPassword").value;
+
+        const message =
+            document.getElementById("message");
+
+
+        if (!username || !password) {
+
+            message.textContent =
+                "Введите логин и пароль.";
+
+            return;
+        }
+
+
+        message.textContent =
+            "Выполняется вход...";
+
+
+        try {
+
+            const response = await fetch(
+                "/api/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                }
             );
 
+
+            const data = await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.message || "Неверный логин или пароль.";
+
+                return;
+            }
+
+
+            // Сохраняем пользователя
+            localStorage.setItem(
+                "alywawesUser",
+                JSON.stringify(data.user)
+            );
 
             localStorage.setItem(
                 "alywawesLoggedIn",
@@ -542,66 +683,32 @@
             );
 
 
-            window.location.href = "profile.html";
-
-        });
-
+            message.textContent =
+                "Вход выполнен!";
 
 
-    /* =========================
-       ВХОД
-    ========================= */
+            setTimeout(function() {
 
-    document.getElementById("loginForm")
-        .addEventListener("submit", function(event) {
+                window.location.href =
+                    "profile.html";
 
-            event.preventDefault();
+            }, 500);
 
 
-            const username =
-                document.getElementById("loginUsername").value.trim();
+        } catch (error) {
 
-            const password =
-                document.getElementById("loginPassword").value;
+            console.error(error);
 
+            message.textContent =
+                "Не удалось подключиться к серверу.";
 
-            const savedUser =
-                JSON.parse(
-                    localStorage.getItem("alywawesUser")
-                );
+        }
 
-
-            if (!savedUser) {
-
-                document.getElementById("message").textContent =
-                    "Аккаунт не найден. Сначала зарегистрируйтесь.";
-
-                return;
-            }
-
-
-            if (
-                username === savedUser.username &&
-                password === savedUser.password
-            ) {
-
-                localStorage.setItem(
-                    "alywawesLoggedIn",
-                    "true"
-                );
-
-                window.location.href = "profile.html";
-
-            } else {
-
-                document.getElementById("message").textContent =
-                    "Неверный логин или пароль.";
-
-            }
-
-        });
+});
 
 </script>
 
+
 </body>
+
 </html>
