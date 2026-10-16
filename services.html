@@ -28,22 +28,18 @@
             font-family: "Cormorant Garamond", serif;
         }
 
-
         /* ================= HEADER ================= */
 
         .header {
             height: 153px;
             background: #07122f;
-
             display: flex;
             align-items: center;
-
             padding: 0 40px;
         }
 
         .nav {
             width: 100%;
-
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
@@ -70,8 +66,7 @@
             color: #55c9e3;
         }
 
-
-        /* ================= ЛОГО ================= */
+        /* ================= LOGO ================= */
 
         .logo {
             text-align: center;
@@ -91,8 +86,7 @@
             line-height: 0.9;
         }
 
-
-        /* ================= УСЛУГИ ================= */
+        /* ================= SERVICES ================= */
 
         .services {
             width: 100%;
@@ -121,79 +115,53 @@
             flex: 1;
         }
 
-
-        /* ================= КАРТОЧКИ ================= */
+        /* ================= CARDS ================= */
 
         .cards {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 58px 148px;
-
             max-width: 1310px;
             margin: 0 auto;
         }
 
         .service-card {
             position: relative;
-
             min-height: 445px;
-
             padding: 18px 16px 22px;
-
             border: 1px solid #17205f;
             border-radius: 15px;
-
             background: rgba(184, 216, 244, 0.35);
-
             color: #527fa5;
-
             cursor: pointer;
-
             overflow: hidden;
-
             display: flex;
             flex-direction: column;
-
             transition:
                 transform 0.3s ease,
                 box-shadow 0.3s ease,
                 background 0.3s ease;
         }
 
-
-        /* третья карточка по центру */
-
         .service-card:nth-child(3) {
             grid-column: 1 / 3;
-
             width: 58%;
-
             justify-self: center;
         }
 
-
         .service-card:hover {
             transform: translateY(-5px);
-
             background: rgba(184, 216, 244, 0.55);
-
             box-shadow:
                 0 10px 35px rgba(23, 32, 95, 0.15);
         }
 
-
-        /* ================= КАРТИНКИ ================= */
-
         .service-image {
             display: block;
-
             width: 100%;
             height: 225px;
-
             object-fit: contain;
-
             margin: -5px auto 5px;
-
             opacity: 0.38;
 
             filter:
@@ -216,139 +184,83 @@
             opacity: 0.48;
         }
 
-
-        /* ================= НАЗВАНИЕ ================= */
-
         .service-card h2 {
             margin: -5px 0 15px;
-
             color: #17205f;
-
             font-family: "Cormorant Garamond", serif;
-
             font-size: 43px;
             line-height: 0.95;
-
             font-weight: 700;
-
             text-align: center;
         }
-
-
-        /* ================= ЛИНИЯ ================= */
 
         .card-line {
             width: 86%;
             height: 1px;
-
             margin: 0 auto 14px;
-
             background: #17205f;
         }
-
-
-        /* ================= ОПИСАНИЕ ================= */
 
         .service-card p {
             margin: 0 0 20px;
             padding: 0 2px;
-
             color: #527fa5;
-
-            font-family: "Cormorant Garamond", serif;
-
             font-size: 18px;
             line-height: 1.05;
-
             text-align: left;
-
             flex: 1;
         }
 
-
-        /* ================= КНОПКА ================= */
-
         .card-button {
             display: block;
-
             width: 85%;
-
             margin: 20px auto 0;
-
             padding: 10px 20px;
-
             border: 1px solid #17205f;
             border-radius: 14px;
-
             background: #36598b;
-
             color: white;
-
             font-family: "Cormorant Garamond", serif;
-
             font-size: 22px;
             font-weight: 600;
-
             cursor: pointer;
-
             transition: 0.3s;
         }
 
         .card-button:hover {
             background: #55c9e3;
-
             color: #07122f;
-
             box-shadow:
                 0 0 18px rgba(85, 201, 227, 0.3);
         }
 
-
-        /* =====================================================
-           БЛОК ЗАПИСИ
-        ===================================================== */
+        /* ================= BOOKING ================= */
 
         .booking-page {
             width: 100%;
-
             min-height: calc(100vh - 153px);
-
             display: grid;
-
             grid-template-columns: 50% 50%;
-
             padding: 30px 40px 70px;
-
             background: #05051e;
         }
 
-
-        /* ================= ЛЕВАЯ ЧАСТЬ ================= */
-
         .service-info {
             position: relative;
-
             padding: 0 40px 30px 15px;
-
             border-right: 1px solid #2e78ad;
-
             overflow: hidden;
         }
 
         .service-info::before {
             content: "";
-
             position: absolute;
-
             inset: 0;
-
             background:
                 url("images/tattoo.png")
                 center / 70% auto
                 no-repeat;
-
             opacity: 0.16;
-
             pointer-events: none;
         }
 
@@ -359,54 +271,37 @@
 
         .service-title {
             color: #789bd2;
-
             font-size: 72px;
-
             line-height: 0.92;
-
             margin: 0 0 35px;
-
             max-width: 650px;
-
             font-weight: 600;
         }
 
         .service-description {
             font-size: 28px;
-
             line-height: 1.08;
-
             max-width: 650px;
-
             margin: 0 0 25px;
         }
 
         .service-info h2 {
             color: #789bd2;
-
             font-size: 68px;
-
             margin: 20px 0;
         }
 
         .price-row {
             display: flex;
-
             justify-content: space-between;
-
             gap: 20px;
-
             border-bottom: 1px solid #35516f;
-
             padding: 13px 8px;
-
             font-size: 27px;
-
             font-weight: 600;
         }
 
-
-        /* ================= ПРАВАЯ ЧАСТЬ ================= */
+        /* ================= BOOKING PANEL ================= */
 
         .booking-panel {
             padding: 0 55px 0 65px;
@@ -414,54 +309,36 @@
 
         .panel-inner {
             max-width: 600px;
-
             margin: auto;
         }
 
         .panel-title {
             text-align: center;
-
             font-size: 32px;
-
             margin: 0;
-
             padding-bottom: 10px;
-
             border-bottom: 1px solid #3179ad;
         }
 
-
-        /* ================= ФОРМА ================= */
-
         .greeting {
             font-size: 28px;
-
             margin: 30px 0 12px;
         }
 
         .field-label {
             display: block;
-
             font-size: 24px;
-
             margin: 18px 0 7px;
         }
 
         .field {
             width: 100%;
-
             height: 58px;
-
             border: 1px solid #3180bc;
-
             background: #05051e;
-
             color: white;
-
             padding: 8px 14px;
-
             outline: none;
-
             font: 23px "Cormorant Garamond", serif;
         }
 
@@ -470,28 +347,16 @@
             color: white;
         }
 
-
-        /* ================= КНОПКА ЗАПИСИ ================= */
-
         .main-btn {
             display: block;
-
             margin: 32px auto 0;
-
             min-width: 315px;
-
             padding: 13px 30px;
-
             border-radius: 15px;
-
             border: 1px solid #55a8df;
-
             background: #36598b;
-
             color: white;
-
             font: 28px "Cormorant Garamond", serif;
-
             cursor: pointer;
         }
 
@@ -499,125 +364,113 @@
             background: #4270aa;
         }
 
-
-        /* ================= ТЕКСТ ================= */
-
         .note {
             text-align: center;
-
             font-size: 22px;
-
-            margin: 90px auto 0;
-
+            margin: 45px auto 0;
             border-bottom: 1px solid #315b80;
-
             padding: 15px;
         }
 
-
-        /* ================= ВХОД / РЕГИСТРАЦИЯ ================= */
+        /* ================= AUTH ================= */
 
         .auth-box {
             margin-top: 20px;
-
             border: 1px solid #3180bc;
-
             padding: 22px 28px;
-
             background: rgba(2, 12, 38, 0.4);
         }
 
         .auth-tabs {
             display: flex;
-
             justify-content: center;
-
             gap: 38px;
         }
 
         .auth-tab {
             border: 0;
-
             background: none;
-
             color: white;
-
             font: 25px "Cormorant Garamond";
-
             cursor: pointer;
-
             padding-bottom: 5px;
         }
 
         .auth-tab.active {
             color: #55c9e3;
-
             border-bottom: 1px solid #55c9e3;
         }
 
         .auth-title {
             text-align: center;
-
             font-size: 30px;
         }
 
         .auth-message {
             text-align: center;
-
             min-height: 25px;
-
             color: #55c9e3;
-
             font-size: 19px;
+            margin-top: 15px;
         }
 
-
-        /* ================= ВЫБОР УСЛУГИ ================= */
+        /* ================= SERVICE CHOICE ================= */
 
         .service-choice {
             display: flex;
-
             flex-wrap: wrap;
-
             gap: 8px;
         }
 
         .choice {
             border: 1px solid #3180bc;
-
             background: #0a1638;
-
             color: white;
-
             padding: 7px 12px;
-
             border-radius: 8px;
-
             font: 19px "Cormorant Garamond";
-
             cursor: pointer;
         }
 
         .choice.active {
             background: #35608f;
-
             color: #73e6f2;
         }
 
         .back-link {
             display: inline-block;
-
             margin-top: 18px;
-
             color: #7fc9dc;
-
             text-decoration: none;
-
             font-size: 20px;
         }
 
+        /* ================= SELECTED MASTER ================= */
 
-        /* ================= АДАПТИВ ================= */
+        .selected-master {
+            margin: 20px 0;
+            padding: 15px 20px;
+            background: rgba(81, 197, 233, 0.08);
+            border: 1px solid rgba(81, 197, 233, 0.45);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .selected-master span {
+            color: #8eb7ca;
+            font-family: "Inter", sans-serif;
+            font-size: 13px;
+        }
+
+        .selected-master strong {
+            color: #51c5e9;
+            font-size: 21px;
+            font-weight: 500;
+        }
+
+        /* ================= ADAPTIVE ================= */
 
         @media (max-width: 1000px) {
 
@@ -658,9 +511,7 @@
 
             .service-info {
                 border-right: 0;
-
                 border-bottom: 1px solid #2e78ad;
-
                 padding-bottom: 35px;
             }
 
@@ -676,19 +527,20 @@
                 font-size: 50px;
             }
 
+            .nav a {
+                font-size: 24px;
+            }
+
+            .service-card h2 {
+                font-size: 35px;
+            }
         }
 
     </style>
 
 </head>
 
-
 <body>
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
 
 <header class="header">
 
@@ -704,12 +556,11 @@
                 Услуги
             </a>
 
-            <a href="#masters">
+            <a href="masters.html">
                 Мастера
             </a>
 
         </div>
-
 
         <a href="auth.html" class="logo">
 
@@ -722,7 +573,6 @@
             </span>
 
         </a>
-
 
         <div class="nav-right">
 
@@ -745,11 +595,9 @@
 </header>
 
 
-<!-- =====================================================
-     УСЛУГИ
-===================================================== -->
-
 <main>
+
+    <!-- ================= УСЛУГИ ================= -->
 
     <section class="services">
 
@@ -768,8 +616,7 @@
 
         <section class="cards">
 
-
-            <!-- ================= НАНЕСЕНИЕ ТАТУ ================= -->
+            <!-- НАНЕСЕНИЕ -->
 
             <article
                 class="service-card"
@@ -782,14 +629,11 @@
                     alt="Нанесение тату"
                 >
 
-
                 <h2>
                     Нанесение тату
                 </h2>
 
-
                 <div class="card-line"></div>
-
 
                 <p>
                     Безопасное, стерильное и абсолютно
@@ -805,7 +649,6 @@
                     Мастер с опытом нанесёт тату любого типа и стиля.
                 </p>
 
-
                 <button
                     class="card-button"
                     onclick="
@@ -819,7 +662,7 @@
             </article>
 
 
-            <!-- ================= СВЕДЕНИЕ ТАТУ ================= -->
+            <!-- СВЕДЕНИЕ -->
 
             <article
                 class="service-card"
@@ -832,14 +675,11 @@
                     alt="Сведение тату"
                 >
 
-
                 <h2>
                     Сведение тату
                 </h2>
 
-
                 <div class="card-line"></div>
-
 
                 <p>
                     Все иногда о чём-то жалеют.
@@ -858,7 +698,6 @@
                     без переживаний.
                 </p>
 
-
                 <button
                     class="card-button"
                     onclick="
@@ -872,7 +711,7 @@
             </article>
 
 
-            <!-- ================= ЭСКИЗ ================= -->
+            <!-- ЭСКИЗ -->
 
             <article
                 class="service-card"
@@ -887,15 +726,12 @@
                     alt="Создание индивидуального эскиза"
                 >
 
-
                 <h2>
                     Создание индивидуального<br>
                     эскиза
                 </h2>
 
-
                 <div class="card-line"></div>
-
 
                 <p>
                     Если у вас в голове есть идея картинки,
@@ -909,7 +745,6 @@
                     на вас.
                 </p>
 
-
                 <button
                     class="card-button"
                     onclick="
@@ -922,46 +757,35 @@
 
             </article>
 
-
         </section>
 
     </section>
 
 
-    <!-- =====================================================
-         БЛОК ЗАПИСИ
-    ===================================================== -->
+    <!-- ================= ЗАПИСЬ ================= -->
 
     <section
         class="booking-page"
         id="booking"
     >
 
-
-        <!-- ================= ЛЕВАЯ ЧАСТЬ ================= -->
-
         <section class="service-info">
-
 
             <h1
                 class="service-title"
                 id="serviceTitle"
             ></h1>
 
-
             <p
                 class="service-description"
                 id="serviceDescription"
             ></p>
 
-
             <h2>
                 Цены
             </h2>
 
-
             <div id="prices"></div>
-
 
             <a
                 class="back-link"
@@ -970,17 +794,13 @@
                 ← Вернуться к услугам
             </a>
 
-
         </section>
 
-
-        <!-- ================= ПРАВАЯ ЧАСТЬ ================= -->
 
         <section
             class="booking-panel"
             id="bookingPanel"
         ></section>
-
 
     </section>
 
@@ -988,7 +808,6 @@
 
 
 <script>
-
 
 /* =====================================================
    ДАННЫЕ УСЛУГ
@@ -1064,11 +883,49 @@ const availableDates = [
 
 
 /* =====================================================
-   ВЫБРАННАЯ УСЛУГА
+   МАСТЕР
+===================================================== */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const masterCode =
+    urlParams.get("master");
+
+
+const masters = {
+
+    lina: {
+        id: 1,
+        name: "Лина Лифонова"
+    },
+
+    daniil: {
+        id: 2,
+        name: "Даниил Киров"
+    },
+
+    liliya: {
+        id: 3,
+        name: "Лилия Белова"
+    }
+
+};
+
+
+const selectedMaster =
+    masters[masterCode] || null;
+
+
+/* =====================================================
+   УСЛУГА
 ===================================================== */
 
 let selected =
-    new URLSearchParams(location.search).get("service")
+    urlParams.get("service")
     || "Сведение тату";
 
 
@@ -1080,39 +937,48 @@ if (!data[selected]) {
 
 
 /* =====================================================
-   ПОКАЗЫВАЕМ ИНФОРМАЦИЮ
+   ИНФОРМАЦИЯ ОБ УСЛУГЕ
 ===================================================== */
 
 function updateServiceInfo() {
 
-    document.getElementById("serviceTitle").innerHTML =
+    document.getElementById(
+        "serviceTitle"
+    ).innerHTML =
         data[selected].title;
 
 
-    document.getElementById("serviceDescription").textContent =
+    document.getElementById(
+        "serviceDescription"
+    ).textContent =
         data[selected].text;
 
 
-    document.getElementById("prices").innerHTML =
-        data[selected].prices.map(function(price) {
+    document.getElementById(
+        "prices"
+    ).innerHTML =
 
-            return `
+        data[selected].prices
+            .map(function(price) {
 
-                <div class="price-row">
+                return `
 
-                    <span>
-                        ${price[0]}
-                    </span>
+                    <div class="price-row">
 
-                    <span>
-                        ${price[1]}
-                    </span>
+                        <span>
+                            ${price[0]}
+                        </span>
 
-                </div>
+                        <span>
+                            ${price[1]}
+                        </span>
 
-            `;
+                    </div>
 
-        }).join("");
+                `;
+
+            })
+            .join("");
 
 }
 
@@ -1130,18 +996,27 @@ function selectService(service) {
     render();
 
 
+    const newUrl =
+        "services.html?master="
+        + encodeURIComponent(
+            masterCode || ""
+        )
+        + "&service="
+        + encodeURIComponent(service);
+
+
     history.replaceState(
         null,
         "",
-        "services.html?service="
-        + encodeURIComponent(service)
+        newUrl
     );
 
 
-    document.getElementById("booking")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+    document.getElementById(
+        "booking"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
 
 }
 
@@ -1154,13 +1029,24 @@ function user() {
 
     try {
 
-        return JSON.parse(
-            localStorage.getItem("alywawesUser")
-        );
+        const saved =
+            localStorage.getItem(
+                "alywawesUser"
+            );
+
+
+        if (!saved) {
+            return null;
+        }
+
+
+        return JSON.parse(saved);
 
     }
 
-    catch (e) {
+    catch (error) {
+
+        console.error(error);
 
         return null;
 
@@ -1177,12 +1063,13 @@ function logged() {
 
     return (
 
-        localStorage.getItem("alywawesLoggedIn")
-        === "true"
+        localStorage.getItem(
+            "alywawesLoggedIn"
+        ) === "true"
 
         &&
 
-        user()
+        user() !== null
 
     );
 
@@ -1196,9 +1083,7 @@ function logged() {
 function esc(text) {
 
     return String(text).replace(
-
         /[&<>"']/g,
-
         function(x) {
 
             return {
@@ -1212,14 +1097,13 @@ function esc(text) {
             }[x];
 
         }
-
     );
 
 }
 
 
 /* =====================================================
-   ОТОБРАЖЕНИЕ
+   ОТРИСОВКА
 ===================================================== */
 
 function render() {
@@ -1245,13 +1129,23 @@ function render() {
 
 function showBooking() {
 
-    let u = user();
+    const u = user();
 
 
-    document.getElementById("bookingPanel").innerHTML = `
+    if (!u) {
+
+        showAuth("login");
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "bookingPanel"
+    ).innerHTML = `
 
         <div class="panel-inner">
-
 
             <h2 class="panel-title">
                 Записаться
@@ -1271,29 +1165,58 @@ function showBooking() {
             </div>
 
 
+            <div class="selected-master">
+
+                <span>
+                    Ваш мастер
+                </span>
+
+                <strong>
+
+                    ${
+                        selectedMaster
+                        ? esc(
+                            selectedMaster.name
+                        )
+                        : "Мастер не выбран"
+                    }
+
+                </strong>
+
+            </div>
+
+
             <div class="service-choice">
 
-                ${Object.keys(data).map(function(x) {
+                ${
+                    Object.keys(data)
+                    .map(function(service) {
 
-                    return `
+                        return `
 
-                        <button
-                            class="choice ${
-                                x === selected
-                                ? "active"
-                                : ""
-                            }"
+                            <button
+                                class="choice ${
+                                    service === selected
+                                    ? "active"
+                                    : ""
+                                }"
 
-                            onclick="selectService('${x}')"
-                        >
+                                onclick="
+                                    selectService(
+                                        '${service}'
+                                    )
+                                "
+                            >
 
-                            ${esc(x)}
+                                ${esc(service)}
 
-                        </button>
+                            </button>
 
-                    `;
+                        `;
 
-                }).join("")}
+                    })
+                    .join("")
+                }
 
             </div>
 
@@ -1311,20 +1234,29 @@ function showBooking() {
             >
 
                 <option value="">
+
                     Выберите свободное время
+
                 </option>
 
-                ${availableDates.map(function(date) {
 
-                    return `
+                ${
+                    availableDates
+                    .map(function(date) {
 
-                        <option value="${date}">
-                            ${date}
-                        </option>
+                        return `
 
-                    `;
+                            <option value="${date}">
 
-                }).join("")}
+                                ${date}
+
+                            </option>
+
+                        `;
+
+                    })
+                    .join("")
+                }
 
             </select>
 
@@ -1379,7 +1311,6 @@ function showBooking() {
 
             </a>
 
-
         </div>
 
     `;
@@ -1393,10 +1324,11 @@ function showBooking() {
 
 function showAuth(mode) {
 
-    document.getElementById("bookingPanel").innerHTML = `
+    document.getElementById(
+        "bookingPanel"
+    ).innerHTML = `
 
         <div class="panel-inner">
-
 
             <h2 class="panel-title">
                 Записаться
@@ -1405,9 +1337,7 @@ function showAuth(mode) {
 
             <div class="auth-box">
 
-
                 <div class="auth-tabs">
-
 
                     <button
                         class="auth-tab ${
@@ -1416,7 +1346,9 @@ function showAuth(mode) {
                             : ""
                         }"
 
-                        onclick="showAuth('login')"
+                        onclick="
+                            showAuth('login')
+                        "
                     >
 
                         Вход
@@ -1431,13 +1363,14 @@ function showAuth(mode) {
                             : ""
                         }"
 
-                        onclick="showAuth('register')"
+                        onclick="
+                            showAuth('register')
+                        "
                     >
 
                         Регистрация
 
                     </button>
-
 
                 </div>
 
@@ -1461,8 +1394,11 @@ function showAuth(mode) {
                     `
 
                         <label class="field-label">
+
                             Логин
+
                         </label>
+
 
                         <input
                             class="field"
@@ -1472,8 +1408,11 @@ function showAuth(mode) {
 
 
                         <label class="field-label">
+
                             Пароль
+
                         </label>
+
 
                         <input
                             class="field"
@@ -1498,8 +1437,11 @@ function showAuth(mode) {
                     `
 
                         <label class="field-label">
+
                             Имя
+
                         </label>
+
 
                         <input
                             class="field"
@@ -1510,8 +1452,11 @@ function showAuth(mode) {
 
 
                         <label class="field-label">
+
                             Логин
+
                         </label>
+
 
                         <input
                             class="field"
@@ -1522,8 +1467,11 @@ function showAuth(mode) {
 
 
                         <label class="field-label">
+
                             Пароль
+
                         </label>
+
 
                         <input
                             class="field"
@@ -1552,7 +1500,6 @@ function showAuth(mode) {
                     id="msg"
                 ></div>
 
-
             </div>
 
 
@@ -1565,7 +1512,6 @@ function showAuth(mode) {
 
             </div>
 
-
         </div>
 
     `;
@@ -1574,44 +1520,110 @@ function showAuth(mode) {
 
 
 /* =====================================================
-   ВХОД
+   ВХОД ЧЕРЕЗ FLASK
 ===================================================== */
 
 function login() {
 
-    let u = user();
+    const loginValue =
+        document.getElementById(
+            "login"
+        ).value.trim();
 
-    let message =
-        document.getElementById("msg");
+
+    const passwordValue =
+        document.getElementById(
+            "pass"
+        ).value;
 
 
-    if (!u) {
+    const message =
+        document.getElementById(
+            "msg"
+        );
+
+
+    if (
+        !loginValue ||
+        !passwordValue
+    ) {
 
         message.textContent =
-            "Аккаунт не найден. Зарегистрируйтесь.";
+            "Введите логин и пароль.";
 
         return;
 
     }
 
 
-    let loginValue =
-        document.getElementById("login").value.trim();
+    message.textContent =
+        "Выполняется вход...";
 
 
-    let passwordValue =
-        document.getElementById("pass").value;
+    fetch(
+        "/api/login",
+        {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+
+            body: JSON.stringify({
+
+                username:
+                    loginValue,
+
+                password:
+                    passwordValue
+
+            })
+
+        }
+    )
+
+    .then(function(response) {
+
+        return response
+            .json()
+            .then(function(data) {
+
+                return {
+
+                    ok:
+                        response.ok,
+
+                    data:
+                        data
+
+                };
+
+            });
+
+    })
+
+    .then(function(result) {
+
+        if (!result.ok) {
+
+            message.textContent =
+                result.data.message ||
+                "Неверный логин или пароль.";
+
+            return;
+
+        }
 
 
-    if (
+        localStorage.setItem(
+            "alywawesUser",
+            JSON.stringify(
+                result.data.user
+            )
+        );
 
-        loginValue === u.username
-
-        &&
-
-        passwordValue === u.password
-
-    ) {
 
         localStorage.setItem(
             "alywawesLoggedIn",
@@ -1619,45 +1631,59 @@ function login() {
         );
 
 
+        message.textContent =
+            "Вход выполнен!";
+
+
         showBooking();
 
-    }
+    })
 
-    else {
+    .catch(function(error) {
+
+        console.error(error);
 
         message.textContent =
-            "Неверный логин или пароль.";
+            "Не удалось подключиться к серверу.";
 
-    }
+    });
 
 }
 
 
 /* =====================================================
-   РЕГИСТРАЦИЯ
+   РЕГИСТРАЦИЯ ЧЕРЕЗ FLASK
 ===================================================== */
 
 function register() {
 
-    let name =
-        document.getElementById("name").value.trim();
+    const name =
+        document.getElementById(
+            "name"
+        ).value.trim();
 
 
-    let login =
-        document.getElementById("reglogin").value.trim();
+    const loginValue =
+        document.getElementById(
+            "reglogin"
+        ).value.trim();
 
 
-    let password =
-        document.getElementById("regpass").value;
+    const password =
+        document.getElementById(
+            "regpass"
+        ).value;
 
 
-    let message =
-        document.getElementById("msg");
+    const message =
+        document.getElementById(
+            "msg"
+        );
 
 
     if (
         !name ||
-        !login ||
+        !loginValue ||
         !password
     ) {
 
@@ -1669,32 +1695,103 @@ function register() {
     }
 
 
-    let newUser = {
+    if (password.length < 6) {
 
-        name: name,
+        message.textContent =
+            "Пароль должен содержать минимум 6 символов.";
 
-        username: login,
+        return;
 
-        password: password,
-
-        appointments: []
-
-    };
+    }
 
 
-    localStorage.setItem(
-        "alywawesUser",
-        JSON.stringify(newUser)
-    );
+    message.textContent =
+        "Регистрация...";
 
 
-    localStorage.setItem(
-        "alywawesLoggedIn",
-        "true"
-    );
+    fetch(
+        "/api/register",
+        {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+
+            body: JSON.stringify({
+
+                name:
+                    name,
+
+                username:
+                    loginValue,
+
+                password:
+                    password
+
+            })
+
+        }
+    )
+
+    .then(function(response) {
+
+        return response
+            .json()
+            .then(function(data) {
+
+                return {
+
+                    ok:
+                        response.ok,
+
+                    data:
+                        data
+
+                };
+
+            });
+
+    })
+
+    .then(function(result) {
+
+        if (!result.ok) {
+
+            message.textContent =
+                result.data.message ||
+                "Ошибка регистрации.";
+
+            return;
+
+        }
 
 
-    showBooking();
+        message.textContent =
+            "Регистрация прошла успешно! Теперь войдите.";
+
+
+        setTimeout(
+            function() {
+
+                showAuth("login");
+
+            },
+            1000
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Не удалось подключиться к серверу.";
+
+    });
 
 }
 
@@ -1703,18 +1800,34 @@ function register() {
    СОЗДАНИЕ ЗАПИСИ
 ===================================================== */
 
-function saveAppointment() {
+async function saveAppointment() {
 
-    let date =
-        document.getElementById("date").value;
-
-
-    let phone =
-        document.getElementById("phone").value.trim();
+    const date =
+        document.getElementById(
+            "date"
+        ).value;
 
 
-    let message =
-        document.getElementById("msg");
+    const phone =
+        document.getElementById(
+            "phone"
+        ).value.trim();
+
+
+    const message =
+        document.getElementById(
+            "msg"
+        );
+
+
+    if (!selectedMaster) {
+
+        message.textContent =
+            "Сначала выберите мастера.";
+
+        return;
+
+    }
 
 
     if (!date || !phone) {
@@ -1727,35 +1840,112 @@ function saveAppointment() {
     }
 
 
-    let u = user();
+    const u = user();
 
 
-    u.appointments =
-        u.appointments || [];
+    if (!u || !u.id) {
+
+        message.textContent =
+            "Не удалось определить пользователя. Войдите в аккаунт заново.";
+
+        return;
+
+    }
 
 
-    u.appointments.push({
-
-        service: selected,
-
-        date: date,
-
-        phone: phone,
-
-        status:
-            "Ожидает подтверждения"
-
-    });
+    const parts =
+        date.split(" — ");
 
 
-    localStorage.setItem(
-        "alywawesUser",
-        JSON.stringify(u)
-    );
+    const appointmentDate =
+        parts[0];
+
+
+    const appointmentTime =
+        parts[1];
 
 
     message.textContent =
-        "Запись создана! Она появилась в вашем профиле.";
+        "Сохраняем запись...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/appointments",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        user_id:
+                            u.id,
+
+                        master_id:
+                            selectedMaster.id,
+
+                        service:
+                            selected,
+
+                        appointment_date:
+                            appointmentDate,
+
+                        appointment_time:
+                            appointmentTime,
+
+                        phone:
+                            phone
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            message.textContent =
+                result.message ||
+                "Не удалось создать запись.";
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "Запись успешно создана!";
+
+
+        console.log(
+            "Запись сохранена:",
+            result
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Не удалось подключиться к серверу.";
+
+    }
 
 }
 
@@ -1770,6 +1960,6 @@ render();
 
 </script>
 
-
 </body>
+
 </html>
