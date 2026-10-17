@@ -417,7 +417,94 @@ def create_appointment():
         "message": "Запись успешно создана"
     })
 
+# ==========================================
+# ПОЛУЧЕНИЕ ЗАПИСЕЙ КЛИЕНТА
+# ==========================================
 
+@app.route("/api/appointments/<int:user_id>", methods=["GET"])
+def get_user_appointments(user_id):
+
+    connection = get_db()
+
+    appointments = connection.execute("""
+        SELECT
+            appointments.id,
+            appointments.service,
+            appointments.appointment_date,
+            appointments.appointment_time,
+            appointments.phone,
+            appointments.status,
+            masters.name AS master_name
+        FROM appointments
+        LEFT JOIN masters
+            ON appointments.master_id = masters.id
+        WHERE appointments.user_id = ?
+        ORDER BY
+            appointments.appointment_date,
+            appointments.appointment_time
+    """, (user_id,)).fetchall()
+
+    connection.close()
+
+    result = []
+
+    for appointment in appointments:
+
+        result.append({
+            "id": appointment["id"],
+            "service": appointment["service"],
+            "date": appointment["appointment_date"],
+            "time": appointment["appointment_time"],
+            "phone": appointment["phone"],
+            "status": appointment["status"],
+            "master": appointment["master_name"] or "Мастер не выбран"
+        })
+
+    return jsonify({
+        "success": True,
+        "appointments": result
+    })
+
+
+# ==========================================
+# УДАЛЕНИЕ ЗАПИСИ
+# ==========================================
+
+@app.route(
+    "/api/appointments/<int:appointment_id>",
+    methods=["DELETE"]
+)
+def delete_appointment(appointment_id):
+
+    connection = get_db()
+
+    appointment = connection.execute("""
+        SELECT id
+        FROM appointments
+        WHERE id = ?
+    """, (appointment_id,)).fetchone()
+
+    if not appointment:
+
+        connection.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Запись не найдена"
+        }), 404
+
+    connection.execute("""
+        DELETE FROM appointments
+        WHERE id = ?
+    """, (appointment_id,))
+
+    connection.commit()
+    connection.close()
+
+    return jsonify({
+        "success": True,
+        "message": "Запись удалена"
+    })
 # ==========================================
 # ЗАПУСК БАЗЫ
 # ==========================================
