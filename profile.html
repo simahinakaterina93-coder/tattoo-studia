@@ -525,124 +525,331 @@
   ======================== */
   let user = JSON.parse(localStorage.getItem("alywawesUser")) || null;
 
-  // Добавим поля, которых может не быть
-  if (user) {
-    if (!Array.isArray(user.appointments)) user.appointments = [];
-    if (!user.avatar) user.avatar = null;
-  }
-
-  /* ========================
-     СОХРАНЕНИЕ
-  ======================== */
-  function save() {
-    localStorage.setItem("alywawesUser", JSON.stringify(user));
+  if (!user) {
+    window.location.href = "auth.html";
   }
 
   /* ========================
      ОТРИСОВКА ПРОФИЛЯ
   ======================== */
-  function render() {
+  function renderProfile() {
+
     if (!user) return;
 
-    // Имя и логин
     const firstName = (user.name || "Гость").split(" ")[0];
-    document.getElementById("greetName").textContent = firstName;
-    document.getElementById("fullName").textContent  = user.name || "Без имени";
-    document.getElementById("username").textContent  = "@" + (user.username || "user");
 
-    // Аватар
+    document.getElementById("greetName").textContent =
+      firstName;
+
+    document.getElementById("fullName").textContent =
+      user.name || "Без имени";
+
+    document.getElementById("username").textContent =
+      "@" + (user.username || "user");
+
+
+    /* ========================
+       АВАТАР
+    ======================== */
+
     const av = document.getElementById("avatarBox");
+
     if (user.avatar) {
-      av.style.backgroundImage = `url(${user.avatar})`;
+
+      av.style.backgroundImage =
+        `url(${user.avatar})`;
+
       av.textContent = "";
+
     } else {
+
       av.style.backgroundImage = "none";
       av.textContent = "👤";
     }
+  }
 
-    // Статистика
-    const count = user.appointments.length;
-    document.getElementById("activeCount").textContent = count;
 
-    if (count > 0) {
-      document.getElementById("nextDate").textContent =
-        user.appointments[count - 1].date;
-    } else {
-      document.getElementById("nextDate").textContent = "--.--.--";
-    }
+  /* ========================
+     ЗАГРУЗКА ЗАПИСЕЙ ИЗ БАЗЫ
+  ======================== */
+  async function loadAppointments() {
 
-    // Список услуг
-    const list = document.getElementById("servicesList");
-    list.innerHTML = "";
-
-    if (count === 0) {
-      list.innerHTML = '<p class="empty-note">У вас пока нет записей. Выберите услугу в разделе «Услуги».</p>';
+    if (!user || !user.id) {
+      console.error("ID пользователя не найден");
       return;
     }
 
-    user.appointments.forEach((item, index) => {
-      const div = document.createElement("div");
-      div.className = "service-item";
+    try {
+
+      const response = await fetch(
+        `/api/appointments/${user.id}`
+      );
+
+      const result = await response.json();
+
+      if (!result.success) {
+
+        console.error(
+          result.message || "Не удалось загрузить записи"
+        );
+
+        return;
+      }
+
+      const appointments = result.appointments || [];
+
+      renderAppointments(appointments);
+
+    } catch (error) {
+
+      console.error(
+        "Ошибка загрузки записей:",
+        error
+      );
+
+      document.getElementById("servicesList").innerHTML =
+        '<p class="empty-note">Не удалось загрузить записи.</p>';
+    }
+  }
+
+
+  /* ========================
+     ОТРИСОВКА ЗАПИСЕЙ
+  ======================== */
+  function renderAppointments(appointments) {
+
+    const list =
+      document.getElementById("servicesList");
+
+    const activeCount =
+      document.getElementById("activeCount");
+
+    const nextDate =
+      document.getElementById("nextDate");
+
+
+    /* ========================
+       ЕСЛИ ЗАПИСЕЙ НЕТ
+    ======================== */
+
+    if (appointments.length === 0) {
+
+      activeCount.textContent = "0";
+
+      nextDate.textContent = "--.--.--";
+
+      list.innerHTML =
+        '<p class="empty-note">' +
+        'У вас пока нет записей. ' +
+        'Выберите услугу в разделе «Услуги».' +
+        '</p>';
+
+      return;
+    }
+
+
+    /* ========================
+       КОЛИЧЕСТВО ЗАПИСЕЙ
+    ======================== */
+
+    activeCount.textContent =
+      appointments.length;
+
+
+    /* ========================
+       БЛИЖАЙШАЯ ЗАПИСЬ
+    ======================== */
+
+    nextDate.textContent =
+      appointments[0].date +
+      " — " +
+      appointments[0].time;
+
+
+    /* ========================
+       СПИСОК
+    ======================== */
+
+    list.innerHTML = "";
+
+
+    appointments.forEach((item) => {
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "service-item";
+
+
       div.innerHTML = `
+
         <div class="service-info">
-          <span class="name">${item.name}</span>
-          <span class="meta">${item.date}</span>
-          <span class="price">${item.price}</span>
+
+          <span class="name">
+            ${item.service}
+          </span>
+
+          <span class="meta">
+            ${item.date} — ${item.time}
+          </span>
+
+          <span class="meta">
+            Мастер: ${item.master}
+          </span>
+
+          <span class="price">
+            ${item.status}
+          </span>
+
         </div>
-        <button class="delete-btn" title="Удалить запись" onclick="removeAppointment(${index})">✕</button>
+
+        <button
+          class="delete-btn"
+          title="Удалить запись"
+          onclick="removeAppointment(${item.id})"
+        >
+          ✕
+        </button>
+
       `;
+
       list.appendChild(div);
+
     });
   }
 
+
   /* ========================
-     УДАЛЕНИЕ ЗАПИСИ
+     УДАЛЕНИЕ ЗАПИСИ ИЗ БАЗЫ
   ======================== */
-  function removeAppointment(index) {
-    if (!confirm("Удалить эту запись?")) return;
-    user.appointments.splice(index, 1);
-    save();
-    render();
+  async function removeAppointment(appointmentId) {
+
+    if (!confirm("Удалить эту запись?")) {
+      return;
+    }
+
+    try {
+
+      const response = await fetch(
+        `/api/appointments/${appointmentId}`,
+        {
+          method: "DELETE"
+        }
+      );
+
+      const result =
+        await response.json();
+
+
+      if (!result.success) {
+
+        alert(
+          result.message ||
+          "Не удалось удалить запись"
+        );
+
+        return;
+      }
+
+
+      /* Обновляем список */
+
+      await loadAppointments();
+
+
+    } catch (error) {
+
+      console.error(
+        "Ошибка удаления:",
+        error
+      );
+
+      alert(
+        "Не удалось удалить запись."
+      );
+    }
   }
+
 
   /* ========================
      ЗАГРУЗКА АВАТАРА
   ======================== */
   function uploadAvatar(event) {
-    const file = event.target.files[0];
+
+    const file =
+      event.target.files[0];
+
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      user.avatar = e.target.result;
-      save();
-      render();
-    };
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+      function (e) {
+
+        user.avatar =
+          e.target.result;
+
+        localStorage.setItem(
+          "alywawesUser",
+          JSON.stringify(user)
+        );
+
+        renderProfile();
+      };
+
+
     reader.readAsDataURL(file);
   }
+
 
   /* ========================
      НАВИГАЦИЯ
   ======================== */
-  function goHome()     { window.location.href = "index.html"; }
-  function goServices() { window.location.href = "services.html"; }
 
-  /* ========================
-     ВЫХОД ИЗ АККАУНТА
-  ======================== */
-  function logout(e) {
-    e.preventDefault();
-    if (!confirm("Выйти из аккаунта?")) return;
-
-    localStorage.removeItem("alywawesLoggedIn");
-    // Сам аккаунт (alywawesUser) оставляем, чтобы можно было снова войти.
-    window.location.href = "index.html";
+  function goHome() {
+    window.location.href =
+      "index.html";
   }
 
+  function goServices() {
+    window.location.href =
+      "services.html";
+  }
+
+
   /* ========================
-     СТАРТ
+     ВЫХОД
   ======================== */
-  render();
+
+  function logout(e) {
+
+    e.preventDefault();
+
+    if (!confirm("Выйти из аккаунта?")) {
+      return;
+    }
+
+    localStorage.removeItem(
+      "alywawesLoggedIn"
+    );
+
+    window.location.href =
+      "index.html";
+  }
+
+
+  /* ========================
+     ЗАПУСК
+  ======================== */
+
+  renderProfile();
+
+  loadAppointments();
+
 </script>
 
 </body>
