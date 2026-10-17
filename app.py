@@ -33,6 +33,14 @@ def get_db():
 def create_database():
 
     connection = get_db()
+    user = connection.execute(
+    """
+    SELECT id
+    FROM users
+    WHERE id = ?
+    """,
+    (user_id,)
+).fetchone()
 
 
     # ======================================
