@@ -21,7 +21,10 @@ app = Flask(__name__)
 def get_db():
 
     connection = sqlite3.connect(DATABASE)
+
     connection.row_factory = sqlite3.Row
+
+    connection.execute("PRAGMA foreign_keys = ON")
 
     return connection
 
@@ -33,14 +36,6 @@ def get_db():
 def create_database():
 
     connection = get_db()
-    user = connection.execute(
-    """
-    SELECT id
-    FROM users
-    WHERE id = ?
-    """,
-    (user_id,)
-).fetchone()
 
 
     # ======================================
@@ -87,7 +82,7 @@ def create_database():
 
 
     # ======================================
-    # ДОБАВЛЯЕМ МАСТЕРОВ
+    # МАСТЕР ЛИНА
     # ======================================
 
     connection.execute("""
@@ -109,6 +104,10 @@ def create_database():
     """)
 
 
+    # ======================================
+    # МАСТЕР ДАНИИЛ
+    # ======================================
+
     connection.execute("""
         INSERT OR IGNORE INTO masters
         (
@@ -127,6 +126,10 @@ def create_database():
         )
     """)
 
+
+    # ======================================
+    # МАСТЕР ЛИЛИЯ
+    # ======================================
 
     connection.execute("""
         INSERT OR IGNORE INTO masters
@@ -148,7 +151,7 @@ def create_database():
 
 
     # ======================================
-    # ЗАПИСИ КЛИЕНТОВ
+    # ЗАПИСИ
     # ======================================
 
     connection.execute("""
@@ -203,10 +206,26 @@ def home():
 
 
 # ==========================================
+# ФАЙЛЫ САЙТА
+# ==========================================
+
+@app.route("/<path:filename>")
+def files(filename):
+
+    return send_from_directory(
+        BASE_DIR,
+        filename
+    )
+
+
+# ==========================================
 # РЕГИСТРАЦИЯ
 # ==========================================
 
-@app.route("/api/register", methods=["POST"])
+@app.route(
+    "/api/register",
+    methods=["POST"]
+)
 def register():
 
     data = request.get_json()
@@ -258,15 +277,14 @@ def register():
     connection = get_db()
 
 
+    # Проверяем логин
+
     existing_user = connection.execute(
         """
         SELECT id
-
         FROM users
-
         WHERE username = ?
         """,
-
         (username,)
     ).fetchone()
 
@@ -277,16 +295,21 @@ def register():
 
         return jsonify({
             "success": False,
-            "message": "Такой логин уже существует"
+            "message":
+                "Такой логин уже существует"
         }), 409
 
+
+    # Хешируем пароль
 
     password_hash = generate_password_hash(
         password
     )
 
 
-    connection.execute(
+    # Создаём пользователя
+
+    cursor = connection.execute(
         """
         INSERT INTO users
         (
@@ -308,14 +331,33 @@ def register():
     )
 
 
+    user_id = cursor.lastrowid
+
+
     connection.commit()
 
     connection.close()
 
 
     return jsonify({
+
         "success": True,
-        "message": "Регистрация прошла успешно"
+
+        "message":
+            "Регистрация прошла успешно",
+
+        "user": {
+
+            "id": user_id,
+
+            "name": name,
+
+            "username": username,
+
+            "role": "client"
+
+        }
+
     })
 
 
@@ -323,7 +365,10 @@ def register():
 # ВХОД
 # ==========================================
 
-@app.route("/api/login", methods=["POST"])
+@app.route(
+    "/api/login",
+    methods=["POST"]
+)
 def login():
 
     data = request.get_json()
@@ -353,7 +398,8 @@ def login():
 
         return jsonify({
             "success": False,
-            "message": "Введите логин и пароль"
+            "message":
+                "Введите логин и пароль"
         }), 400
 
 
@@ -385,7 +431,8 @@ def login():
 
         return jsonify({
             "success": False,
-            "message": "Неверный логин или пароль"
+            "message":
+                "Неверный логин или пароль"
         }), 401
 
 
@@ -396,7 +443,8 @@ def login():
 
         return jsonify({
             "success": False,
-            "message": "Неверный логин или пароль"
+            "message":
+                "Неверный логин или пароль"
         }), 401
 
 
@@ -404,7 +452,8 @@ def login():
 
         "success": True,
 
-        "message": "Вход выполнен",
+        "message":
+            "Вход выполнен",
 
         "user": {
 
@@ -451,6 +500,12 @@ def create_appointment():
     )
 
 
+    username = data.get(
+        "username",
+        ""
+    ).strip()
+
+
     master_id = data.get(
         "master_id"
     )
@@ -480,19 +535,12 @@ def create_appointment():
     # ПРОВЕРКИ
     # ======================================
 
-    if not user_id:
-
-        return jsonify({
-            "success": False,
-            "message": "Пользователь не найден"
-        }), 400
-
-
     if not service:
 
         return jsonify({
             "success": False,
-            "message": "Услуга не выбрана"
+            "message":
+                "Услуга не выбрана"
         }), 400
 
 
@@ -500,7 +548,8 @@ def create_appointment():
 
         return jsonify({
             "success": False,
-            "message": "Дата не выбрана"
+            "message":
+                "Дата не выбрана"
         }), 400
 
 
@@ -508,7 +557,8 @@ def create_appointment():
 
         return jsonify({
             "success": False,
-            "message": "Время не выбрано"
+            "message":
+                "Время не выбрано"
         }), 400
 
 
@@ -516,7 +566,8 @@ def create_appointment():
 
         return jsonify({
             "success": False,
-            "message": "Введите телефон"
+            "message":
+                "Введите телефон"
         }), 400
 
 
@@ -524,29 +575,68 @@ def create_appointment():
 
 
     # ======================================
-    # ПРОВЕРЯЕМ ПОЛЬЗОВАТЕЛЯ
+    # ИЩЕМ ПОЛЬЗОВАТЕЛЯ ПО ID
     # ======================================
 
-    user = connection.execute(
-        """
-        SELECT id
+    user = None
 
-        FROM users
 
-        WHERE id = ?
-        """,
+    if user_id:
 
-        (user_id,)
-    ).fetchone()
+        user = connection.execute(
+            """
+            SELECT
+                id,
+                name,
+                username
 
+            FROM users
+
+            WHERE id = ?
+            """,
+
+            (user_id,)
+        ).fetchone()
+
+
+    # ======================================
+    # ЕСЛИ ID СТАРЫЙ —
+    # ИЩЕМ ПО ЛОГИНУ
+    # ======================================
+
+    if not user and username:
+
+        user = connection.execute(
+            """
+            SELECT
+                id,
+                name,
+                username
+
+            FROM users
+
+            WHERE username = ?
+            """,
+
+            (username,)
+        ).fetchone()
+
+
+    # ======================================
+    # ПОЛЬЗОВАТЕЛЬ НЕ НАЙДЕН
+    # ======================================
 
     if not user:
 
         connection.close()
 
         return jsonify({
+
             "success": False,
-            "message": "Пользователь не найден"
+
+            "message":
+                "Пользователь не найден. Войдите в аккаунт заново."
+
         }), 404
 
 
@@ -574,8 +664,12 @@ def create_appointment():
             connection.close()
 
             return jsonify({
+
                 "success": False,
-                "message": "Мастер не найден"
+
+                "message":
+                    "Мастер не найден"
+
             }), 404
 
 
@@ -600,7 +694,7 @@ def create_appointment():
         """,
 
         (
-            user_id,
+            user["id"],
             master_id,
             service,
             appointment_date,
@@ -627,27 +721,14 @@ def create_appointment():
 
 
 # ==========================================
-# HTML / CSS / JS / IMAGES
-# ==========================================
-
-@app.route("/<path:filename>")
-def files(filename):
-
-    return send_from_directory(
-        BASE_DIR,
-        filename
-    )
-
-
-# ==========================================
-# СОЗДАНИЕ БАЗЫ
+# ЗАПУСК БАЗЫ
 # ==========================================
 
 create_database()
 
 
 # ==========================================
-# ЗАПУСК
+# ЗАПУСК FLASK
 # ==========================================
 
 if __name__ == "__main__":
