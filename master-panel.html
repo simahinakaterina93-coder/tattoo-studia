@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALYWAWES — Панель мастера</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: #02091d;
+      color: #f5f7ff;
+      font-family: "Cormorant Garamond", serif;
+      overflow-x: hidden;
+    }
+
+    /* ================= HEADER ================= */
+    .header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 90px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(3, 12, 36, 0.94);
+      border-bottom: 1px solid rgba(86, 176, 220, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      width: min(1400px, 95%);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 2.5vw, 45px);
+    }
+
+    .nav-right { justify-content: flex-end; }
+
+    .nav a {
+      color: #f3f4f8;
+      text-decoration: none;
+      font-size: 22px;
+      white-space: nowrap;
+      transition: color .3s ease;
+      cursor: pointer;
+    }
+
+    .nav a:hover { color: #51c5e9; }
+
+    .logo { text-align: center; line-height: 1; text-decoration: none; }
+    .logo-main {
+      display: block;
+      color: #42afd4;
+      font-size: 34px;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    .logout-link { color: #ff8b8b !important; }
+    .logout-link:hover { color: #ff5050 !important; }
+
+    /* ================= ОСНОВНОЙ КАРКАС ================= */
+    .panel-page {
+      position: relative;
+      min-height: 100vh;
+      padding: 120px 5% 40px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(1, 7, 26, .65),
+          rgba(0, 20, 55, .55) 45%,
+          rgba(1, 6, 24, .9)
+        ),
+        url("ocean.jpg") center center / cover no-repeat,
+        radial-gradient(circle at 50% 20%, #087a9e 0%, #032d62 42%, #010822 85%);
+      background-attachment: fixed;
+    }
+
+    .panel-container {
+      width: min(1300px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      background: rgba(2, 10, 30, 0.78);
+      border: 1px solid rgba(86, 176, 220, 0.25);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      min-height: 640px;
+    }
+
+    /* ================= ЛЕВАЯ КОЛОНКА ================= */
+    .left-col {
+      border-right: 1px solid rgba(86, 176, 220, 0.2);
+      padding: 22px 18px;
+      background: rgba(2, 8, 28, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(86, 176, 220, 0.25);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-title small {
+      color: #8eb7ca;
+      font-size: 13px;
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+    }
+
+    /* Список клиентов */
+    .client-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .25s ease;
+      margin-bottom: 5px;
+    }
+
+    .client-item:hover { background: rgba(81, 197, 233, 0.12); }
+
+    .client-item.active {
+      background: rgba(81, 197, 233, 0.28);
+      box-shadow: inset 0 0 0 1px rgba(81, 197, 233, 0.45);
+    }
+
+    .client-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #0a2a4a;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #51c5e9;
+      flex-shrink: 0;
+      border: 1px solid rgba(81, 197, 233, 0.35);
+    }
+
+    .client-meta { flex: 1; min-width: 0; }
+    .client-meta .name {
+      font-size: 17px;
+      color: #dbeafe;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .client-meta .service {
+      font-size: 12px;
+      color: #8eb7ca;
+      font-family: "Inter", sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .empty-note {
+      color: #8ba3b8;
+      font-style: italic;
+      font-size: 15px;
+      font-family: "Inter", sans-serif;
+      padding: 8px 0;
+    }
+
+    /* Свободные даты */
+    .slots-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .slot-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(81, 197, 233, 0.10);
+      border: 1px solid rgba(81, 197, 233, 0.4);
+      border-radius: 8px;
+      font-size: 15px;
+      color: #dbeafe;
+      font-family: "Inter", sans-serif;
+    }
+
+    .slot-remove {
+      border: none;
+      background: transparent;
+      color: #ff8b8b;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0 4px;
+    }
+
+    .slot-remove:hover { color: #ff5050; }
+
+    .slot-add-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .slot-add-row input {
+      flex: 1;
+      height: 40px;
+      padding: 0 10px;
+      background: rgba(0, 5, 30, 0.6);
+      border: 1px solid rgba(86, 176, 220, 0.4);
+      border-radius: 8px;
+      color: #fff;
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .slot-add-row input:focus { border-color: #51c5e9; }
+
+    .slot-add-row button {
+      height: 40px;
+      padding: 0 14px;
+      border: 1px solid #2a6aa4;
+      background: #2a6aa4;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+    }
+
+    .slot-add-row button:hover { background: #51c5e9; color: #02091d; }
+
+    /* ================= ПРАВАЯ ЧАСТЬ ================= */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 640px;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 26px;
+      border-bottom: 1px solid rgba(86, 176, 220, 0.2);
+    }
+
+    .big-avatar {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: #0a2a4a;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(81, 197, 233, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #51c5e9;
+      flex-shrink: 0;
+    }
+
+    .chat-header .chat-info h3 {
+      font-size: 22px;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .chat-header .chat-info p {
+      font-size: 14px;
+      color: #8eb7ca;
+      font-family: "Inter", sans-serif;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 22px 26px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 320px;
+      max-height: 470px;
+    }
+
+    .messages::-webkit-scrollbar { width: 6px; }
+    .messages::-webkit-scrollbar-thumb {
+      background: rgba(81,197,233,0.4);
+      border-radius: 3px;
+    }
+
+    .empty-chat-note {
+      color: #8ba3b8;
+      font-style: italic;
+      font-size: 16px;
+      font-family: "Inter", sans-serif;
+      margin: auto;
+      text-align: center;
+    }
+
+    .msg {
+      max-width: 70%;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 17px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      animation: fadeIn .25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.master-msg {
+      align-self: flex-end;
+      background: #2a6aa4;
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg.user-msg {
+      align-self: flex-start;
+      background: rgba(81, 197, 233, 0.15);
+      border: 1px solid rgba(81, 197, 233, 0.4);
+      color: #e0f2fe;
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg .msg-time {
+      display: block;
+      font-size: 11px;
+      color: rgba(220, 240, 255, 0.6);
+      margin-top: 4px;
+      font-family: "Inter", sans-serif;
+    }
+
+    .input-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 22px;
+      border-top: 1px solid rgba(86, 176, 220, 0.2);
+      background: rgba(2, 8, 28, 0.5);
+    }
+
+    .input-bar input[type="text"] {
+      flex: 1;
+      height: 46px;
+      padding: 0 18px;
+      background: rgba(2, 15, 40, 0.6);
+      border: 1px solid rgba(86, 176, 220, 0.3);
+      border-radius: 23px;
+      color: #fff;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 17px;
+      outline: none;
+    }
+
+    .input-bar input[type="text"]::placeholder {
+      color: #8ba3b8;
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+    }
+
+    .input-bar input[type="text"]:focus { border-color: #51c5e9; }
+
+    .send-btn {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      border: none;
+      background: #2a6aa4;
+      color: #fff;
+      font-size: 19px;
+      cursor: pointer;
+      transition: .25s;
+      flex-shrink: 0;
+    }
+
+    .send-btn:hover { background: #51c5e9; color: #02091d; }
+
+    .no-selection {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      color: #8ba3b8;
+      font-size: 17px;
+      font-family: "Inter", sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+
+    /* ================= АДАПТИВ ================= */
+    @media (max-width: 900px) {
+      .header { height: 70px; }
+      .nav-left, .nav-right { display: none; }
+      .nav { display: flex; justify-content: center; }
+      .logo-main { font-size: 26px; }
+      .panel-page { padding-top: 100px; }
+      .panel-container { grid-template-columns: 1fr; }
+      .left-col { border-right: none; border-bottom: 1px solid rgba(86, 176, 220, 0.2); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= ШАПКА ================= -->
+<header class="header">
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html">Главная</a>
+      <a href="services.html">Услуги</a>
+      <a href="masters.html">Мастера</a>
+    </div>
+
+    <a href="master-panel.html" class="logo">
+      <span class="logo-main">ALYWAWES</span>
+    </a>
+
+    <div class="nav-right">
+      <a href="services.html">Цены</a>
+      <a href="#" class="logout-link" onclick="logout(event)">Выйти</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= ПАНЕЛЬ ================= -->
+<div class="panel-page">
+  <div class="panel-container">
+
+    <!-- ЛЕВАЯ КОЛОНКА -->
+    <aside class="left-col">
+
+      <!-- Клиенты -->
+      <div>
+        <div class="section-title">
+          Мои клиенты
+          <small id="clientsCount">0</small>
+        </div>
+        <div id="clientsContainer">
+          <p class="empty-note">Пока нет клиентов.</p>
+        </div>
+      </div>
+
+      <!-- Свободные даты -->
+      <div>
+        <div class="section-title">
+          Свободные даты
+          <small id="slotsCount">0</small>
+        </div>
+        <div class="slots-list" id="slotsContainer">
+          <p class="empty-note">Нет свободных дат.</p>
+        </div>
+
+        <div class="slot-add-row">
+          <input type="text" id="newSlotInput" placeholder="ДД.ММ.ГГГГ — ЧЧ:ММ">
+          <button onclick="addSlot()">+</button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ПРАВАЯ ЧАСТЬ -->
+    <section class="right-col" id="chatArea">
+      <div class="no-selection">
+        Выберите клиента слева, чтобы открыть переписку.
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  /* ========================
+     ЗАЩИТА
+  ======================== */
+  if (localStorage.getItem("alywawesMasterLoggedIn") !== "true") {
+    window.location.href = "master-login.html";
+  }
+
+  const MASTER_ID   = localStorage.getItem("alywawesMasterId");
+  const MASTER_NAME = localStorage.getItem("alywawesMasterName") || "Мастер";
+
+  let currentClient = null;
+  let clientsCache  = [];
+
+  /* ========================
+     УТИЛИТЫ
+  ======================== */
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, s => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;",
+      '"': "&quot;", "'": "&#39;"
+    }[s]));
+  }
+
+  function chatKey(username, masterId) {
+    return `alywawes_chat_${username}_${masterId}`;
+  }
+
+  function loadChat(username, masterId) {
+    try {
+      return JSON.parse(localStorage.getItem(chatKey(username, masterId))) || [];
+    } catch (e) { return []; }
+  }
+
+  function saveChat(username, masterId, list) {
+    localStorage.setItem(chatKey(username, masterId), JSON.stringify(list));
+  }
+
+  /* ========================
+     КЛИЕНТЫ
+     Ищем по всем возможным источникам:
+       1) alywawesUser (текущий клиент localStorage)
+       2) alywawesAllUsers (если вы когда-нибудь будете хранить список)
+       3) alywawesAppointments (если сервер сохраняет локально)
+  ======================== */
+  function collectClients() {
+    const found = {};
+    const masterShortName = MASTER_NAME.split(" ")[0]; // "Лина", "Даниил", "Лилия"
+
+    function scanUser(u) {
+      if (!u) return;
+      if (!Array.isArray(u.appointments)) return;
+
+      u.appointments.forEach(a => {
+        const masterField = (a.master || "").toString();
+        if (
+          masterField.includes(MASTER_NAME) ||
+          masterField.includes(masterShortName)
+        ) {
+          if (!found[u.username]) {
+            found[u.username] = {
+              username: u.username,
+              name: u.name || u.username,
+              avatar: u.avatar || null,
+              lastService: a.name || a.service || "—",
+              lastDate: a.date || "—"
+            };
+          }
+        }
+      });
+    }
+
+    // 1. alywawesUser
+    try {
+      const saved = localStorage.getItem("alywawesUser");
+      if (saved) scanUser(JSON.parse(saved));
+    } catch (e) {}
+
+    // 2. alywawesAllUsers (если появится база клиентов)
+    try {
+      const all = JSON.parse(localStorage.getItem("alywawesAllUsers") || "[]");
+      if (Array.isArray(all)) all.forEach(scanUser);
+    } catch (e) {}
+
+    // 3. alywawesAppointments (если кто-то пишет сюда)
+    try {
+      const arr = JSON.parse(localStorage.getItem("alywawesAppointments") || "[]");
+      if (Array.isArray(arr)) {
+        arr.forEach(a => {
+          const masterField = (a.master || "").toString();
+          if (
+            masterField.includes(MASTER_NAME) ||
+            masterField.includes(masterShortName)
+          ) {
+            const uname = a.username || a.client_username;
+            if (uname && !found[uname]) {
+              found[uname] = {
+                username: uname,
+                name: a.client_name || uname,
+                avatar: null,
+                lastService: a.name || a.service || "—",
+                lastDate: a.date || a.appointment_date || "—"
+              };
+            }
+          }
+        });
+      }
+    } catch (e) {}
+
+    return Object.values(found);
+  }
+
+  /* ========================
+     ОТРИСОВКА СПИСКА КЛИЕНТОВ
+  ======================== */
+  function renderClients() {
+    clientsCache = collectClients();
+    const container = document.getElementById("clientsContainer");
+    document.getElementById("clientsCount").textContent = clientsCache.length;
+
+    if (clientsCache.length === 0) {
+      container.innerHTML = '<p class="empty-note">Пока нет клиентов, записанных к вам.</p>';
+      return;
+    }
+
+    container.innerHTML = clientsCache.map(c => `
+      <div class="client-item ${c.username === currentClient ? 'active' : ''}"
+           onclick="openClient('${escapeHtml(c.username)}')">
+        <div class="client-avatar"
+             style="${c.avatar ? `background-image:url('${c.avatar}')` : ''}">
+          ${c.avatar ? '' : '👤'}
+        </div>
+        <div class="client-meta">
+          <div class="name">${escapeHtml(c.name)}</div>
+          <div class="service">${escapeHtml(c.lastService)} • ${escapeHtml(c.lastDate)}</div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  /* ========================
+     СВОБОДНЫЕ ДАТЫ
+  ======================== */
+  function slotsKey() {
+    return `alywawesMasterSlots_${MASTER_ID}`;
+  }
+
+  function loadSlots() {
+    try {
+      return JSON.parse(localStorage.getItem(slotsKey())) || [];
+    } catch (e) { return []; }
+  }
+
+  function saveSlots(list) {
+    localStorage.setItem(slotsKey(), JSON.stringify(list));
+  }
+
+  function renderSlots() {
+    const slots = loadSlots();
+    document.getElementById("slotsCount").textContent = slots.length;
+    const container = document.getElementById("slotsContainer");
+
+    if (slots.length === 0) {
+      container.innerHTML = '<p class="empty-note">Нет свободных дат.</p>';
+      return;
+    }
+
+    container.innerHTML = slots.map((s, i) => `
+      <div class="slot-item">
+        <span>${escapeHtml(s)}</span>
+        <button class="slot-remove" onclick="removeSlot(${i})" title="Удалить">✕</button>
+      </div>
+    `).join("");
+  }
+
+  function addSlot() {
+    const input = document.getElementById("newSlotInput");
+    const value = input.value.trim();
+    if (!value) return;
+
+    const slots = loadSlots();
+    if (slots.includes(value)) {
+      alert("Такая дата уже есть.");
+      return;
+    }
+
+    slots.push(value);
+    saveSlots(slots);
+    input.value = "";
+    renderSlots();
+  }
+
+  function removeSlot(index) {
+    const slots = loadSlots();
+    slots.splice(index, 1);
+    saveSlots(slots);
+    renderSlots();
+  }
+
+  /* ========================
+     ОТКРЫТИЕ ДИАЛОГА
+  ======================== */
+  function openClient(username) {
+    currentClient = username;
+    renderClients();
+    renderChatHeader();
+    renderMessages();
+  }
+
+  function findClient(username) {
+    return clientsCache.find(c => c.username === username) || {};
+  }
+
+  function renderChatHeader() {
+    const c = findClient(currentClient);
+    const area = document.getElementById("chatArea");
+
+    area.innerHTML = `
+      <div class="chat-header">
+        <div class="big-avatar"
+             style="${c.avatar ? `background-image:url('${c.avatar}')` : ''}">
+          ${c.avatar ? '' : '👤'}
+        </div>
+        <div class="chat-info">
+          <h3>${escapeHtml(c.name || c.username)}</h3>
+          <p>${escapeHtml(c.lastService || '')} • ${escapeHtml(c.lastDate || '')}</p>
+        </div>
+      </div>
+
+      <div class="messages" id="messages"></div>
+
+      <div class="input-bar">
+        <input type="text" id="messageInput" placeholder="Напишите клиенту.."
+               onkeydown="if(event.key==='Enter') sendMessage()">
+        <button class="send-btn" onclick="sendMessage()">↑</button>
+      </div>
+    `;
+  }
+
+  /* ========================
+     СООБЩЕНИЯ
+  ======================== */
+  function renderMessages() {
+    const container = document.getElementById("messages");
+    if (!container) return;
+
+    const list = loadChat(currentClient, MASTER_ID);
+
+    container.innerHTML = "";
+
+    if (list.length === 0) {
+      container.innerHTML = '<p class="empty-chat-note">Нет сообщений. Напишите первым.</p>';
+      return;
+    }
+
+    list.forEach(msg => {
+      const div = document.createElement("div");
+      // В chat.html "user" = клиент, "master" = мастер.
+      div.className = "msg " + (msg.from === "master" ? "master-msg" : "user-msg");
+      div.innerHTML = `${escapeHtml(msg.text)}
+        <span class="msg-time">${escapeHtml(msg.time)}</span>`;
+      container.appendChild(div);
+    });
+
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("messageInput");
+    const text = input.value.trim();
+    if (!text || !currentClient) return;
+
+    const now = new Date();
+    const time = now.toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+
+    const list = loadChat(currentClient, MASTER_ID);
+    list.push({ from: "master", text: text, time: time });
+    saveChat(currentClient, MASTER_ID, list);
+
+    input.value = "";
+    renderMessages();
+  }
+
+  /* ========================
+     ВЫХОД
+  ======================== */
+  function logout(e) {
+    e.preventDefault();
+    if (!confirm("Выйти из панели мастера?")) return;
+
+    localStorage.removeItem("alywawesMasterLoggedIn");
+    localStorage.removeItem("alywawesMasterId");
+    localStorage.removeItem("alywawesMasterName");
+
+    window.location.href = "index.html";
+  }
+
+  /* ========================
+     СТАРТ
+  ======================== */
+  renderClients();
+  renderSlots();
+
+  // Автообновление каждые 3 секунды
+  setInterval(() => {
+    renderClients();
+    if (currentClient) renderMessages();
+  }, 3000);
+</script>
+
+</body>
+</html>
