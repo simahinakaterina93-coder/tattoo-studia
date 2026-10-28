@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -197,11 +197,17 @@
       return;
     }
 
-    localStorage.setItem("alywawesMasterLoggedIn", "true");
-    localStorage.setItem("alywawesMasterId", masterId);
-    localStorage.setItem("alywawesMasterName", MASTER_NAMES[masterId]);
+   const MASTER_IDS = {
+  lina: 1,
+  daniil: 2,
+  liliya: 3
+};
 
-    window.location.href = "master-panel.html";
+localStorage.setItem("alywawesMasterLoggedIn", "true");
+localStorage.setItem("alywawesMasterId", MASTER_IDS[masterId]);
+localStorage.setItem("alywawesMasterName", MASTER_NAMES[masterId]);
+
+window.location.href = "master-panel.html";
   });
 </script>
 
