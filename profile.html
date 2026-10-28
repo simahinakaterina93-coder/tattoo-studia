@@ -513,36 +513,65 @@
 </div>
 
 <script>
-  /* ========================
-     ЗАЩИТА СТРАНИЦЫ
-  ======================== */
+
   if (localStorage.getItem("alywawesLoggedIn") !== "true") {
     window.location.href = "auth.html";
   }
 
+
   /* ========================
      ДАННЫЕ ПОЛЬЗОВАТЕЛЯ
   ======================== */
-  let user = JSON.parse(localStorage.getItem("alywawesUser")) || null;
+
+  let user = null;
+
+  try {
+    const savedUser = localStorage.getItem("alywawesUser");
+
+    if (savedUser && savedUser !== "undefined") {
+      user = JSON.parse(savedUser);
+    }
+  } catch (error) {
+    console.error("Ошибка чтения данных пользователя:", error);
+
+    localStorage.removeItem("alywawesUser");
+    user = null;
+  }
+
+
+  /* ========================
+     ЕСЛИ ДАННЫХ НЕТ
+  ======================== */
 
   if (!user) {
+
+    console.error("Данные пользователя не найдены.");
+
     window.location.href = "auth.html";
+
   }
+
 
   /* ========================
      ОТРИСОВКА ПРОФИЛЯ
   ======================== */
+
   function renderProfile() {
 
     if (!user) return;
 
-    const firstName = (user.name || "Гость").split(" ")[0];
+
+    const firstName =
+      (user.name || "Гость").split(" ")[0];
+
 
     document.getElementById("greetName").textContent =
       firstName;
 
+
     document.getElementById("fullName").textContent =
       user.name || "Без имени";
+
 
     document.getElementById("username").textContent =
       "@" + (user.username || "user");
@@ -552,53 +581,178 @@
        АВАТАР
     ======================== */
 
-    const av = document.getElementById("avatarBox");
+    const avatar =
+      document.getElementById("avatarBox");
+
 
     if (user.avatar) {
 
-      av.style.backgroundImage =
+      avatar.style.backgroundImage =
         `url(${user.avatar})`;
 
-      av.textContent = "";
+      avatar.textContent = "";
 
     } else {
 
-      av.style.backgroundImage = "none";
-      av.textContent = "👤";
+      avatar.style.backgroundImage = "none";
+
+      avatar.textContent = "👤";
+
     }
+
   }
 
 
   /* ========================
-     ЗАГРУЗКА ЗАПИСЕЙ ИЗ БАЗЫ
+     ПОЛУЧЕНИЕ ПОЛЬЗОВАТЕЛЯ
+     ЕСЛИ НЕТ ID
   ======================== */
-  async function loadAppointments() {
 
-    if (!user || !user.id) {
-      console.error("ID пользователя не найден");
-      return;
+  async function loadUserFromServer() {
+
+    if (!user || !user.username) {
+
+      console.error("Логин пользователя не найден.");
+
+      return false;
+
     }
+
 
     try {
 
       const response = await fetch(
-        `/api/appointments/${user.id}`
+        `/api/user/${encodeURIComponent(user.username)}`
       );
 
+
       const result = await response.json();
+
+
+      if (!result.success || !result.user) {
+
+        console.error(
+          result.message || "Пользователь не найден"
+        );
+
+        return false;
+
+      }
+
+
+      user = result.user;
+
+
+      localStorage.setItem(
+        "alywawesUser",
+        JSON.stringify(user)
+      );
+
+
+      return true;
+
+    } catch (error) {
+
+      console.error(
+        "Ошибка получения пользователя:",
+        error
+      );
+
+      return false;
+
+    }
+
+  }
+
+
+  /* ========================
+     ЗАГРУЗКА ЗАПИСЕЙ
+  ======================== */
+
+  async function loadAppointments() {
+
+    if (!user) {
+
+      console.error("Пользователь не найден.");
+
+      return;
+
+    }
+
+
+    /* ========================
+       ЕСЛИ ID НЕТ
+    ======================== */
+
+    if (!user.id) {
+
+      console.log(
+        "ID пользователя отсутствует. Получаем пользователя из базы..."
+      );
+
+
+      const loaded =
+        await loadUserFromServer();
+
+
+      if (!loaded) {
+
+        document.getElementById(
+          "servicesList"
+        ).innerHTML =
+          '<p class="empty-note">' +
+          'Не удалось загрузить данные аккаунта.' +
+          '</p>';
+
+        return;
+
+      }
+
+    }
+
+
+    /* ========================
+       ЗАГРУЖАЕМ ЗАПИСИ
+    ======================== */
+
+    try {
+
+      const response =
+        await fetch(
+          `/api/appointments/${user.id}`
+        );
+
+
+      const result =
+        await response.json();
+
+
+      console.log(
+        "Записи пользователя:",
+        result
+      );
+
 
       if (!result.success) {
 
         console.error(
-          result.message || "Не удалось загрузить записи"
+          result.message ||
+          "Не удалось загрузить записи"
         );
 
         return;
+
       }
 
-      const appointments = result.appointments || [];
 
-      renderAppointments(appointments);
+      const appointments =
+        result.appointments || [];
+
+
+      renderAppointments(
+        appointments
+      );
+
 
     } catch (error) {
 
@@ -607,36 +761,58 @@
         error
       );
 
-      document.getElementById("servicesList").innerHTML =
-        '<p class="empty-note">Не удалось загрузить записи.</p>';
+
+      document.getElementById(
+        "servicesList"
+      ).innerHTML =
+        '<p class="empty-note">' +
+        'Не удалось загрузить записи.' +
+        '</p>';
+
     }
+
   }
 
 
   /* ========================
      ОТРИСОВКА ЗАПИСЕЙ
   ======================== */
-  function renderAppointments(appointments) {
+
+  function renderAppointments(
+    appointments
+  ) {
 
     const list =
-      document.getElementById("servicesList");
+      document.getElementById(
+        "servicesList"
+      );
+
 
     const activeCount =
-      document.getElementById("activeCount");
+      document.getElementById(
+        "activeCount"
+      );
+
 
     const nextDate =
-      document.getElementById("nextDate");
+      document.getElementById(
+        "nextDate"
+      );
 
 
     /* ========================
-       ЕСЛИ ЗАПИСЕЙ НЕТ
+       НЕТ ЗАПИСЕЙ
     ======================== */
 
-    if (appointments.length === 0) {
+    if (!appointments ||
+        appointments.length === 0) {
 
-      activeCount.textContent = "0";
+      activeCount.textContent =
+        "0";
 
-      nextDate.textContent = "--.--.--";
+      nextDate.textContent =
+        "--.--.--";
+
 
       list.innerHTML =
         '<p class="empty-note">' +
@@ -644,7 +820,9 @@
         'Выберите услугу в разделе «Услуги».' +
         '</p>';
 
+
       return;
+
     }
 
 
@@ -673,70 +851,109 @@
     list.innerHTML = "";
 
 
-    appointments.forEach((item) => {
+    appointments.forEach(
+      item => {
 
-      const div =
-        document.createElement("div");
+        const div =
+          document.createElement(
+            "div"
+          );
 
-      div.className =
-        "service-item";
+
+        div.className =
+          "service-item";
 
 
-      div.innerHTML = `
+        div.innerHTML = `
 
-        <div class="service-info">
+          <div class="service-info">
 
-          <span class="name">
-            ${item.service}
-          </span>
+            <span class="name">
+              ${escapeHtml(item.service)}
+            </span>
 
-          <span class="meta">
-            ${item.date} — ${item.time}
-          </span>
+            <span class="meta">
+              ${escapeHtml(item.date)}
+              —
+              ${escapeHtml(item.time)}
+            </span>
 
-          <span class="meta">
-            Мастер: ${item.master}
-          </span>
+            <span class="meta">
+              Мастер:
+              ${escapeHtml(item.master || "Не указан")}
+            </span>
 
-          <span class="price">
-            ${item.status}
-          </span>
+            <span class="price">
+              ${escapeHtml(item.status || "Ожидает подтверждения")}
+            </span>
 
-        </div>
+          </div>
 
-        <button
-          class="delete-btn"
-          title="Удалить запись"
-          onclick="removeAppointment(${item.id})"
-        >
-          ✕
-        </button>
 
-      `;
+          <button
+            class="delete-btn"
+            title="Удалить запись"
+            onclick="removeAppointment(${item.id})"
+          >
+            ✕
+          </button>
 
-      list.appendChild(div);
+        `;
 
-    });
+
+        list.appendChild(div);
+
+      }
+    );
+
   }
 
 
   /* ========================
-     УДАЛЕНИЕ ЗАПИСИ ИЗ БАЗЫ
+     ЗАЩИТА HTML
   ======================== */
-  async function removeAppointment(appointmentId) {
+
+  function escapeHtml(value) {
+
+    return String(value || "").replace(
+      /[&<>"']/g,
+      symbol => ({
+
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+
+      }[symbol])
+    );
+
+  }
+
+
+  /* ========================
+     УДАЛЕНИЕ ЗАПИСИ
+  ======================== */
+
+  async function removeAppointment(
+    appointmentId
+  ) {
 
     if (!confirm("Удалить эту запись?")) {
       return;
     }
 
+
     try {
 
-      const response = await fetch(
-        `/api/appointments/${appointmentId}`,
-        {
-          method: "DELETE"
-        }
-      );
+      const response =
+        await fetch(
+          `/api/appointments/${appointmentId}`,
+          {
+            method: "DELETE"
+          }
+        );
+
 
       const result =
         await response.json();
@@ -750,10 +967,9 @@
         );
 
         return;
+
       }
 
-
-      /* Обновляем список */
 
       await loadAppointments();
 
@@ -765,20 +981,25 @@
         error
       );
 
+
       alert(
         "Не удалось удалить запись."
       );
+
     }
+
   }
 
 
   /* ========================
      ЗАГРУЗКА АВАТАРА
   ======================== */
+
   function uploadAvatar(event) {
 
     const file =
       event.target.files[0];
+
 
     if (!file) return;
 
@@ -788,21 +1009,25 @@
 
 
     reader.onload =
-      function (e) {
+      function(event) {
 
         user.avatar =
-          e.target.result;
+          event.target.result;
+
 
         localStorage.setItem(
           "alywawesUser",
           JSON.stringify(user)
         );
 
+
         renderProfile();
+
       };
 
 
     reader.readAsDataURL(file);
+
   }
 
 
@@ -811,13 +1036,18 @@
   ======================== */
 
   function goHome() {
+
     window.location.href =
       "index.html";
+
   }
 
+
   function goServices() {
+
     window.location.href =
       "services.html";
+
   }
 
 
@@ -825,20 +1055,29 @@
      ВЫХОД
   ======================== */
 
-  function logout(e) {
+  function logout(event) {
 
-    e.preventDefault();
+    event.preventDefault();
+
 
     if (!confirm("Выйти из аккаунта?")) {
       return;
     }
 
+
     localStorage.removeItem(
       "alywawesLoggedIn"
     );
 
+
+    localStorage.removeItem(
+      "alywawesUser"
+    );
+
+
     window.location.href =
       "index.html";
+
   }
 
 
