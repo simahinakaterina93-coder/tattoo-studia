@@ -445,164 +445,405 @@
   </div>
 </div>
 
-<script>
-  /* ========================
-     ПРОВЕРКА АВТОРИЗАЦИИ
-  ======================== */
-  if (localStorage.getItem("alywawesLoggedIn") !== "true") {
-    window.location.href = "auth.html";
-  }
+ <script>
+    // ==============================
+    // ПРОВЕРКА АВТОРИЗАЦИИ
+    // ==============================
 
-  /* ========================
-     СПИСОК МАСТЕРОВ
-  ======================== */
-  const MASTERS = {
-    lina:   { name: "Лина Лифонова",  cls: "lina"   },
-    daniil: { name: "Даниил Киров",   cls: "daniil" },
-    liliya: { name: "Лилия Белова",   cls: "liliya" }
-  };
-
-  let currentMaster = "lina";
-
-  /* ========================
-     ХРАНИЛИЩЕ СООБЩЕНИЙ
-     Ключ: "alywawes_chat_<username>_<masterId>"
-  ======================== */
-  const user = JSON.parse(localStorage.getItem("alywawesUser")) || {};
-  const userKey = user.username || "guest";
-
-  function chatKey(masterId) {
-    return `alywawes_chat_${userKey}_${masterId}`;
-  }
-
-  function loadMessages(masterId) {
-    try {
-      return JSON.parse(localStorage.getItem(chatKey(masterId))) || [];
-    } catch (e) { return []; }
-  }
-
-  function saveMessages(masterId, list) {
-    localStorage.setItem(chatKey(masterId), JSON.stringify(list));
-  }
-
-  /* ========================
-     ПЕРЕКЛЮЧЕНИЕ МАСТЕРА
-  ======================== */
-  function selectMaster(masterId) {
-    currentMaster = masterId;
-
-    // Подсветка активного пункта
-    document.querySelectorAll(".master-item").forEach(el => {
-      el.classList.toggle("active", el.dataset.master === masterId);
-    });
-
-    // Обновляем заголовок чата
-    const m = MASTERS[masterId];
-    document.getElementById("chatName").textContent = m.name;
-
-    const bigAvatar = document.getElementById("chatAvatar");
-    bigAvatar.className = "big-avatar " + m.cls;
-
-    // Рендерим сообщения
-    renderMessages();
-  }
-
-  /* ========================
-     ОТРИСОВКА СООБЩЕНИЙ
-  ======================== */
-  function renderMessages() {
-    const container = document.getElementById("messages");
-    const list = loadMessages(currentMaster);
-
-    container.innerHTML = "";
-
-    if (list.length === 0) {
-      container.innerHTML = '<p class="empty-chat-note">Напишите сообщение, чтобы начать переписку.</p>';
-      return;
+    if (localStorage.getItem("alywawesLoggedIn") !== "true") {
+        window.location.href = "auth.html";
     }
 
-    list.forEach(msg => {
-      const div = document.createElement("div");
-      div.className = "msg " + (msg.from === "user" ? "user" : "master");
-      div.innerHTML = `${escapeHtml(msg.text)}
-        <span class="msg-time">${msg.time}</span>`;
-      container.appendChild(div);
-    });
+    // ==============================
+    // МАСТЕРА
+    // ==============================
 
-    // Прокрутка вниз
-    container.scrollTop = container.scrollHeight;
-  }
+    const MASTERS = {
+        lina: {
+            name: "Лина Лифонова",
+            cls: "lina"
+        },
 
-  /* ========================
-     ОТПРАВКА СООБЩЕНИЯ
-  ======================== */
-  function sendMessage() {
-    const input = document.getElementById("messageInput");
-    const text  = input.value.trim();
-    if (!text) return;
+        daniil: {
+            name: "Даниил Киров",
+            cls: "daniil"
+        },
 
-    const list = loadMessages(currentMaster);
+        liliya: {
+            name: "Лилия Белова",
+            cls: "liliya"
+        }
+    };
 
-    const now = new Date();
-    const time = now.toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+    let currentMaster = "lina";
 
-    // Сообщение пользователя
-    list.push({ from: "user", text: text, time: time });
-    saveMessages(currentMaster, list);
+    // ==============================
+    // ТЕКУЩИЙ КЛИЕНТ
+    // ==============================
 
-    input.value = "";
-    renderMessages();
+    const user =
+        JSON.parse(localStorage.getItem("alywawesUser")) || {};
 
-    // Имитация ответа мастера через 1.5–2.5 секунды
-    setTimeout(() => {
-      const answers = [
-        "Здравствуйте! Да, конечно, обсудим ваш эскиз.",
-        "Спасибо за сообщение, отвечу в течение дня.",
-        "Отличная идея! Можем назначить дату консультации.",
-        "Подскажите, пожалуйста, желаемый размер и место.",
-        "Рад(а) помочь! Уточните, в каком стиле хотите тату."
-      ];
-      const reply = answers[Math.floor(Math.random() * answers.length)];
+    const clientId = user.id;
 
-      const list2 = loadMessages(currentMaster);
-      list2.push({ from: "master", text: reply, time: time });
-      saveMessages(currentMaster, list2);
+    if (!clientId) {
+        console.error("ID клиента не найден");
 
-      renderMessages();
-    }, 1500 + Math.random() * 1000);
-  }
+        alert("Не удалось определить ваш аккаунт. Войдите в систему заново.");
 
-  /* ========================
-     ПРИКРЕПЛЕНИЕ ФАЙЛА (имитация)
-  ======================== */
-  function attachFile() {
-    alert("Функция прикрепления файлов появится позже.");
-  }
+        window.location.href = "auth.html";
+    }
 
-  /* ========================
-     ЭКРАНИРОВАНИЕ HTML
-  ======================== */
-  function escapeHtml(str) {
-    return str.replace(/[&<>"']/g, s => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;",
-      '"': "&quot;", "'": "&#39;"
-    }[s]));
-  }
-  /* ========================
-     ПОДДЕРЖКА ?master=... ИЗ URL
-  ======================== */
-  const urlParams = new URLSearchParams(window.location.search);
-  const masterFromUrl = urlParams.get("master");
+    // ==============================
+    // ВЫБОР МАСТЕРА
+    // ==============================
 
-  if (masterFromUrl && MASTERS[masterFromUrl]) {
-    // Если пришли из эскиза — открываем соответствующего мастера
-    selectMaster(masterFromUrl);
-  } else {
-    selectMaster("lina");
-  }
-  /* ========================
-     СТАРТ
-  ======================== */
+    function selectMaster(masterId) {
+
+        if (!MASTERS[masterId]) {
+            return;
+        }
+
+        currentMaster = masterId;
+
+        // Активный мастер
+        document.querySelectorAll(".master-item").forEach(item => {
+
+            item.classList.toggle(
+                "active",
+                item.dataset.master === masterId
+            );
+
+        });
+
+        // Имя мастера
+        const master = MASTERS[masterId];
+
+        const chatName =
+            document.getElementById("chatName");
+
+        if (chatName) {
+            chatName.textContent = master.name;
+        }
+
+        // Аватар
+        const avatar =
+            document.getElementById("chatAvatar");
+
+        if (avatar) {
+            avatar.className =
+                "big-avatar " + master.cls;
+        }
+
+        // Загружаем сообщения
+        loadMessages(masterId);
+    }
+
+    // ==============================
+    // ЗАГРУЗКА СООБЩЕНИЙ
+    // ==============================
+
+    async function loadMessages(masterId) {
+
+        if (!clientId) {
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                `/api/chat/${masterId}?client_id=${clientId}`
+            );
+
+            const data = await response.json();
+
+            if (!data.success) {
+
+                console.error(
+                    data.message || "Ошибка загрузки чата"
+                );
+
+                return;
+            }
+
+            const container =
+                document.getElementById("messages");
+
+            if (!container) {
+                return;
+            }
+
+            container.innerHTML = "";
+
+            // Если сообщений пока нет
+            if (
+                !data.messages ||
+                data.messages.length === 0
+            ) {
+
+                container.innerHTML = `
+                    <p class="empty-chat-note">
+                        Напишите сообщение, чтобы начать переписку.
+                    </p>
+                `;
+
+                return;
+            }
+
+            // Выводим сообщения
+            data.messages.forEach(message => {
+
+                const div =
+                    document.createElement("div");
+
+                // Сообщение клиента справа,
+                // мастера слева
+                div.className =
+                    "msg " +
+                    (
+                        message.from === "client"
+                            ? "user"
+                            : "master"
+                    );
+
+                div.innerHTML = `
+                    ${escapeHtml(message.text)}
+                    <span class="msg-time">
+                        ${formatTime(message.time)}
+                    </span>
+                `;
+
+                container.appendChild(div);
+
+            });
+
+            // Прокручиваем вниз
+            container.scrollTop =
+                container.scrollHeight;
+
+        } catch (error) {
+
+            console.error(
+                "Ошибка загрузки сообщений:",
+                error
+            );
+
+        }
+    }
+
+    // ==============================
+    // ОТПРАВКА СООБЩЕНИЯ
+    // ==============================
+
+    async function sendMessage() {
+
+        const input =
+            document.getElementById("messageInput");
+
+        if (!input) {
+            return;
+        }
+
+        const text =
+            input.value.trim();
+
+        if (!text) {
+            return;
+        }
+
+        if (!clientId) {
+
+            alert(
+                "Не удалось определить клиента."
+            );
+
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                `/api/chat/${currentMaster}`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        client_id: clientId,
+                        message: text
+                    })
+                }
+            );
+
+            const data =
+                await response.json();
+
+            if (!data.success) {
+
+                alert(
+                    data.message ||
+                    "Не удалось отправить сообщение."
+                );
+
+                return;
+            }
+
+            // Очищаем поле
+            input.value = "";
+
+            // Загружаем чат заново
+            await loadMessages(currentMaster);
+
+            // Возвращаем курсор
+            input.focus();
+
+        } catch (error) {
+
+            console.error(
+                "Ошибка отправки сообщения:",
+                error
+            );
+
+            alert(
+                "Не удалось отправить сообщение."
+            );
+        }
+    }
+
+    // ==============================
+    // ENTER = ОТПРАВИТЬ
+    // ==============================
+
+    const messageInput =
+        document.getElementById("messageInput");
+
+    if (messageInput) {
+
+        messageInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ) {
+
+                    event.preventDefault();
+
+                    sendMessage();
+                }
+
+            }
+        );
+    }
+
+    // ==============================
+    // ВРЕМЯ
+    // ==============================
+
+    function formatTime(time) {
+
+        if (!time) {
+            return "";
+        }
+
+        try {
+
+            const date =
+                new Date(
+                    time.replace(" ", "T") + "Z"
+                );
+
+            return date.toLocaleTimeString(
+                "ru-RU",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+        } catch (error) {
+
+            return "";
+        }
+    }
+
+    // ==============================
+    // КНОПКА ПРИКРЕПЛЕНИЯ
+    // ==============================
+
+    function attachFile() {
+
+        alert(
+            "Функция прикрепления файлов появится позже."
+        );
+    }
+
+    // ==============================
+    // ЗАЩИТА ОТ HTML
+    // ==============================
+
+    function escapeHtml(str) {
+
+        return String(str).replace(
+            /[&<>"']/g,
+            function(symbol) {
+
+                return {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                }[symbol];
+
+            }
+        );
+    }
+
+    // ==============================
+    // ОПРЕДЕЛЯЕМ МАСТЕРА ИЗ URL
+    // ==============================
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const masterFromUrl =
+        urlParams.get("master");
+
+    if (
+        masterFromUrl &&
+        MASTERS[masterFromUrl]
+    ) {
+
+        selectMaster(masterFromUrl);
+
+    } else {
+
+        selectMaster("lina");
+    }
+
+    // ==============================
+    // ОБНОВЛЕНИЕ ЧАТА
+    // ==============================
+    // Проверяем новые сообщения
+    // каждые 3 секунды
+
+    setInterval(
+        function() {
+
+            loadMessages(currentMaster);
+
+        },
+        3000
+    );
+
 </script>
 
 </body>
