@@ -672,16 +672,22 @@ document
 
 
             // Сохраняем пользователя
-            localStorage.setItem(
-                "alywawesUser",
-                JSON.stringify(data.user)
-            );
+const user = {
+    id: data.id,
+    name: data.name,
+    username: data.username,
+    role: data.role
+};
 
-            localStorage.setItem(
-                "alywawesLoggedIn",
-                "true"
-            );
+localStorage.setItem(
+    "alywawesUser",
+    JSON.stringify(user)
+);
 
+localStorage.setItem(
+    "alywawesLoggedIn",
+    "true"
+);
 
             message.textContent =
                 "Вход выполнен!";
