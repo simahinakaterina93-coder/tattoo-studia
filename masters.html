@@ -264,7 +264,6 @@
       box-shadow: 0 0 20px rgba(91, 199, 230, 0.5);
     }
 
-    /* ================= АДАПТИВ ================= */
     @media (max-width: 1000px) {
       .masters-grid {
         grid-template-columns: 1fr;
@@ -297,7 +296,6 @@
 
 <body>
 
-<!-- ================= ШАПКА ================= -->
 <header class="header">
   <nav class="nav">
     <div class="nav-left">
@@ -319,9 +317,7 @@
   </nav>
 </header>
 
-<!-- ================= КОНТЕНТ ================= -->
 <div class="masters-page">
-  <!-- Фоновые изображения -->
   <div class="sketch-left"></div>
   <div class="sketch-right"></div>
 
@@ -330,7 +326,6 @@
 
     <div class="masters-grid">
 
-      <!-- МАСТЕР 1: ЛИНА -->
       <div class="master-card">
         <div class="master-top">
           <div class="master-photo lina"></div>
@@ -345,7 +340,6 @@
        <a class="btn-book" href="services.html?master=lina">Записаться</a>
       </div>
 
-      <!-- МАСТЕР 2: ДАНИИЛ -->
       <div class="master-card">
         <div class="master-top">
           <div class="master-photo daniil"></div>
@@ -380,9 +374,7 @@
 </div>
 
 <script>
-  /* ========================
-     ЛОГОТИП: профиль или вход
-  ======================== */
+  
   const isLogged = localStorage.getItem("alywawesLoggedIn") === "true";
   document.getElementById("logoLink").href = isLogged
     ? "profile.html"
