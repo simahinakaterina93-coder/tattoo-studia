@@ -137,7 +137,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-
             transition:
                 transform 0.3s ease,
                 box-shadow 0.3s ease,
@@ -153,7 +152,6 @@
         .service-card:hover {
             transform: translateY(-5px);
             background: rgba(184, 216, 244, 0.55);
-
             box-shadow:
                 0 10px 35px rgba(23, 32, 95, 0.15);
         }
@@ -164,7 +162,6 @@
             height: 225px;
             object-fit: contain;
             margin: -5px auto 5px;
-
             opacity: 0.38;
 
             filter:
@@ -189,9 +186,7 @@
 
         .service-card h2 {
             margin: -5px 0 15px;
-
             color: #17205f;
-
             font-family: "Cormorant Garamond", serif;
             font-size: 43px;
             line-height: 0.95;
@@ -203,49 +198,38 @@
             width: 86%;
             height: 1px;
             margin: 0 auto 14px;
-
             background: #17205f;
         }
 
         .service-card p {
             margin: 0 0 20px;
             padding: 0 2px;
-
             color: #527fa5;
-
             font-size: 18px;
             line-height: 1.05;
             text-align: left;
-
             flex: 1;
         }
 
         .card-button {
             display: block;
-
             width: 85%;
             margin: 20px auto 0;
             padding: 10px 20px;
-
             border: 1px solid #17205f;
             border-radius: 14px;
-
             background: #36598b;
             color: white;
-
             font-family: "Cormorant Garamond", serif;
             font-size: 22px;
             font-weight: 600;
-
             cursor: pointer;
-
             transition: 0.3s;
         }
 
         .card-button:hover {
             background: #55c9e3;
             color: #07122f;
-
             box-shadow:
                 0 0 18px rgba(85, 201, 227, 0.3);
         }
@@ -255,38 +239,28 @@
         .booking-page {
             width: 100%;
             min-height: calc(100vh - 153px);
-
             display: grid;
             grid-template-columns: 50% 50%;
-
             padding: 30px 40px 70px;
-
             background: #05051e;
         }
 
         .service-info {
             position: relative;
-
             padding: 0 40px 30px 15px;
-
             border-right: 1px solid #2e78ad;
-
             overflow: hidden;
         }
 
         .service-info::before {
             content: "";
-
             position: absolute;
             inset: 0;
-
             background:
                 url("images/tattoo.png")
                 center / 70% auto
                 no-repeat;
-
             opacity: 0.16;
-
             pointer-events: none;
         }
 
@@ -297,45 +271,32 @@
 
         .service-title {
             color: #789bd2;
-
             font-size: 72px;
             line-height: 0.92;
-
             margin: 0 0 35px;
-
             max-width: 650px;
-
             font-weight: 600;
         }
 
         .service-description {
             font-size: 28px;
             line-height: 1.08;
-
             max-width: 650px;
-
             margin: 0 0 25px;
         }
 
         .service-info h2 {
             color: #789bd2;
-
             font-size: 68px;
-
             margin: 20px 0;
         }
 
         .price-row {
             display: flex;
-
             justify-content: space-between;
-
             gap: 20px;
-
             border-bottom: 1px solid #35516f;
-
             padding: 13px 8px;
-
             font-size: 27px;
             font-weight: 600;
         }
@@ -353,48 +314,32 @@
 
         .panel-title {
             text-align: center;
-
             font-size: 32px;
-
             margin: 0;
-
             padding-bottom: 10px;
-
             border-bottom: 1px solid #3179ad;
         }
 
         .greeting {
             font-size: 28px;
-
             margin: 30px 0 12px;
         }
 
         .field-label {
             display: block;
-
             font-size: 24px;
-
             margin: 18px 0 7px;
         }
 
         .field {
             width: 100%;
             height: 58px;
-
             border: 1px solid #3180bc;
-
             background: #05051e;
             color: white;
-
             padding: 8px 14px;
-
             outline: none;
-
             font: 23px "Cormorant Garamond", serif;
-        }
-
-        .field:focus {
-            border-color: #55c9e3;
         }
 
         .field option {
@@ -404,23 +349,14 @@
 
         .main-btn {
             display: block;
-
             margin: 32px auto 0;
-
             min-width: 315px;
-
             padding: 13px 30px;
-
             border-radius: 15px;
-
             border: 1px solid #55a8df;
-
             background: #36598b;
-
             color: white;
-
             font: 28px "Cormorant Garamond", serif;
-
             cursor: pointer;
         }
 
@@ -430,13 +366,9 @@
 
         .note {
             text-align: center;
-
             font-size: 22px;
-
             margin: 45px auto 0;
-
             border-bottom: 1px solid #315b80;
-
             padding: 15px;
         }
 
@@ -444,57 +376,41 @@
 
         .auth-box {
             margin-top: 20px;
-
             border: 1px solid #3180bc;
-
             padding: 22px 28px;
-
             background: rgba(2, 12, 38, 0.4);
         }
 
         .auth-tabs {
             display: flex;
-
             justify-content: center;
-
             gap: 38px;
         }
 
         .auth-tab {
             border: 0;
-
             background: none;
-
             color: white;
-
             font: 25px "Cormorant Garamond";
-
             cursor: pointer;
-
             padding-bottom: 5px;
         }
 
         .auth-tab.active {
             color: #55c9e3;
-
             border-bottom: 1px solid #55c9e3;
         }
 
         .auth-title {
             text-align: center;
-
             font-size: 30px;
         }
 
         .auth-message {
             text-align: center;
-
             min-height: 25px;
-
             color: #55c9e3;
-
             font-size: 19px;
-
             margin-top: 15px;
         }
 
@@ -502,101 +418,59 @@
 
         .service-choice {
             display: flex;
-
             flex-wrap: wrap;
-
             gap: 8px;
         }
 
         .choice {
             border: 1px solid #3180bc;
-
             background: #0a1638;
-
             color: white;
-
             padding: 7px 12px;
-
             border-radius: 8px;
-
             font: 19px "Cormorant Garamond";
-
             cursor: pointer;
         }
 
         .choice.active {
             background: #35608f;
-
             color: #73e6f2;
         }
 
         .back-link {
             display: inline-block;
-
             margin-top: 18px;
-
             color: #7fc9dc;
-
             text-decoration: none;
-
             font-size: 20px;
         }
 
-        .back-link:hover {
-            color: #55c9e3;
-        }
-
-        /* ================= MASTER ================= */
+        /* ================= SELECTED MASTER ================= */
 
         .selected-master {
             margin: 20px 0;
-
             padding: 15px 20px;
-
             background: rgba(81, 197, 233, 0.08);
-
             border: 1px solid rgba(81, 197, 233, 0.45);
-
             border-radius: 12px;
-
             display: flex;
-
             flex-direction: column;
-
             gap: 4px;
         }
 
         .selected-master span {
             color: #8eb7ca;
-
-            font-size: 14px;
+            font-family: "Inter", sans-serif;
+            font-size: 13px;
         }
 
         .selected-master strong {
             color: #51c5e9;
-
             font-size: 21px;
-
             font-weight: 500;
         }
 
-        .master-warning {
-            margin: 15px 0;
-
-            padding: 12px 15px;
-
-            border: 1px solid rgba(234, 191, 140, 0.5);
-
-            border-radius: 10px;
-
-            color: #eabf8c;
-
-            font-size: 19px;
-
-            text-align: center;
-        }
-
-        /* ================= MOBILE ================= */
+        /* ================= ADAPTIVE ================= */
 
         @media (max-width: 1000px) {
 
@@ -613,9 +487,7 @@
             .nav-left,
             .nav-right {
                 justify-content: center;
-
                 flex-wrap: wrap;
-
                 gap: 25px;
             }
 
@@ -629,21 +501,17 @@
 
             .service-card:nth-child(3) {
                 grid-column: auto;
-
                 width: 100%;
             }
 
             .booking-page {
                 grid-template-columns: 1fr;
-
                 padding: 25px;
             }
 
             .service-info {
                 border-right: 0;
-
                 border-bottom: 1px solid #2e78ad;
-
                 padding-bottom: 35px;
             }
 
@@ -672,7 +540,6 @@
 
 </head>
 
-
 <body>
 
 <header class="header">
@@ -695,7 +562,6 @@
 
         </div>
 
-
         <a href="auth.html" class="logo">
 
             <span class="logo-small">
@@ -708,18 +574,17 @@
 
         </a>
 
-
         <div class="nav-right">
 
-            <a href="services.html#prices">
+            <a href="#prices">
                 Цены
             </a>
 
-            <a href="index.html#contacts">
+            <a href="#contacts">
                 Контакты
             </a>
 
-            <a href="index.html#faq">
+            <a href="#faq">
                 FAQ⌒
             </a>
 
@@ -764,34 +629,28 @@
                     alt="Нанесение тату"
                 >
 
-
                 <h2>
                     Нанесение тату
                 </h2>
 
-
                 <div class="card-line"></div>
 
-
                 <p>
-                    Безопасное, стерильное и абсолютно превосходное
-                    нанесение татуировки в любом стиле:
-                    от геометрии и олдскула до биомеханики
-                    и высококачественного реализма.
+                    Безопасное, стерильное и абсолютно
+                    превосходное нанесение татуировки в любом стиле:
+                    от геометрии и олдскула, до биомеханики и
+                    высококачественного реализма – всё ограничивается
+                    только Вашей фантазией!
 
-                    Всё ограничивается только Вашей фантазией!
-
-                    Мы стараемся создать атмосферу,
-                    в которой вам будет комфортно,
-                    ведь тату — не пытка, а украшение вас.
+                    Мы стараемся создать атмосферу в которой вам
+                    будет комфортно, ведь тату - не пытка,
+                    а украшение вас)
 
                     Мастер с опытом нанесёт тату любого типа и стиля.
                 </p>
 
-
                 <button
                     class="card-button"
-                    type="button"
                     onclick="
                         event.stopPropagation();
                         selectService('Нанесение тату')
@@ -816,38 +675,31 @@
                     alt="Сведение тату"
                 >
 
-
                 <h2>
                     Сведение тату
                 </h2>
 
-
                 <div class="card-line"></div>
-
 
                 <p>
                     Все иногда о чём-то жалеют.
                     Так же иногда происходит с татуировкой,
-                    которая была сделана в неудачное время
-                    или в неудачном месте.
+                    которая была сделана в неудачное время,
+                    или в неудачном месте, либо рисунок мог
+                    с годами надоесть.
 
-                    Рисунок мог с годами надоесть.
+                    Как бы кто не говорил, тату это не всегда
+                    навсегда.
 
-                    Как бы кто ни говорил,
-                    тату — это не всегда навсегда.
+                    Качественное выведение татуировки Вы можете
+                    получить в нашей студии.
 
-                    Качественное выведение татуировки
-                    Вы можете получить в нашей студии.
-
-                    Без адской боли,
-                    без некрасивых шрамов,
+                    Без адской боли, без некрасивых шрамов,
                     без переживаний.
                 </p>
 
-
                 <button
                     class="card-button"
-                    type="button"
                     onclick="
                         event.stopPropagation();
                         selectService('Сведение тату')
@@ -864,9 +716,7 @@
             <article
                 class="service-card"
                 onclick="
-                    selectService(
-                        'Создание индивидуального эскиза'
-                    )
+                    selectService('Создание индивидуального эскиза')
                 "
             >
 
@@ -876,36 +726,30 @@
                     alt="Создание индивидуального эскиза"
                 >
 
-
                 <h2>
                     Создание индивидуального<br>
                     эскиза
                 </h2>
 
-
                 <div class="card-line"></div>
-
 
                 <p>
                     Если у вас в голове есть идея картинки,
-                    которую вы хотели бы перенести на своё тело
+                    которую вы бы хотели перенести на свое тело
                     в виде татуировки или же вы хотите рисунок,
-                    который будет только у вас.
+                    который будет только у вас, тогда спешим
+                    вас порадовать.
 
-                    В нашей студии есть мастера,
-                    готовые сделать вам индивидуальный эскиз
-                    и перенести его на вас.
+                    В нашей студии есть мастера готовые сделать
+                    вам индивидуальный эскиз и перенести его
+                    на вас.
                 </p>
-
 
                 <button
                     class="card-button"
-                    type="button"
                     onclick="
                         event.stopPropagation();
-                        selectService(
-                            'Создание индивидуального эскиза'
-                        )
+                        selectService('Создание индивидуального эскиза')
                     "
                 >
                     Создать эскиз →
@@ -932,20 +776,16 @@
                 id="serviceTitle"
             ></h1>
 
-
             <p
                 class="service-description"
                 id="serviceDescription"
             ></p>
 
-
             <h2>
                 Цены
             </h2>
 
-
             <div id="prices"></div>
-
 
             <a
                 class="back-link"
@@ -967,6 +807,9 @@
 </main>
 
 
+
+
+
 <script>
 
 /* =====================================================
@@ -977,11 +820,10 @@ const data = {
 
     "Сведение тату": {
 
-        title:
-            "Сведение<br>Татуировки",
+        title: "Сведение<br>Татуировки",
 
         text:
-            "Все иногда о чём-то жалеют. Так же иногда происходит с татуировкой, которая была сделана в неудачное время, или в неудачном месте, либо рисунок мог с годами надоесть. Как бы кто ни говорил, тату — это не всегда навсегда. Качественное выведение татуировки Вы можете получить в нашей студии. Без адской боли, без некрасивых шрамов, без переживаний.",
+            "Все иногда о чём-то жалеют. Так же иногда происходит с татуировкой, которая была сделана в неудачное время, или в неудачном месте, либо рисунок мог с годами надоесть. Как бы кто не говорил, тату это не всегда навсегда. Качественное выведение татуировки Вы можете получить в нашей студии. Без адской боли, без некрасивых шрамов, без переживаний.",
 
         prices: [
             ["Первичная консультация", "500 р"],
@@ -993,8 +835,7 @@ const data = {
 
     "Нанесение тату": {
 
-        title:
-            "Нанесение<br>Тату",
+        title: "Нанесение<br>Тату",
 
         text:
             "Создадим татуировку, которая будет подходить именно вам. Мастер обсудит идею, размер, место нанесения и все важные детали перед началом работы.",
@@ -1009,15 +850,14 @@ const data = {
 
     "Создание индивидуального эскиза": {
 
-        title:
-            "Создание<br>индивидуального<br>эскиза",
+        title: "Создание<br>индивидуального<br>эскиза",
 
         text:
             "Если у вас в голове есть идея картинки, которую вы хотите перенести на тело, мастер создаст индивидуальный эскиз специально для вас.",
 
         prices: [
             ["Первичная консультация", "от 500 р"],
-            ["Создание эскиза поэтапно", "от 2000 р"]
+            ["Создание эскиза", "от 2000 р"]
         ]
 
     }
@@ -1026,25 +866,17 @@ const data = {
 
 
 /* =====================================================
-   СВОБОДНЫЕ СЛОТЫ
+   ПОЛУЧАЕМ МАСТЕРА ИЗ URL
 ===================================================== */
 
-const availableDates = [
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
 
-    "15.10.2026 — 12:00",
+const masterCode =
+    urlParams.get("master");
 
-    "15.10.2026 — 15:00",
-
-    "16.10.2026 — 11:00",
-
-    "18.10.2026 — 14:00"
-
-];
-
-
-/* =====================================================
-   МАСТЕРА
-===================================================== */
 
 const masters = {
 
@@ -1066,22 +898,20 @@ const masters = {
 };
 
 
-/* =====================================================
-   URL
-===================================================== */
+/*
+    Если мастер передан через URL —
+    используем его.
 
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
+    Например:
 
+    services.html?master=lina
 
-let masterCode =
-    urlParams.get("master");
-
+    Если мастер не указан,
+    временно используем Лину.
+*/
 
 const selectedMaster =
-    masters[masterCode] || null;
+    masters[masterCode] || masters.lina;
 
 
 /* =====================================================
@@ -1095,42 +925,101 @@ let selected =
 
 if (!data[selected]) {
 
-    selected =
-        "Сведение тату";
+    selected = "Сведение тату";
 
 }
 
 
 /* =====================================================
-   ПОЛЬЗОВАТЕЛЬ
+   СВОБОДНЫЕ СЛОТЫ
 ===================================================== */
 
-function getUser() {
+let availableSlots = [];
+
+
+/* =====================================================
+   ЗАГРУЗКА СЛОТОВ С СЕРВЕРА
+===================================================== */
+
+async function loadSlots() {
+
+    const dateSelect =
+        document.getElementById("date");
+
+
+    if (!dateSelect) {
+        return;
+    }
+
+
+    dateSelect.innerHTML = `
+
+        <option value="">
+            Загрузка свободного времени...
+        </option>
+
+    `;
+
 
     try {
 
-        const saved =
-            localStorage.getItem(
-                "alywawesUser"
+        const response =
+            await fetch(
+                "/api/master/"
+                + selectedMaster.id
+                + "/slots"
             );
 
 
-        if (!saved) {
+        const result =
+            await response.json();
 
-            return null;
+
+        console.log(
+            "Свободные слоты:",
+            result
+        );
+
+
+        if (!response.ok || !result.success) {
+
+            dateSelect.innerHTML = `
+
+                <option value="">
+                    Не удалось загрузить время
+                </option>
+
+            `;
+
+            return;
 
         }
 
 
-        return JSON.parse(saved);
+        availableSlots =
+            result.slots || [];
+
+
+        renderSlots();
+
 
     }
 
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "Ошибка загрузки слотов:",
+            error
+        );
 
-        return null;
+
+        dateSelect.innerHTML = `
+
+            <option value="">
+                Ошибка подключения к серверу
+            </option>
+
+        `;
 
     }
 
@@ -1138,48 +1027,68 @@ function getUser() {
 
 
 /* =====================================================
-   ПРОВЕРКА ВХОДА
+   ПОКАЗЫВАЕМ СЛОТЫ
 ===================================================== */
 
-function logged() {
+function renderSlots() {
 
-    return (
-
-        localStorage.getItem(
-            "alywawesLoggedIn"
-        ) === "true"
-
-        &&
-
-        getUser() !== null
-
-    );
-
-}
+    const dateSelect =
+        document.getElementById("date");
 
 
-/* =====================================================
-   ЗАЩИТА HTML
-===================================================== */
+    if (!dateSelect) {
+        return;
+    }
 
-function esc(text) {
 
-    return String(text).replace(
-        /[&<>"']/g,
-        function(x) {
+    if (
+        !availableSlots ||
+        availableSlots.length === 0
+    ) {
 
-            return {
+        dateSelect.innerHTML = `
 
-                "&": "&amp;",
-                "<": "&lt;",
-                ">": "&gt;",
-                '"': "&quot;",
-                "'": "&#039;"
+            <option value="">
+                У мастера пока нет свободного времени
+            </option>
 
-            }[x];
+        `;
 
-        }
-    );
+        return;
+
+    }
+
+
+    dateSelect.innerHTML = `
+
+        <option value="">
+            Выберите свободное время
+        </option>
+
+    `;
+
+
+    availableSlots.forEach(function(slot) {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            slot.slot_date
+            + " — "
+            + slot.slot_time;
+
+
+        option.textContent =
+            slot.slot_date
+            + " — "
+            + slot.slot_time;
+
+
+        dateSelect.appendChild(option);
+
+    });
 
 }
 
@@ -1214,11 +1123,11 @@ function updateServiceInfo() {
                     <div class="price-row">
 
                         <span>
-                            ${esc(price[0])}
+                            ${price[0]}
                         </span>
 
                         <span>
-                            ${esc(price[1])}
+                            ${price[1]}
                         </span>
 
                     </div>
@@ -1237,40 +1146,28 @@ function updateServiceInfo() {
 
 function selectService(service) {
 
-    selected =
-        service;
+    selected = service;
 
 
     updateServiceInfo();
 
+
     render();
 
 
-    const params =
-        new URLSearchParams();
-
-
-    if (masterCode) {
-
-        params.set(
-            "master",
-            masterCode
-        );
-
-    }
-
-
-    params.set(
-        "service",
-        service
-    );
+    const newUrl =
+        "services.html?master="
+        + encodeURIComponent(
+            masterCode || "lina"
+        )
+        + "&service="
+        + encodeURIComponent(service);
 
 
     history.replaceState(
         null,
         "",
-        "services.html?"
-        + params.toString()
+        newUrl
     );
 
 
@@ -1279,6 +1176,92 @@ function selectService(service) {
     ).scrollIntoView({
         behavior: "smooth"
     });
+
+}
+
+
+/* =====================================================
+   ПОЛЬЗОВАТЕЛЬ
+===================================================== */
+
+function user() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                "alywawesUser"
+            );
+
+
+        if (!saved) {
+            return null;
+        }
+
+
+        return JSON.parse(saved);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Ошибка пользователя:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   ПРОВЕРКА ВХОДА
+===================================================== */
+
+function logged() {
+
+    return (
+
+        localStorage.getItem(
+            "alywawesLoggedIn"
+        ) === "true"
+
+        &&
+
+        user() !== null
+
+    );
+
+}
+
+
+/* =====================================================
+   ЗАЩИТА HTML
+===================================================== */
+
+function esc(text) {
+
+    return String(
+        text || ""
+    ).replace(
+        /[&<>"']/g,
+        function(x) {
+
+            return {
+
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+
+            }[x];
+
+        }
+    );
 
 }
 
@@ -1310,8 +1293,7 @@ function render() {
 
 function showBooking() {
 
-    const u =
-        getUser();
+    const u = user();
 
 
     if (!u) {
@@ -1319,60 +1301,6 @@ function showBooking() {
         showAuth("login");
 
         return;
-
-    }
-
-
-    let masterBlock = "";
-
-
-    if (selectedMaster) {
-
-        masterBlock = `
-
-            <div class="selected-master">
-
-                <span>
-                    Ваш мастер
-                </span>
-
-                <strong>
-                    ${esc(
-                        selectedMaster.name
-                    )}
-                </strong>
-
-            </div>
-
-        `;
-
-    }
-
-    else {
-
-        masterBlock = `
-
-            <div class="selected-master">
-
-                <span>
-                    Ваш мастер
-                </span>
-
-                <strong>
-                    Мастер не выбран
-                </strong>
-
-            </div>
-
-
-            <div class="master-warning">
-
-                Сначала выберите мастера
-                на странице «Мастера».
-
-            </div>
-
-        `;
 
     }
 
@@ -1393,10 +1321,7 @@ function showBooking() {
                 Здравствуйте,
 
                 <strong>
-                    ${esc(
-                        u.name
-                        || "клиент"
-                    )}
+                    ${esc(u.name)}
                 </strong>,
 
                 выберите услугу
@@ -1404,7 +1329,17 @@ function showBooking() {
             </div>
 
 
-            ${masterBlock}
+            <div class="selected-master">
+
+                <span>
+                    Ваш мастер
+                </span>
+
+                <strong>
+                    ${esc(selectedMaster.name)}
+                </strong>
+
+            </div>
 
 
             <div class="service-choice">
@@ -1416,8 +1351,6 @@ function showBooking() {
                         return `
 
                             <button
-                                type="button"
-
                                 class="choice ${
                                     service === selected
                                     ? "active"
@@ -1426,7 +1359,7 @@ function showBooking() {
 
                                 onclick="
                                     selectService(
-                                        ${JSON.stringify(service)}
+                                        '${service}'
                                     )
                                 "
                             >
@@ -1457,31 +1390,8 @@ function showBooking() {
             >
 
                 <option value="">
-
-                    Выберите свободное время
-
+                    Загрузка свободного времени...
                 </option>
-
-
-                ${
-                    availableDates
-                    .map(function(date) {
-
-                        return `
-
-                            <option
-                                value="${esc(date)}"
-                            >
-
-                                ${esc(date)}
-
-                            </option>
-
-                        `;
-
-                    })
-                    .join("")
-                }
 
             </select>
 
@@ -1502,12 +1412,8 @@ function showBooking() {
 
 
             <button
-                type="button"
                 class="main-btn"
-
-                onclick="
-                    saveAppointment()
-                "
+                onclick="saveAppointment()"
             >
 
                 Закончить запись
@@ -1544,6 +1450,15 @@ function showBooking() {
 
     `;
 
+
+    /*
+        После создания формы
+        загружаем реальные даты
+        из базы Flask.
+    */
+
+    loadSlots();
+
 }
 
 
@@ -1569,8 +1484,6 @@ function showAuth(mode) {
                 <div class="auth-tabs">
 
                     <button
-                        type="button"
-
                         class="auth-tab ${
                             mode === "login"
                             ? "active"
@@ -1588,8 +1501,6 @@ function showAuth(mode) {
 
 
                     <button
-                        type="button"
-
                         class="auth-tab ${
                             mode === "register"
                             ? "active"
@@ -1627,9 +1538,7 @@ function showAuth(mode) {
                     `
 
                         <label class="field-label">
-
                             Логин
-
                         </label>
 
 
@@ -1641,9 +1550,7 @@ function showAuth(mode) {
 
 
                         <label class="field-label">
-
                             Пароль
-
                         </label>
 
 
@@ -1655,12 +1562,8 @@ function showAuth(mode) {
 
 
                         <button
-                            type="button"
                             class="main-btn"
-
-                            onclick="
-                                login()
-                            "
+                            onclick="login()"
                         >
 
                             Войти
@@ -1674,9 +1577,7 @@ function showAuth(mode) {
                     `
 
                         <label class="field-label">
-
                             Имя
-
                         </label>
 
 
@@ -1689,9 +1590,7 @@ function showAuth(mode) {
 
 
                         <label class="field-label">
-
                             Логин
-
                         </label>
 
 
@@ -1704,9 +1603,7 @@ function showAuth(mode) {
 
 
                         <label class="field-label">
-
                             Пароль
-
                         </label>
 
 
@@ -1719,12 +1616,8 @@ function showAuth(mode) {
 
 
                         <button
-                            type="button"
                             class="main-btn"
-
-                            onclick="
-                                register()
-                            "
+                            onclick="register()"
                         >
 
                             Зарегистрироваться
@@ -1761,7 +1654,7 @@ function showAuth(mode) {
 
 
 /* =====================================================
-   ВХОД ЧЕРЕЗ FLASK
+   ВХОД
 ===================================================== */
 
 async function login() {
@@ -1833,6 +1726,12 @@ async function login() {
             await response.json();
 
 
+        console.log(
+            "Ответ входа:",
+            result
+        );
+
+
         if (
             !response.ok ||
             !result.success
@@ -1847,10 +1746,40 @@ async function login() {
         }
 
 
+        /*
+            ВАЖНО:
+
+            Новый Flask возвращает:
+
+            result.id
+            result.name
+            result.username
+            result.role
+
+            а не result.user
+        */
+
+        const currentUser = {
+
+            id:
+                result.id,
+
+            name:
+                result.name,
+
+            username:
+                result.username,
+
+            role:
+                result.role
+
+        };
+
+
         localStorage.setItem(
             "alywawesUser",
             JSON.stringify(
-                result.user
+                currentUser
             )
         );
 
@@ -1882,7 +1811,7 @@ async function login() {
 
 
 /* =====================================================
-   РЕГИСТРАЦИЯ ЧЕРЕЗ FLASK
+   РЕГИСТРАЦИЯ
 ===================================================== */
 
 async function register() {
@@ -1989,7 +1918,7 @@ async function register() {
 
 
         message.textContent =
-            "Регистрация прошла успешно! Теперь войдите.";
+            "Регистрация прошла успешно!";
 
 
         setTimeout(
@@ -2021,39 +1950,11 @@ async function register() {
 
 async function saveAppointment() {
 
-    const message =
-        document.getElementById(
-            "msg"
-        );
-
-
-    /* ================================================
-       ПРОВЕРЯЕМ МАСТЕРА
-    ================================================ */
-
-    if (!selectedMaster) {
-
-        message.textContent =
-            "Сначала выберите мастера на странице «Мастера».";
-
-        return;
-
-    }
-
-
-    /* ================================================
-       ПОЛУЧАЕМ ДАТУ
-    ================================================ */
-
     const date =
         document.getElementById(
             "date"
         ).value;
 
-
-    /* ================================================
-       ПОЛУЧАЕМ ТЕЛЕФОН
-    ================================================ */
 
     const phone =
         document.getElementById(
@@ -2061,10 +1962,26 @@ async function saveAppointment() {
         ).value.trim();
 
 
+    const message =
+        document.getElementById(
+            "msg"
+        );
+
+
+    if (!selectedMaster) {
+
+        message.textContent =
+            "Сначала выберите мастера.";
+
+        return;
+
+    }
+
+
     if (!date) {
 
         message.textContent =
-            "Выберите свободную дату.";
+            "Выберите свободное время.";
 
         return;
 
@@ -2074,52 +1991,28 @@ async function saveAppointment() {
     if (!phone) {
 
         message.textContent =
-            "Введите телефон.";
+            "Укажите номер телефона.";
 
         return;
 
     }
 
 
-    /* ================================================
-       ПОЛЬЗОВАТЕЛЬ
-    ================================================ */
-
-    const u =
-        getUser();
+    const u = user();
 
 
-    if (
-        !u ||
-        !u.username
-    ) {
+    if (!u || !u.id) {
 
         message.textContent =
-            "Не удалось определить пользователя. Войдите в аккаунт заново.";
+            "Войдите в аккаунт заново.";
 
         return;
 
     }
 
-
-    /* ================================================
-       РАЗДЕЛЯЕМ ДАТУ И ВРЕМЯ
-    ================================================ */
 
     const parts =
         date.split(" — ");
-
-
-    if (
-        parts.length !== 2
-    ) {
-
-        message.textContent =
-            "Неверно указаны дата и время.";
-
-        return;
-
-    }
 
 
     const appointmentDate =
@@ -2133,10 +2026,6 @@ async function saveAppointment() {
     message.textContent =
         "Сохраняем запись...";
 
-
-    /* ================================================
-       ОТПРАВЛЯЕМ В FLASK
-    ================================================ */
 
     try {
 
@@ -2157,10 +2046,7 @@ async function saveAppointment() {
                     body: JSON.stringify({
 
                         user_id:
-                            u.id || null,
-
-                        username:
-                            u.username,
+                            u.id,
 
                         master_id:
                             selectedMaster.id,
@@ -2187,9 +2073,11 @@ async function saveAppointment() {
             await response.json();
 
 
-        /* ============================================
-           ОШИБКА
-        ============================================ */
+        console.log(
+            "Ответ записи:",
+            result
+        );
+
 
         if (
             !response.ok ||
@@ -2205,18 +2093,34 @@ async function saveAppointment() {
         }
 
 
-        /* ============================================
-           УСПЕХ
-        ============================================ */
-
         message.textContent =
             "Запись успешно создана!";
 
 
-        console.log(
-            "Запись сохранена:",
-            result
-        );
+        /*
+            Удаляем использованный слот
+            из списка на странице.
+        */
+
+        availableSlots =
+            availableSlots.filter(
+                function(slot) {
+
+                    return !(
+                        slot.slot_date ===
+                            appointmentDate
+
+                        &&
+
+                        slot.slot_time ===
+                            appointmentTime
+                    );
+
+                }
+            );
+
+
+        renderSlots();
 
 
     }
