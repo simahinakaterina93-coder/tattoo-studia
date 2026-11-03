@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 import sqlite3
 import os
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -23,6 +24,127 @@ def get_db():
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     return connection
+
+
+def parse_slot_datetime(date_str, time_str):
+    """Дата+время слота/записи → datetime или None."""
+    date_part = str(date_str or "").strip()
+    time_part = str(time_str or "").strip().replace(".", ":")
+
+    if not date_part:
+        return None
+
+    if not time_part:
+        time_part = "00:00"
+
+    candidates = (
+        f"{date_part} {time_part}",
+        f"{date_part} {time_part}:00",
+    )
+    formats = (
+        "%Y-%m-%d %H:%M",
+        "%Y-%m-%d %H:%M:%S",
+        "%d.%m.%Y %H:%M",
+        "%d.%m.%Y %H:%M:%S",
+        "%d/%m/%Y %H:%M",
+    )
+
+    for value in candidates:
+        for fmt in formats:
+            try:
+                return datetime.strptime(value, fmt)
+            except ValueError:
+                continue
+
+    for fmt in ("%Y-%m-%d", "%d.%m.%Y", "%d/%m/%Y"):
+        try:
+            return datetime.strptime(date_part, fmt)
+        except ValueError:
+            continue
+
+    return None
+
+
+def purge_expired_appointments(connection=None):
+    """
+    Локальная БД: удаляет записи и свободные слоты,
+    у которых дата/время уже прошли.
+    Прошедшие слоты обратно не возвращаем.
+    """
+    own_connection = connection is None
+    if own_connection:
+        connection = get_db()
+
+    now = datetime.now()
+    deleted_appointments = 0
+    deleted_slots = 0
+
+    appointments = connection.execute("""
+        SELECT id, appointment_date, appointment_time
+        FROM appointments
+    """).fetchall()
+
+    expired_appointment_ids = []
+    for row in appointments:
+        when = parse_slot_datetime(
+            row["appointment_date"],
+            row["appointment_time"]
+        )
+        if when is not None and when < now:
+            expired_appointment_ids.append(row["id"])
+
+    if expired_appointment_ids:
+        connection.executemany(
+            "DELETE FROM appointments WHERE id = ?",
+            [(item_id,) for item_id in expired_appointment_ids]
+        )
+        deleted_appointments = len(expired_appointment_ids)
+
+    slots = connection.execute("""
+        SELECT id, slot_date, slot_time
+        FROM master_slots
+    """).fetchall()
+
+    expired_slot_ids = []
+    for row in slots:
+        when = parse_slot_datetime(row["slot_date"], row["slot_time"])
+        if when is not None and when < now:
+            expired_slot_ids.append(row["id"])
+
+    if expired_slot_ids:
+        connection.executemany(
+            "DELETE FROM master_slots WHERE id = ?",
+            [(item_id,) for item_id in expired_slot_ids]
+        )
+        deleted_slots = len(expired_slot_ids)
+
+    if deleted_appointments or deleted_slots:
+        connection.commit()
+
+    if own_connection:
+        connection.close()
+
+    return {
+        "appointments": deleted_appointments,
+        "slots": deleted_slots
+    }
+
+
+@app.before_request
+def cleanup_expired_before_request():
+    # Не трогаем статику лишний раз на каждый файл —
+    # чистим на API и HTML-страницах с записями.
+    path = request.path or ""
+    if path.startswith("/api/") or path in (
+        "/",
+        "/profile.html",
+        "/services.html",
+        "/master-panel.html"
+    ):
+        try:
+            purge_expired_appointments()
+        except Exception:
+            pass
 
 
 # ==========================================

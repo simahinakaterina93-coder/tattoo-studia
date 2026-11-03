@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -414,10 +414,14 @@
       .nav-left, .nav-right { display: none; }
       .nav { display: flex; justify-content: center; }
       .logo-main { font-size: 28px; }
-      .profile-wrapper { padding-top: 70px; }
+      .profile-wrapper { padding-top: 70px; padding-left: 4%; padding-right: 4%; }
       .profile-card { flex-direction: column; text-align: center; }
+      .stats-row { grid-template-columns: 1fr; }
+      .my-services h3 { font-size: 28px; }
+      .services-list { font-size: 18px; }
     }
   </style>
+  <link rel="stylesheet" href="mobile.css">
 </head>
 
 <body>
@@ -1091,5 +1095,6 @@
 
 </script>
 
+<script src="nav-mobile.js"></script>
 </body>
 </html>

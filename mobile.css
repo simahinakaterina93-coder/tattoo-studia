@@ -1,0 +1,161 @@
+/* Общая мобильная оболочка ALYWAWES */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.nav-toggle {
+  display: none;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(115, 215, 248, 0.35);
+  border-radius: 12px;
+  background: rgba(8, 28, 58, 0.85);
+  color: #9fdff5;
+  cursor: pointer;
+  z-index: 120;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.header.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.header.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.header.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-drawer {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .header {
+    position: relative;
+  }
+
+  .header .nav {
+    position: relative;
+    width: min(1250px, 94%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header .nav-left,
+  .header .nav-right {
+    display: none !important;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .mobile-drawer {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 110;
+    padding: 18px 20px 24px;
+    background: rgba(2, 10, 28, 0.98);
+    border-bottom: 1px solid rgba(86, 176, 220, 0.18);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .header.nav-open .mobile-drawer {
+    display: flex;
+  }
+
+  .mobile-drawer a {
+    display: block;
+    padding: 14px 8px;
+    color: #f3f4f8;
+    text-decoration: none;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    border-bottom: 1px solid rgba(115, 230, 242, 0.12);
+  }
+
+  .mobile-drawer a:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-drawer a:hover,
+  .mobile-drawer a.active {
+    color: #51c5e9;
+  }
+
+  body.nav-lock {
+    overflow: hidden;
+  }
+
+  .price-row,
+  .faq-question,
+  .faq-answer p {
+    font-size: 20px !important;
+  }
+
+  .faq-title h2,
+  .prices-title h2,
+  .about h2 {
+    font-size: clamp(34px, 9vw, 48px) !important;
+  }
+
+  .faq-title span,
+  .prices-title span {
+    width: 48px !important;
+  }
+
+  .faq,
+  .prices,
+  .about {
+    padding-left: 6% !important;
+    padding-right: 6% !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .booking-btn,
+  .btn-book,
+  .btn-action,
+  .submit-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font-size: 16px !important;
+  }
+}
