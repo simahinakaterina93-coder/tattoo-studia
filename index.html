@@ -3,15 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ALYWAWES — Студия татуировки</title>
 
-  <!-- Шрифт можно заменить на любой из Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <link rel="stylesheet" href="mobile.css">
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -30,6 +36,7 @@
       overflow-x: hidden;
     }
 
+
     /* ================= HEADER ================= */
 
     .header {
@@ -39,93 +46,136 @@
       width: 100%;
       height: 162px;
       z-index: 100;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       background: rgba(3, 12, 36, 0.94);
+
       border-bottom: 1px solid rgba(86, 176, 220, 0.12);
+
       backdrop-filter: blur(12px);
     }
 
+
     .nav {
       width: min(1250px, 94%);
+
       display: grid;
       grid-template-columns: 1fr auto 1fr;
+
       align-items: center;
+
       gap: 40px;
     }
+
 
     .nav-left,
     .nav-right {
       display: flex;
       align-items: center;
+
       gap: clamp(25px, 3vw, 58px);
     }
+
 
     .nav-right {
       justify-content: flex-end;
     }
 
+
     .nav a {
       position: relative;
+
       color: #f3f4f8;
+
       text-decoration: none;
+
       font-size: 27px;
+
       white-space: nowrap;
+
       transition: color .3s ease;
     }
+
 
     .nav a:hover {
       color: #51c5e9;
     }
 
+
     .nav a.active::after {
       content: "";
+
       position: absolute;
+
       left: 0;
       right: 0;
+
       bottom: -14px;
+
       height: 1px;
+
       background: #e7e9ef;
     }
 
+
     .logo {
       text-align: center;
+
       line-height: 1;
+
       white-space: nowrap;
+
+      text-decoration: none;
     }
+
 
     .logo-small {
       display: block;
+
       margin-bottom: 2px;
+
       color: #f1f2f5;
+
       font-size: 17px;
+
       letter-spacing: 1px;
     }
 
+
     .logo-main {
       display: block;
+
       color: #42afd4;
+
       font-size: 43px;
+
       letter-spacing: 2px;
+
       font-weight: 500;
     }
+
+
 
     /* ================= HERO ================= */
 
     .hero {
       position: relative;
+
       min-height: 100vh;
+
       padding-top: 162px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       overflow: hidden;
 
-      /*
-        Положи фотографию глубины океана рядом с index.html
-        и назови её ocean.jpg
-      */
       background:
         linear-gradient(
           to bottom,
@@ -133,755 +183,2047 @@
           rgba(0, 20, 55, .18) 45%,
           rgba(1, 6, 24, .65)
         ),
+
         url("ocean.jpg") center center / cover no-repeat,
-        radial-gradient(circle at 50% 20%, #087a9e 0%, #032d62 42%, #010822 85%);
+
+        radial-gradient(
+          circle at 50% 20%,
+          #087a9e 0%,
+          #032d62 42%,
+          #010822 85%
+        );
     }
 
+
     /* Затемнение фотографии */
+
     .hero::before {
       content: "";
+
       position: absolute;
+
       inset: 0;
+
       background:
         radial-gradient(
           ellipse at 50% 30%,
           rgba(35, 205, 236, .18),
           transparent 48%
         ),
+
         linear-gradient(
           to bottom,
           rgba(0, 0, 20, .05) 0%,
           rgba(0, 4, 24, .15) 55%,
           rgba(0, 5, 24, .72) 100%
         );
+
       pointer-events: none;
     }
 
-    /* Лёгкая анимация "воды" */
+
+    /* Лёгкая анимация воды */
+
     .hero::after {
       content: "";
+
       position: absolute;
+
       inset: -10%;
+
       background:
         radial-gradient(
           ellipse at 50% 0%,
           rgba(95, 230, 255, .14),
           transparent 30%
         );
+
       filter: blur(20px);
+
       animation: waterGlow 7s ease-in-out infinite alternate;
+
       pointer-events: none;
     }
 
+
     @keyframes waterGlow {
+
       from {
         transform: translateY(-15px) scale(1);
         opacity: .55;
       }
+
       to {
         transform: translateY(25px) scale(1.08);
         opacity: .9;
       }
+
     }
 
-  .hero-content {
-  position: relative;
-  z-index: 2;
-  width: min(850px, 90%);
-  text-align: center;
-  margin-top: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-  animation: heroAppear 1.2s ease both;
-}
 
-.hero-content h1 {
-    margin: 0;
-}
+    .hero-content {
+      position: relative;
 
-.hero-content p {
-    margin-top: 0;
-}
+      z-index: 2;
 
-.booking-btn {
-    margin-top: 24px;
-}
+      width: min(850px, 90%);
+
+      text-align: center;
+
+      margin-top: 80px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 28px;
+
+      animation: heroAppear 1.2s ease both;
+    }
+
+
+    .hero-content h1 {
+      margin: 0;
+    }
+
+
+    .hero-content p {
+      margin-top: 0;
+    }
+
+
+    .booking-btn {
+      margin-top: 24px;
+    }
+
 
     @keyframes heroAppear {
+
       from {
         opacity: 0;
         transform: translateY(35px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
+
     }
 
+
     .hero h1 {
-  font-family: "Inter", sans-serif;
+      font-family: "Cormorant Garamond", sans-serif;
 
-  font-size: clamp(48px, 6vw, 84px);
+      font-size: clamp(48px, 6vw, 84px);
 
-  line-height: .98;
+      line-height: .98;
 
-  font-weight: 700;
+      font-weight: 700;
 
-  color: #dcecff;
+      color: #dcecff;
 
-  text-shadow: 0 3px 25px rgba(0, 0, 0, .45);
+      text-shadow:
+        0 3px 25px rgba(0, 0, 0, .45);
 
-  margin-bottom: 18px;
-}
+      margin-bottom: 18px;
+    }
 
-.hero-subtitle {
-  font-size: clamp(28px, 3vw, 42px);
-  color: #e8f4ff;
-  text-shadow: 0 2px 14px rgba(0, 10, 30, .55);
-  margin-bottom: 0;
-}
- .booking-btn {
-  position: relative;
-  top: 0;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    .hero-subtitle {
+      font-size: clamp(28px, 3vw, 42px);
 
-  min-width: 220px;
-  height: 64px;
-  padding: 0 34px;
+      color: #e8f4ff;
 
-  border-radius: 14px;
-  border: 1px solid rgba(115, 215, 248, .45);
+      text-shadow:
+        0 2px 14px rgba(0, 10, 30, .55);
 
-  background: rgba(89, 156, 214, .78);
+      margin-bottom: 0;
+    }
 
-  color: #07162e;
 
-  font-family: "Cormorant Garamond", serif;
-  font-size: 27px;
+    .booking-btn {
+      position: relative;
 
-  text-decoration: none;
+      top: 0;
 
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.25),
-    inset 0 1px 0 rgba(255,255,255,.18);
+      display: inline-flex;
 
-  transition:
-    transform .3s ease,
-    background .3s ease,
-    box-shadow .3s ease;
-}
-.booking-btn:hover {
-  transform: translateY(-4px);
+      align-items: center;
+      justify-content: center;
 
-  background: #72c7ed;
+      min-width: 220px;
 
-  box-shadow:
-    0 18px 45px rgba(0, 140, 210, .25);
-}
+      height: 64px;
+
+      padding: 0 34px;
+
+      border-radius: 14px;
+
+      border: 1px solid rgba(115, 215, 248, .45);
+
+      background: rgba(89, 156, 214, .78);
+
+      color: #07162e;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 27px;
+
+      text-decoration: none;
+
+      box-shadow:
+        0 12px 35px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+      transition:
+        transform .3s ease,
+        background .3s ease,
+        box-shadow .3s ease;
+    }
+
+
+    .booking-btn:hover {
+
+      transform: translateY(-4px);
+
+      background: #72c7ed;
+
+      box-shadow:
+        0 18px 45px rgba(0, 140, 210, .25);
+    }
+
+
 
     /* ================= SECOND SECTION ================= */
 
     .about {
       min-height: 70vh;
+
       padding: 120px 8%;
+
       background: #030a21;
+
       text-align: center;
     }
 
+
     .about h2 {
       font-size: 50px;
+
       color: #69c8e6;
+
       margin-bottom: 20px;
     }
 
+
     .about p {
       max-width: 750px;
+
       margin: 0 auto;
+
       color: #cbd6e8;
+
       font-size: 24px;
+
       line-height: 1.5;
     }
+
+
+
+    /* ================= FAQ ================= */
+
+    .faq {
+      background: #030a21;
+
+      padding: 120px 10%;
+
+      min-height: 700px;
+    }
+
+
+    .faq-title {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 30px;
+    }
+
+
+    .faq-title span {
+
+      width: 180px;
+
+      height: 1px;
+
+      background: #73E6F2;
+
+      opacity: 0.5;
+    }
+
+
+    .faq-title h2 {
+
+      color: #73E6F2;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 64px;
+
+      font-weight: 500;
+
+      margin: 0;
+    }
+
+
+    .faq-subtitle {
+
+      text-align: center;
+
+      color: #8FAAB5;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 24px;
+
+      margin: 15px 0 60px;
+    }
+
+
+    .faq-list {
+
+      max-width: 950px;
+
+      margin: 0 auto;
+    }
+
+
+    .faq-item {
+
+      border-bottom:
+        1px solid rgba(115, 230, 242, 0.35);
+    }
+
+
+    .faq-question {
+
+      width: 100%;
+
+      padding: 25px 10px;
+
+      background: none;
+
+      border: none;
+
+      color: #F2FAFC;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 27px;
+
+      text-align: left;
+
+      cursor: pointer;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      transition: 0.3s;
+    }
+
+
+    .faq-question span {
+
+      color: #73E6F2;
+
+      font-size: 35px;
+
+      font-weight: 300;
+
+      transition: 0.3s;
+    }
+
+
+    .faq-question:hover {
+
+      color: #73E6F2;
+    }
+
+
+    .faq-answer {
+
+      max-height: 0;
+
+      overflow: hidden;
+
+      transition:
+        max-height 0.4s ease;
+    }
+
+
+    .faq-answer p {
+
+      color: #B8CBD3;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 21px;
+
+      line-height: 1.6;
+
+      margin: 0;
+
+      padding: 0 50px 25px 10px;
+    }
+
+
+    .faq-item.active .faq-answer {
+
+      max-height: 300px;
+    }
+
+
+    .faq-item.active .faq-question span {
+
+      transform: rotate(45deg);
+    }
+
+
+
+    /* ================= ЦЕНЫ ================= */
+
+    .prices {
+
+      background: #030a21;
+
+      padding: 120px 8%;
+
+      min-height: 700px;
+    }
+
+
+    .prices-title {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 30px;
+    }
+
+
+    .prices-title span {
+
+      width: 180px;
+
+      height: 1px;
+
+      background: #73e6f2;
+
+      opacity: 0.5;
+    }
+
+
+    .prices-title h2 {
+
+      color: #73e6f2;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 64px;
+
+      font-weight: 500;
+
+      margin: 0;
+    }
+
+
+    .prices-subtitle {
+
+      text-align: center;
+
+      color: #8faab5;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 24px;
+
+      margin: 15px 0 60px;
+    }
+
+
+    .prices-list {
+
+      max-width: 950px;
+
+      margin: 0 auto;
+    }
+
+
+    .price-category {
+
+      margin-bottom: 45px;
+    }
+
+
+    .price-category h3 {
+
+      color: #73e6f2;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 34px;
+
+      font-weight: 500;
+
+      margin: 0 0 10px;
+    }
+
+
+    .price-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      padding: 18px 10px;
+
+      border-bottom:
+        1px solid rgba(115, 230, 242, 0.3);
+
+      color: #f2fafc;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 25px;
+    }
+
+
+    .price-row span:last-child {
+
+      color: #73e6f2;
+
+      white-space: nowrap;
+    }
+
+
+
+    /* ================= КОНТАКТЫ ================= */
+
+    .contacts {
+
+      background: #030a21;
+
+      padding: 120px 8% 0;
+
+      min-height: 850px;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+
+    .contacts-title {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 30px;
+
+      margin-bottom: 70px;
+    }
+
+
+    .contacts-title span {
+
+      width: 180px;
+
+      height: 1px;
+
+      background: #73e6f2;
+
+      opacity: 0.5;
+    }
+
+
+    .contacts-title h2 {
+
+      color: #73e6f2;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 64px;
+
+      font-weight: 500;
+
+      margin: 0;
+    }
+
+
+    .contacts-content {
+
+      max-width: 1100px;
+
+      margin: 0 auto;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 70px;
+    }
+
+
+    /* Левая часть */
+
+    .contacts-info {
+
+      padding-right: 50px;
+
+      border-right:
+        1px solid rgba(115, 230, 242, 0.25);
+    }
+
+
+    .contact-item {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 25px;
+
+      margin-bottom: 32px;
+    }
+
+
+    .contact-icon {
+
+      width: 55px;
+
+      height: 55px;
+
+      border:
+        1px solid rgba(115, 230, 242, 0.45);
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #73e6f2;
+
+      font-size: 25px;
+
+      background:
+        rgba(3, 20, 48, 0.65);
+
+      box-shadow:
+        0 0 20px rgba(60, 190, 230, 0.08);
+
+      flex-shrink: 0;
+    }
+
+
+    .contact-item a {
+
+      color: #f2fafc;
+
+      text-decoration: none;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 27px;
+
+      transition: .3s;
+    }
+
+
+    .contact-item a:hover {
+
+      color: #73e6f2;
+    }
+
+
+    /* Правая часть */
+
+    .contacts-hours {
+
+      width: 100%;
+    }
+
+
+    .contacts-hours h3 {
+
+      color: #73e6f2;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 34px;
+
+      font-weight: 500;
+
+      margin: 0 0 25px;
+    }
+
+
+    .hours-row {
+
+      display: grid;
+
+      grid-template-columns: 90px 1fr;
+
+      padding: 15px 18px;
+
+      color: #f2fafc;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 25px;
+
+      border-bottom:
+        1px solid rgba(115, 230, 242, 0.18);
+
+      transition: .3s;
+    }
+
+
+    .hours-row:nth-child(odd) {
+
+      background:
+        rgba(50, 120, 160, 0.08);
+    }
+
+
+    .hours-row:hover {
+
+      background:
+        rgba(81, 197, 233, 0.09);
+    }
+
+
+    .hours-row .day {
+
+      color: #73e6f2;
+
+      font-weight: 600;
+    }
+
+
+    .hours-row .closed {
+
+      color: #8faab5;
+    }
+
+
+    /* Адрес */
+
+    .contacts-address {
+
+      max-width: 1100px;
+
+      margin: 70px auto 35px;
+
+      text-align: center;
+
+      color: #cbd6e8;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 27px;
+    }
+
+
+    .contacts-address strong {
+
+      color: #73e6f2;
+
+      font-weight: 500;
+    }
+
+
+    /* Карта */
+
+    .contacts-map {
+
+      width: 100%;
+
+      height: 300px;
+
+      border-top:
+        1px solid rgba(115, 230, 242, 0.2);
+
+      background:
+        linear-gradient(
+          rgba(3, 10, 33, 0.72),
+          rgba(3, 10, 33, 0.72)
+        ),
+
+        url("ocean.jpg") center / cover no-repeat;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #73e6f2;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 28px;
+
+      text-align: center;
+    }
+
+
+    .contacts-map strong {
+
+      color: #73e6f2;
+
+      font-weight: 500;
+    }
+
+
+
+    /* ================= MASTER LINK ================= */
+
+    .master-link {
+
+      display: block;
+
+      text-align: center;
+
+      margin: 30px 0;
+
+      color: rgba(115, 230, 242, 0.55);
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      transition: 0.3s;
+    }
+
+
+    .master-link:hover {
+
+      color: #73e6f2;
+    }
+
+
 
     /* ================= MOBILE ================= */
 
     @media (max-width: 900px) {
+
       .header {
+
         height: 78px;
       }
 
+
       .nav {
+
         display: flex;
+
         justify-content: center;
+
         align-items: center;
       }
 
+
       .nav-left,
       .nav-right {
+
         display: none;
       }
 
+
       .logo-main {
+
         font-size: 30px;
       }
 
+
       .logo-small {
+
         font-size: 12px;
       }
 
+
       .hero {
+
         padding-top: 78px;
+
         min-height: 100svh;
       }
 
+
       .hero-content {
+
         margin-top: 24px;
+
         gap: 18px;
       }
 
+
       .hero-subtitle {
+
         margin-bottom: 0;
+
         font-size: clamp(22px, 6vw, 30px);
       }
 
+
       .booking-btn {
-        min-width: min(220px, 100%);
+
+        min-width:
+          min(220px, 100%);
+
         height: 56px;
+
         font-size: 23px;
+
         margin-top: 12px;
       }
+
 
       .about,
       .faq,
       .prices {
+
         padding-top: 72px;
+
         padding-bottom: 72px;
       }
 
+
       .price-row {
+
         gap: 16px;
+
         font-size: 20px;
       }
-    }
 
-    @media (max-width: 500px) {
-      .hero h1 {
-        font-size: clamp(36px, 11vw, 43px);
+
+
+      /* МОБИЛЬНЫЕ КОНТАКТЫ */
+
+      .contacts {
+
+        padding: 80px 6% 0;
+
+        min-height: auto;
       }
 
+
+      .contacts-title {
+
+        gap: 15px;
+
+        margin-bottom: 45px;
+      }
+
+
+      .contacts-title span {
+
+        width: 60px;
+      }
+
+
+      .contacts-title h2 {
+
+        font-size: 48px;
+      }
+
+
+      .contacts-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+      }
+
+
+      .contacts-info {
+
+        padding-right: 0;
+
+        border-right: none;
+
+        border-bottom:
+          1px solid rgba(115, 230, 242, 0.25);
+
+        padding-bottom: 30px;
+      }
+
+
+      .contact-item {
+
+        margin-bottom: 24px;
+      }
+
+
+      .contact-item a {
+
+        font-size: 23px;
+      }
+
+
+      .contacts-hours h3 {
+
+        font-size: 30px;
+      }
+
+
+      .hours-row {
+
+        font-size: 22px;
+      }
+
+
+      .contacts-address {
+
+        margin: 50px auto 30px;
+
+        font-size: 22px;
+
+        line-height: 1.4;
+      }
+
+
+      .contacts-map {
+
+        height: 220px;
+
+        font-size: 23px;
+      }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+      .hero h1 {
+
+        font-size:
+          clamp(36px, 11vw, 43px);
+      }
+
+
       .hero-subtitle {
+
         font-size: 24px;
       }
 
+
       .booking-btn {
+
         width: 100%;
+
         min-width: 0;
+
         height: 54px;
+
         font-size: 22px;
       }
 
+
       .faq-question {
+
         font-size: 22px;
+
         padding: 18px 4px;
       }
 
+
       .faq-answer p {
+
         padding-right: 8px;
+
         font-size: 18px;
       }
-    }
-  /* ================= FAQ ================= */
 
-    .faq {
-        background: #030a21;
-        padding: 120px 10%;
-        min-height: 700px;
-    }
 
-    .faq-title {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-    }
+      .contacts-title h2 {
 
-    .faq-title span {
-        width: 180px;
-        height: 1px;
-        background: #73E6F2;
-        opacity: 0.5;
-    }
+        font-size: 42px;
+      }
 
-    .faq-title h2 {
-        color: #73E6F2;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 64px;
-        font-weight: 500;
-        margin: 0;
-    }
 
-    .faq-subtitle {
-        text-align: center;
-        color: #8FAAB5;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 24px;
-        margin: 15px 0 60px;
-    }
+      .contacts-title span {
 
-    .faq-list {
-        max-width: 950px;
-        margin: 0 auto;
-    }
+        width: 35px;
+      }
 
-    .faq-item {
-        border-bottom: 1px solid rgba(115, 230, 242, 0.35);
-    }
 
-    .faq-question {
-        width: 100%;
-        padding: 25px 10px;
-        background: none;
-        border: none;
-        color: #F2FAFC;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 27px;
-        text-align: left;
-        cursor: pointer;
+      .contact-icon {
 
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        width: 48px;
 
-        transition: 0.3s;
-    }
+        height: 48px;
 
-    .faq-question span {
-        color: #73E6F2;
-        font-size: 35px;
-        font-weight: 300;
-        transition: 0.3s;
-    }
-
-    .faq-question:hover {
-        color: #73E6F2;
-    }
-
-    .faq-answer {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-    }
-
-    .faq-answer p {
-        color: #B8CBD3;
-        font-family: "Cormorant Garamond", serif;
         font-size: 21px;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0 50px 25px 10px;
+      }
+
+
+      .contact-item {
+
+        gap: 15px;
+      }
+
+
+      .contact-item a {
+
+        font-size: 20px;
+      }
+
+
+      .hours-row {
+
+        grid-template-columns: 65px 1fr;
+
+        font-size: 20px;
+
+        padding: 13px 10px;
+      }
+
+
+      .contacts-address {
+
+        font-size: 20px;
+      }
+
     }
-
-    .faq-item.active .faq-answer {
-        max-height: 300px;
-    }
-
-    .faq-item.active .faq-question span {
-        transform: rotate(45deg);
-    }
-
-    
-    /* ================= ЦЕНЫ ================= */
-
-.prices {
-    background: #030a21;
-    padding: 120px 8%;
-    min-height: 700px;
-}
-
-.prices-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-}
-
-.prices-title span {
-    width: 180px;
-    height: 1px;
-    background: #73e6f2;
-    opacity: 0.5;
-}
-
-.prices-title h2 {
-    color: #73e6f2;
-    font-family: "Cormorant Garamond", serif;
-    font-size: 64px;
-    font-weight: 500;
-    margin: 0;
-}
-
-.prices-subtitle {
-    text-align: center;
-    color: #8faab5;
-    font-family: "Cormorant Garamond", serif;
-    font-size: 24px;
-    margin: 15px 0 60px;
-}
-
-.prices-list {
-    max-width: 950px;
-    margin: 0 auto;
-}
-
-.price-category {
-    margin-bottom: 45px;
-}
-
-.price-category h3 {
-    color: #73e6f2;
-    font-family: "Cormorant Garamond", serif;
-    font-size: 34px;
-    font-weight: 500;
-    margin: 0 0 10px;
-}
-
-.price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 18px 10px;
-
-    border-bottom: 1px solid rgba(115, 230, 242, 0.3);
-
-    color: #f2fafc;
-    font-family: "Cormorant Garamond", serif;
-    font-size: 25px;
-}
-
-.price-row span:last-child {
-    color: #73e6f2;
-    white-space: nowrap;
-}
-  .master-link {
-    display: block;
-    text-align: center;
-    margin: 30px 0;
-    color: rgba(115, 230, 242, 0.55);
-    text-decoration: none;
-    font-size: 15px;
-    transition: 0.3s;
-}
-
-.master-link:hover {
-    color: #73e6f2;
-}  
 
   </style>
+
 </head>
 
+
 <body>
+
 
   <!-- ================= HEADER ================= -->
 
   <header class="header">
+
     <nav class="nav">
 
+
       <div class="nav-left">
-        <a href="#" class="active">Главная</a>
-        <a href="services.html">Услуги</a>
-        <a href="masters.html">Мастера</a>
+
+        <a href="#" class="active">
+          Главная
+        </a>
+
+        <a href="services.html">
+          Услуги
+        </a>
+
+        <a href="masters.html">
+          Мастера
+        </a>
+
       </div>
 
-<a href="auth.html" class="logo">
-    <span class="logo-small">студия татуировки</span>
-    <span class="logo-main">ALYWAWES</span>
-</a>
+
+      <a href="auth.html" class="logo">
+
+        <span class="logo-small">
+          студия татуировки
+        </span>
+
+        <span class="logo-main">
+          ALYWAWES
+        </span>
+
+      </a>
+
 
       <div class="nav-right">
-        <a href="#prices">Цены</a>
-        <a href="#contacts">Контакты</a>
-        <a href="#faq">FAQ⌒</a>
+
+        <a href="#prices">
+          Цены
+        </a>
+
+        <a href="#contacts">
+          Контакты
+        </a>
+
+        <a href="#faq">
+          FAQ⌒
+        </a>
+
       </div>
 
+
     </nav>
+
   </header>
+
 
 
   <!-- ================= HERO ================= -->
 
   <main>
 
+
     <section class="hero">
 
-       <div class="hero-content">
+
+      <div class="hero-content">
+
 
         <h1>
+
           Твой храм<br>
+
           татуировки
+
         </h1>
 
+
         <p class="hero-subtitle">
+
           Найди свой стиль
+
         </p>
 
-        <a href="services.html" class="booking-btn">
+
+        <a
+          href="services.html"
+          class="booking-btn"
+        >
+
           Записаться
+
         </a>
 
+
       </div>
+
+
     </section>
 
 
-    <!-- ================= ДАЛЬШЕ ПО САЙТУ ================= -->
 
-    <section class="about" id="services">
-      <h2>Погрузись в свой стиль</h2>
+    <!-- ================= ABOUT ================= -->
+
+    <section
+      class="about"
+      id="services"
+    >
+
+      <h2>
+        Погрузись в свой стиль
+      </h2>
+
 
       <p>
+
         Татуировка — это не просто рисунок.
         Это часть твоей истории, которую ты выбираешь сам.
+
       </p>
+
+
     </section>
 
-    <section class="about" id="masters">
-  <h2>Наши мастера</h2>
-  <p>Познакомьтесь с командой студии ALYWAWES.</p>
-  <a href="masters.html" class="booking-btn" style="margin-top:40px; position:static; top:0;">Смотреть мастеров</a>
-</section>
 
-  <section class="prices" id="prices">
 
-    <div class="prices-title">
+    <!-- ================= MASTERS ================= -->
+
+    <section
+      class="about"
+      id="masters"
+    >
+
+      <h2>
+        Наши мастера
+      </h2>
+
+
+      <p>
+        Познакомьтесь с командой студии ALYWAWES.
+      </p>
+
+
+      <a
+        href="masters.html"
+        class="booking-btn"
+        style="
+          margin-top:40px;
+          position:static;
+          top:0;
+        "
+      >
+
+        Смотреть мастеров
+
+      </a>
+
+
+    </section>
+
+
+
+    <!-- ================= ЦЕНЫ ================= -->
+
+    <section
+      class="prices"
+      id="prices"
+    >
+
+
+      <div class="prices-title">
+
         <span></span>
-        <h2>Цены</h2>
-        <span></span>
-    </div>
 
-    <p class="prices-subtitle">
+        <h2>
+          Цены
+        </h2>
+
+        <span></span>
+
+      </div>
+
+
+      <p class="prices-subtitle">
+
         Выберите услугу и узнайте её стоимость
-    </p>
 
-    <div class="prices-list">
+      </p>
+
+
+      <div class="prices-list">
+
 
         <!-- НАНЕСЕНИЕ ТАТУ -->
+
         <div class="price-category">
 
-            <h3>Нанесение тату</h3>
 
-            <div class="price-row">
-                <span>Нанесение татуировки</span>
-                <span>от 2500 р</span>
-            </div>
+          <h3>
+            Нанесение тату
+          </h3>
 
-            <div class="price-row">
-                <span>Коррекция татуировки</span>
-                <span>от 2500 р</span>
-            </div>
+
+          <div class="price-row">
+
+            <span>
+              Нанесение татуировки
+            </span>
+
+            <span>
+              от 2500 р
+            </span>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Коррекция татуировки
+            </span>
+
+            <span>
+              от 2500 р
+            </span>
+
+          </div>
+
 
         </div>
+
 
 
         <!-- СВЕДЕНИЕ ТАТУ -->
+
         <div class="price-category">
 
-            <h3>Сведение татуировки</h3>
 
-            <div class="price-row">
-                <span>Первичная консультация</span>
-                <span>500 р</span>
-            </div>
+          <h3>
+            Сведение татуировки
+          </h3>
 
-            <div class="price-row">
-                <span>Сведение тату</span>
-                <span>от 2500 р</span>
-            </div>
+
+          <div class="price-row">
+
+            <span>
+              Первичная консультация
+            </span>
+
+            <span>
+              500 р
+            </span>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Сведение тату
+            </span>
+
+            <span>
+              от 2500 р
+            </span>
+
+          </div>
+
 
         </div>
+
 
 
         <!-- ЭСКИЗ -->
+
         <div class="price-category">
 
-            <h3>Создание индивидуального эскиза</h3>
 
-            <div class="price-row">
-                <span>Первичная консультация</span>
-                <span>от 500 р</span>
-            </div>
+          <h3>
+            Создание индивидуального эскиза
+          </h3>
 
-            <div class="price-row">
-                <span>Создание эскиза поэтапно</span>
-                <span>от 2000 р</span>
-            </div>
+
+          <div class="price-row">
+
+            <span>
+              Первичная консультация
+            </span>
+
+            <span>
+              от 500 р
+            </span>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Создание эскиза поэтапно
+            </span>
+
+            <span>
+              от 2000 р
+            </span>
+
+          </div>
+
 
         </div>
 
-    </div>
 
-</section>
+      </div>
 
-    <section class="about" id="contacts">
-      <h2>Контакты</h2>
-      <p>Здесь разместим адрес, телефон, соцсети и карту.</p>
+
     </section>
 
-   <section class="faq" id="faq">
 
-    <div class="faq-title">
-        <span></span>
-        <h2>FAQ</h2>
-        <span></span>
-    </div>
 
-    <p class="faq-subtitle">
+    <!-- ================= КОНТАКТЫ ================= -->
+
+    <section
+      class="contacts"
+      id="contacts"
+    >
+
+
+      <div class="contacts-title">
+
+        <span></span>
+
+        <h2>
+          Контакты
+        </h2>
+
+        <span></span>
+
+      </div>
+
+
+
+      <div class="contacts-content">
+
+
+        <!-- ЛЕВАЯ ЧАСТЬ -->
+
+        <div class="contacts-info">
+
+
+          <!-- ТЕЛЕФОН -->
+
+          <div class="contact-item">
+
+
+            <div class="contact-icon">
+              ☎
+            </div>
+
+
+            <a href="tel:+79503767275">
+
+              +7 (950) 376-72-75
+
+            </a>
+
+
+          </div>
+
+
+
+          <!-- ПОЧТА -->
+
+          <div class="contact-item">
+
+
+            <div class="contact-icon">
+              ✉
+            </div>
+
+
+            <a href="mailto:lsd_06@inbox.ru">
+
+              lsd_06@inbox.ru
+
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ПРАВАЯ ЧАСТЬ -->
+
+        <div class="contacts-hours">
+
+
+          <h3>
+            Время работы
+          </h3>
+
+
+          <div class="hours-row">
+
+            <span class="day">
+              ПН
+            </span>
+
+            <span>
+              11:00 — 20:00
+            </span>
+
+          </div>
+
+
+          <div class="hours-row">
+
+            <span class="day">
+              ВТ
+            </span>
+
+            <span>
+              11:00 — 20:00
+            </span>
+
+          </div>
+
+
+          <div class="hours-row">
+
+            <span class="day">
+              СР
+            </span>
+
+            <span>
+              11:00 — 20:00
+            </span>
+
+          </div>
+
+
+          <div class="hours-row">
+
+            <span class="day">
+              ЧТ
+            </span>
+
+            <span>
+              11:00 — 20:00
+            </span>
+
+          </div>
+
+
+          <div class="hours-row">
+
+            <span class="day">
+              ПТ
+            </span>
+
+            <span>
+              11:00 — 20:00
+            </span>
+
+          </div>
+
+
+          <div class="hours-row">
+
+            <span class="day">
+              СБ
+            </span>
+
+            <span>
+              11:00 — 20:00
+            </span>
+
+          </div>
+
+
+          <div class="hours-row">
+
+            <span class="day">
+              ВС
+            </span>
+
+            <span class="closed">
+              ВЫХОДНОЙ
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- ================= АДРЕС ================= -->
+
+      <div class="contacts-address">
+
+
+        <strong>
+          Адрес студии
+        </strong>
+
+
+        <br>
+
+
+        Улица Кота Стафчика, д. 66
+
+
+      </div>
+
+
+
+      <!-- ================= КАРТА ================= -->
+
+      <div class="contacts-map">
+
+
+        <div>
+
+          📍
+
+          <br>
+
+
+          <strong>
+            ALYWAWES
+          </strong>
+
+
+          <br>
+
+
+          Улица Кота Стафчика, д. 66
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- ================= FAQ ================= -->
+
+    <section
+      class="faq"
+      id="faq"
+    >
+
+
+      <div class="faq-title">
+
+
+        <span></span>
+
+
+        <h2>
+          FAQ
+        </h2>
+
+
+        <span></span>
+
+
+      </div>
+
+
+      <p class="faq-subtitle">
+
         Ответы на часто задаваемые вопросы
-    </p>
 
-    <div class="faq-list">
+      </p>
+
+
+
+      <div class="faq-list">
+
+
+        <!-- ВОПРОС 1 -->
 
         <div class="faq-item">
-            <button class="faq-question">
-                Как подготовиться к сеансу?
-                <span>+</span>
-            </button>
 
-            <div class="faq-answer">
-                <p>
-                    Перед сеансом хорошо выспитесь, поешьте и пейте достаточно воды.
-                    Не употребляйте алкоголь перед процедурой.
-                    Также рекомендуется заранее продумать место и размер татуировки.
-                </p>
-            </div>
+
+          <button class="faq-question">
+
+            Как подготовиться к сеансу?
+
+            <span>
+              +
+            </span>
+
+          </button>
+
+
+          <div class="faq-answer">
+
+            <p>
+
+              Перед сеансом хорошо выспитесь,
+              поешьте и пейте достаточно воды.
+              Не употребляйте алкоголь перед процедурой.
+              Также рекомендуется заранее продумать
+              место и размер татуировки.
+
+            </p>
+
+          </div>
+
+
         </div>
 
 
-        <div class="faq-item">
-            <button class="faq-question">
-                Сколько времени занимает нанесение татуировки?
-                <span>+</span>
-            </button>
 
-            <div class="faq-answer">
-                <p>
-                    Время зависит от размера, сложности и места нанесения.
-                    Небольшая татуировка может занять около часа,
-                    а большая и сложная работа — несколько часов.
-                </p>
-            </div>
+        <!-- ВОПРОС 2 -->
+
+        <div class="faq-item">
+
+
+          <button class="faq-question">
+
+            Сколько времени занимает нанесение татуировки?
+
+            <span>
+              +
+            </span>
+
+          </button>
+
+
+          <div class="faq-answer">
+
+            <p>
+
+              Время зависит от размера,
+              сложности и места нанесения.
+              Небольшая татуировка может занять около часа,
+              а большая и сложная работа —
+              несколько часов.
+
+            </p>
+
+          </div>
+
+
         </div>
 
 
-        <div class="faq-item">
-            <button class="faq-question">
-                Можно ли прийти со своей идеей?
-                <span>+</span>
-            </button>
 
-            <div class="faq-answer">
-                <p>
-                    Конечно. Вы можете показать мастеру понравившиеся изображения,
-                    рассказать свою идею и вместе обсудить будущую татуировку.
-                </p>
-            </div>
+        <!-- ВОПРОС 3 -->
+
+        <div class="faq-item">
+
+
+          <button class="faq-question">
+
+            Можно ли прийти со своей идеей?
+
+            <span>
+              +
+            </span>
+
+          </button>
+
+
+          <div class="faq-answer">
+
+            <p>
+
+              Конечно.
+              Вы можете показать мастеру понравившиеся изображения,
+              рассказать свою идею и вместе обсудить
+              будущую татуировку.
+
+            </p>
+
+          </div>
+
+
         </div>
 
 
-        <div class="faq-item">
-            <button class="faq-question">
-                Можно ли изменить готовый эскиз?
-                <span>+</span>
-            </button>
 
-            <div class="faq-answer">
-                <p>
-                    Да. Эскиз обсуждается с мастером, поэтому до начала работы
-                    можно внести необходимые изменения.
-                </p>
-            </div>
+        <!-- ВОПРОС 4 -->
+
+        <div class="faq-item">
+
+
+          <button class="faq-question">
+
+            Можно ли изменить готовый эскиз?
+
+            <span>
+              +
+            </span>
+
+          </button>
+
+
+          <div class="faq-answer">
+
+            <p>
+
+              Да.
+              Эскиз обсуждается с мастером,
+              поэтому до начала работы
+              можно внести необходимые изменения.
+
+            </p>
+
+          </div>
+
+
         </div>
 
 
-        <div class="faq-item">
-            <button class="faq-question">
-                Как записаться на сеанс?
-                <span>+</span>
-            </button>
 
-            <div class="faq-answer">
-                <p>
-                    Выберите подходящую услугу в разделе «Услуги»,
-                    зарегистрируйтесь или войдите в личный кабинет,
-                    после чего выберите свободную дату и время.
-                </p>
-            </div>
+        <!-- ВОПРОС 5 -->
+
+        <div class="faq-item">
+
+
+          <button class="faq-question">
+
+            Как записаться на сеанс?
+
+            <span>
+              +
+            </span>
+
+          </button>
+
+
+          <div class="faq-answer">
+
+            <p>
+
+              Выберите подходящую услугу
+              в разделе «Услуги»,
+              зарегистрируйтесь или войдите
+              в личный кабинет,
+              после чего выберите свободную
+              дату и время.
+
+            </p>
+
+          </div>
+
+
         </div>
 
 
-        <div class="faq-item">
-            <button class="faq-question">
-                Можно ли свести татуировку?
-                <span>+</span>
-            </button>
 
-            <div class="faq-answer">
-                <p>
-                    Да, в студии доступна услуга сведения татуировки.
-                    Перед процедурой проводится первичная консультация.
-                </p>
-            </div>
+        <!-- ВОПРОС 6 -->
+
+        <div class="faq-item">
+
+
+          <button class="faq-question">
+
+            Можно ли свести татуировку?
+
+            <span>
+              +
+            </span>
+
+          </button>
+
+
+          <div class="faq-answer">
+
+            <p>
+
+              Да,
+              в студии доступна услуга
+              сведения татуировки.
+              Перед процедурой проводится
+              первичная консультация.
+
+            </p>
+
+          </div>
+
+
         </div>
 
-    </div>
 
-</section>
+      </div>
 
-    <section class="about" id="booking">
-      <h2>Запись</h2>
-      <p>Здесь позже сделаем полноценную форму записи.</p>
+
     </section>
 
-  </main>
- 
+
+
+  
+
+  <!-- ================= ВХОД ДЛЯ МАСТЕРА ================= -->
+
+  <a
+    href="master-login.html"
+    class="master-link"
+  >
+
+    Вход для мастера
+
+  </a>
+
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
   <script>
-    // Небольшой эффект при прокрутке:
-    // шапка становится чуть темнее.
-    const header = document.querySelector(".header");
+
+
+    /* ================= ШАПКА ================= */
+
+    const header =
+      document.querySelector(".header");
+
 
     window.addEventListener("scroll", () => {
+
+
       if (window.scrollY > 30) {
-        header.style.background = "rgba(2, 8, 28, 0.98)";
+
+        header.style.background =
+          "rgba(2, 8, 28, 0.98)";
+
       } else {
-        header.style.background = "rgba(3, 12, 36, 0.94)";
+
+        header.style.background =
+          "rgba(3, 12, 36, 0.94)";
+
       }
-      // Показываем ссылку "Профиль" только если пользователь залогинен
-    if (localStorage.getItem("alywawesLoggedIn") === "true") {
-      document.getElementById("profileLink").style.display = "inline-block";
-    }
+
+      const profileLink =
+        document.getElementById("profileLink");
+
+
+      if (
+        profileLink &&
+        localStorage.getItem("alywawesLoggedIn") === "true"
+      ) {
+
+        profileLink.style.display =
+          "inline-block";
+
+      }
+
     });
- 
-  /* ================= FAQ ================= */
 
-    document.querySelectorAll(".faq-question").forEach(function(button) {
 
-        button.addEventListener("click", function() {
 
-            const item = button.parentElement;
+    /* ================= FAQ ================= */
+
+    document
+      .querySelectorAll(".faq-question")
+      .forEach(function(button) {
+
+
+        button.addEventListener(
+          "click",
+          function() {
+
+
+            const item =
+              button.parentElement;
+
 
             item.classList.toggle("active");
 
-        });
 
-    });
+          }
+        );
 
-</script>
-<script src="nav-mobile.js"></script>
-<a href="master-login.html" class="master-link">
-    Вход для мастера
-</a>
+
+      });
+
+
+  </script>
+
+
+
+  <script src="nav-mobile.js"></script>
+
+
 </body>
 </html>
