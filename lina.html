@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ALYWAWES — Лина Лифонова</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #02091d;
+    color: #f5f7ff;
+    font-family: "Cormorant Garamond", serif;
+    overflow-x: hidden;
+}
+
+
+/* ================= HEADER ================= */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 90px;
+
+    z-index: 100;
+
+    background: rgba(3, 12, 36, .94);
+
+    border-bottom: 1px solid rgba(81, 197, 233, .12);
+
+    backdrop-filter: blur(14px);
+}
+
+.nav {
+    width: min(1400px, 94%);
+    height: 100%;
+
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+
+    align-items: center;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+}
+
+.nav-right {
+    justify-content: flex-end;
+}
+
+.nav a {
+    color: #f3f4f8;
+    text-decoration: none;
+
+    font-size: 20px;
+
+    transition: .3s;
+}
+
+.nav a:hover {
+    color: #73e6f2;
+}
+
+
+/* ================= LOGO ================= */
+
+.logo {
+    text-align: center;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.logo-small {
+    display: block;
+
+    color: #f1f2f5;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+.logo-main {
+    display: block;
+
+    color: #51c5e9;
+
+    font-size: 33px;
+    letter-spacing: 3px;
+}
+
+
+/* ================= PAGE ================= */
+
+.page {
+    min-height: 100vh;
+
+    padding: 125px 30px 100px;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(26, 99, 155, .28),
+            transparent 55%
+        ),
+        #02091d;
+}
+
+.container {
+    width: min(1150px, 100%);
+    margin: auto;
+}
+
+
+/* ================= BACK ================= */
+
+.back {
+    display: inline-flex;
+
+    margin-bottom: 35px;
+
+    color: rgba(235, 245, 255, .55);
+
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+
+    text-decoration: none;
+
+    transition: .3s;
+}
+
+.back:hover {
+    color: #73e6f2;
+    transform: translateX(-4px);
+}
+
+
+/* ================= MASTER INFO ================= */
+
+.master {
+    display: grid;
+
+    grid-template-columns: 300px 1fr;
+
+    gap: 65px;
+
+    align-items: center;
+
+    margin-bottom: 100px;
+}
+
+
+/* PHOTO */
+
+.master-photo {
+    width: 300px;
+    height: 370px;
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(81, 197, 233, .25);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45),
+        0 0 30px rgba(81,197,233,.05);
+
+    background-image: url("lina.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* TEXT */
+
+.master-label {
+    color: #51c5e9;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 14px;
+}
+
+.master-name {
+    font-size: 68px;
+
+    font-weight: 500;
+
+    line-height: .88;
+
+    margin-bottom: 22px;
+}
+
+.master-style {
+    color: #73e6f2;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 1.8px;
+
+    margin-bottom: 24px;
+}
+
+.line {
+    width: 100%;
+    max-width: 550px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(81,197,233,.6),
+            transparent
+        );
+
+    margin-bottom: 24px;
+}
+
+.master-description {
+    max-width: 580px;
+
+    color: rgba(235,242,252,.7);
+
+    font-size: 20px;
+
+    line-height: 1.45;
+
+    margin-bottom: 18px;
+}
+
+.experience {
+    color: rgba(235,242,252,.45);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+
+    margin-bottom: 28px;
+}
+
+
+/* BUTTON */
+
+.button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 28px;
+
+    min-height: 48px;
+
+    border-radius: 12px;
+
+    background: #51c5e9;
+
+    color: #06121f;
+
+    text-decoration: none;
+
+    font-size: 19px;
+
+    transition: .3s;
+}
+
+.button:hover {
+    background: #73e6f2;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 25px rgba(81,197,233,.25);
+}
+
+
+/* ================= PORTFOLIO ================= */
+
+.portfolio-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+.portfolio-title {
+    font-size: 48px;
+
+    font-weight: 500;
+}
+
+.portfolio-label {
+    color: rgba(115,230,242,.5);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ================= CARDS ================= */
+
+.works {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* CARD */
+
+.card {
+    position: relative;
+
+    height: 300px;
+
+    padding: 7px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(81,197,233,.13),
+            rgba(4,15,38,.8)
+        );
+
+    border: 1px solid rgba(81,197,233,.18);
+
+    transition: .35s ease;
+}
+
+
+/* INNER */
+
+.card-inner {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: #06132d;
+}
+
+
+/* IMAGE */
+
+.card img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: .5s ease;
+}
+
+
+/* DARK GRADIENT */
+
+.card-inner::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2,9,29,.9),
+            rgba(2,9,29,0) 60%
+        );
+}
+
+
+/* CARD TEXT */
+
+.card-info {
+    position: absolute;
+
+    left: 16px;
+    right: 16px;
+    bottom: 15px;
+
+    z-index: 5;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.card-number {
+    color: #73e6f2;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+.card-name {
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: 500;
+}
+
+
+/* HOVER */
+
+.card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(81,197,233,.5);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.4),
+        0 0 25px rgba(81,197,233,.08);
+}
+
+.card:hover img {
+    transform: scale(1.04);
+}
+
+
+/* ================= EMPTY CARD ================= */
+
+.empty {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(81,197,233,.08),
+            transparent 65%
+        );
+
+    color: rgba(115,230,242,.35);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ================= BOTTOM ================= */
+
+.bottom {
+    margin-top: 80px;
+
+    padding: 50px 25px;
+
+    text-align: center;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7,25,55,.65),
+            rgba(3,13,32,.55)
+        );
+
+    border: 1px solid rgba(81,197,233,.15);
+}
+
+.bottom h2 {
+    font-size: 36px;
+
+    font-weight: 500;
+
+    margin-bottom: 8px;
+}
+
+.bottom p {
+    color: rgba(235,242,252,.55);
+
+    font-size: 17px;
+
+    margin-bottom: 24px;
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+    .nav-left,
+    .nav-right {
+        display: none;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    .master {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .master-photo {
+        width: 300px;
+        height: 350px;
+
+        margin: auto;
+    }
+
+    .master-name {
+        font-size: 58px;
+    }
+
+    .works {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* ================= PHONE ================= */
+
+@media (max-width: 600px) {
+
+    .header {
+        height: 70px;
+    }
+
+    .page {
+        padding: 100px 16px 70px;
+    }
+
+    .logo-main {
+        font-size: 27px;
+    }
+
+    .logo-small {
+        font-size: 10px;
+    }
+
+    .master {
+        margin-bottom: 70px;
+    }
+
+    .master-photo {
+        width: 260px;
+        height: 320px;
+    }
+
+    .master-name {
+        font-size: 46px;
+    }
+
+    .master-description {
+        font-size: 18px;
+    }
+
+    .portfolio-heading {
+        display: block;
+    }
+
+    .portfolio-title {
+        font-size: 40px;
+
+        margin-bottom: 8px;
+    }
+
+    .works {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .card {
+        height: 280px;
+    }
+
+    .bottom {
+        padding: 35px 18px;
+    }
+
+    .bottom h2 {
+        font-size: 29px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <nav class="nav">
+
+        <div class="nav-left">
+
+            <a href="index.html">
+                Главная
+            </a>
+
+            <a href="services.html">
+                Услуги
+            </a>
+
+            <a href="masters.html">
+                Мастера
+            </a>
+
+        </div>
+
+
+        <a href="#" class="logo" id="logoLink">
+
+            <span class="logo-small">
+                студия татуировки
+            </span>
+
+            <span class="logo-main">
+                ALYWAWES
+            </span>
+
+        </a>
+
+
+        <div class="nav-right">
+
+            <a href="services.html">
+                Цены
+            </a>
+
+            <a href="index.html#contacts">
+                Контакты
+            </a>
+
+            <a href="index.html#faq">
+                FAQ⌒
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= CONTENT ================= -->
+
+<main class="page">
+
+<div class="container">
+
+
+    <a href="masters.html" class="back">
+        ← Вернуться к мастерам
+    </a>
+
+
+
+    <!-- ================= MASTER ================= -->
+
+    <section class="master">
+
+
+        <div class="master-photo"></div>
+
+
+        <div>
+
+            <div class="master-label">
+                MASTER 01
+            </div>
+
+
+            <h1 class="master-name">
+                Лина<br>
+                Лифонова
+            </h1>
+
+
+            <div class="master-style">
+                BLACKWORK · LINEWORK · INDIVIDUAL
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <p class="master-description">
+                Лина создаёт выразительные татуировки,
+                сочетая графичность, чёткие линии и
+                индивидуальные идеи клиентов.
+            </p>
+
+
+            <div class="experience">
+                Опыт работы — более 4 лет
+            </div>
+
+
+            <a
+                href="services.html?master=lina"
+                class="button">
+
+                Записаться к Лине
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= WORKS ================= -->
+
+    <section>
+
+
+        <div class="portfolio-heading">
+
+            <h2 class="portfolio-title">
+                Работы Лины
+            </h2>
+
+            <div class="portfolio-label">
+                PORTFOLIO · 2026
+            </div>
+
+        </div>
+
+
+
+        <div class="works">
+
+
+            <!-- CARD 1 -->
+
+            <div class="card">
+
+                <div class="card-inner">
+
+                    <img
+                        src="lina-work-1.jpg"
+                        alt="Работа Лины">
+
+                    <div class="card-info">
+
+                        <span class="card-number">
+                            01
+                        </span>
+
+                        <span class="card-name">
+                        
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 2 -->
+
+            <div class="card">
+
+                <div class="card-inner">
+
+                    <img
+                        src="lina-work-2.jpg"
+                        alt="Работа Лины">
+
+                    <div class="card-info">
+
+                        <span class="card-number">
+                            02
+                        </span>
+
+                        <span class="card-name">
+                        
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 3 -->
+
+            <div class="card">
+
+                <div class="card-inner">
+
+                    <img
+                        src="lina-work-3.jpg"
+                        alt="Работа Лины">
+
+                    <div class="card-info">
+
+                        <span class="card-number">
+                            03
+                        </span>
+
+                        <span class="card-name">
+                    
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 4 -->
+
+         <div class="card">
+
+                <div class="card-inner">
+
+                    <img
+                        src="lina-work-4.jpg"
+                        alt="Работа Лины">
+
+                    <div class="card-info">
+
+                        <span class="card-number">
+                            04
+                        </span>
+
+                        <span class="card-name">
+                    
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 5 -->
+
+           
+               <div class="card">
+
+                <div class="card-inner">
+
+                    <img
+                        src="lina-work-5.jpg"
+                        alt="Работа Лины">
+
+                    <div class="card-info">
+
+                        <span class="card-number">
+                            05
+                        </span>
+
+                        <span class="card-name">
+                    
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD 6 -->
+
+          <div class="card">
+
+                <div class="card-inner">
+
+                    <img
+                        src="lina-work-6.jpg"
+                        alt="Работа Лины">
+
+                    <div class="card-info">
+
+                        <span class="card-number">
+                            06
+                        </span>
+
+                        <span class="card-name">
+                    
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+    </section>
+
+
+
+    <!-- ================= BOTTOM ================= -->
+
+    <section class="bottom">
+
+        <h2>
+            Понравился стиль Лины?
+        </h2>
+
+        <p>
+            Выберите удобную услугу и запишитесь на сеанс.
+        </p>
+
+        <a
+            href="services.html?master=lina"
+            class="button">
+
+            Записаться к Лине
+
+        </a>
+
+    </section>
+
+
+</div>
+
+</main>
+
+
+
+<script>
+
+const isLogged =
+    localStorage.getItem("alywawesLoggedIn") === "true";
+
+document.getElementById("logoLink").href =
+    isLogged
+        ? "profile.html"
+        : "auth.html";
+
+</script>
+
+
+</body>
+</html>

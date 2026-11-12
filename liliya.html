@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ALYWAWES — Лилия Белова</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(35, 105, 155, 0.22), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(20, 90, 140, 0.18), transparent 35%),
+        #02091d;
+      color: #fff;
+      font-family: "Inter", sans-serif;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 55px;
+
+      background: rgba(3, 12, 36, 0.94);
+      border-bottom: 1px solid rgba(81, 197, 233, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      width: 38%;
+    }
+
+    nav.right {
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #73e6f2;
+    }
+
+    .logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+
+      color: #73e6f2;
+      text-decoration: none;
+
+      font-family: "Cormorant Garamond", serif;
+      font-size: 38px;
+      font-weight: 600;
+      letter-spacing: 7px;
+
+      white-space: nowrap;
+      transition: 0.3s;
+    }
+
+    .logo:hover {
+      text-shadow: 0 0 20px rgba(115, 230, 242, 0.55);
+    }
+
+    /* ================= MAIN ================= */
+
+    main {
+      width: min(1180px, calc(100% - 50px));
+      margin: 0 auto;
+      padding-top: 135px;
+      padding-bottom: 80px;
+    }
+
+    /* ================= MASTER ================= */
+
+    .master {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 55px;
+      align-items: center;
+
+      margin-bottom: 90px;
+    }
+
+    .master-photo {
+      width: 300px;
+      height: 370px;
+
+      border-radius: 28px;
+      overflow: hidden;
+
+      border: 1px solid rgba(81, 197, 233, 0.55);
+
+      box-shadow:
+        0 0 30px rgba(45, 150, 200, 0.16),
+        inset 0 0 25px rgba(0,0,0,0.25);
+    }
+
+    .master-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .master-info {
+      padding-right: 20px;
+    }
+
+    .number {
+      color: #51c5e9;
+      font-size: 12px;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+    }
+
+    .master-info h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(48px, 6vw, 76px);
+      font-weight: 500;
+      line-height: 0.95;
+      margin-bottom: 18px;
+    }
+
+    .style {
+      color: #73e6f2;
+      font-size: 12px;
+      letter-spacing: 3px;
+      margin-bottom: 28px;
+    }
+
+    .description {
+      max-width: 620px;
+      color: rgba(255,255,255,0.68);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .experience {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .experience span {
+      color: #73e6f2;
+    }
+
+    .booking-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: 210px;
+      padding: 14px 28px;
+
+      border-radius: 30px;
+      border: 1px solid #51c5e9;
+
+      background: rgba(49, 85, 135, 0.48);
+
+      color: white;
+      text-decoration: none;
+
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+
+      transition: 0.3s;
+    }
+
+    .booking-btn:hover {
+      background: #315587;
+      box-shadow: 0 0 25px rgba(81, 197, 233, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* ================= WORKS ================= */
+
+    .works-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .works-title span {
+      display: block;
+
+      color: #51c5e9;
+      font-size: 11px;
+      letter-spacing: 4px;
+
+      margin-bottom: 12px;
+    }
+
+    .works-title h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 48px;
+      font-weight: 500;
+    }
+
+    .works-title p {
+      margin-top: 10px;
+
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+    }
+
+    .works {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      height: 300px;
+
+      padding: 7px;
+
+      border-radius: 24px;
+
+      background: rgba(7, 28, 61, 0.8);
+      border: 1px solid rgba(81, 197, 233, 0.35);
+
+      box-shadow:
+        0 10px 35px rgba(0,0,0,0.25),
+        0 0 18px rgba(45, 130, 180, 0.08);
+
+      overflow: hidden;
+
+      transition: 0.35s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+
+      border-color: rgba(115, 230, 242, 0.75);
+
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.35),
+        0 0 28px rgba(81, 197, 233, 0.16);
+    }
+
+    .card-inner {
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+
+      border-radius: 18px;
+      overflow: hidden;
+
+      background: #07152e;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      display: block;
+
+      transition: 0.5s;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-overlay {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+
+      width: 100%;
+      padding: 35px 20px 18px;
+
+      background: linear-gradient(
+        to top,
+        rgba(2, 9, 29, 0.95),
+        rgba(2, 9, 29, 0.35),
+        transparent
+      );
+    }
+
+    .card-overlay span {
+      color: #73e6f2;
+      font-size: 10px;
+      letter-spacing: 3px;
+    }
+
+    .card-overlay h3 {
+      margin-top: 5px;
+
+      font-family: "Cormorant Garamond", serif;
+      font-size: 23px;
+      font-weight: 500;
+    }
+
+    /* ================= PLACEHOLDER ================= */
+
+    .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(81,197,233,0.12),
+          transparent 60%
+        ),
+        #07152e;
+    }
+
+    .placeholder-content {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .placeholder-content div {
+      font-size: 28px;
+      color: rgba(115,230,242,0.4);
+      margin-bottom: 8px;
+    }
+
+    .placeholder-content p {
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    /* ================= BOTTOM ================= */
+
+    .bottom {
+      text-align: center;
+      margin-top: 70px;
+    }
+
+    .bottom p {
+      color: rgba(255,255,255,0.55);
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 850px) {
+
+      header {
+        height: 75px;
+        padding: 0 20px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .logo {
+        font-size: 28px;
+        letter-spacing: 5px;
+      }
+
+      main {
+        width: min(100% - 30px, 600px);
+        padding-top: 105px;
+      }
+
+      .master {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+        margin-bottom: 65px;
+      }
+
+      .master-photo {
+        width: min(100%, 300px);
+        height: 370px;
+        margin: 0 auto;
+      }
+
+      .master-info {
+        padding: 0;
+      }
+
+      .description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .works {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        height: 320px;
+      }
+
+      .works-title h2 {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="services.html">Услуги</a>
+    <a href="masters.html">Мастера</a>
+  </nav>
+
+  <a href="#" class="logo" id="logoLink">ALYWAWES</a>
+
+  <nav class="right">
+    <a href="services.html">Цены</a>
+    <a href="index.html#contacts">Контакты</a>
+    <a href="index.html#faq">FAQ</a>
+  </nav>
+
+</header>
+
+
+<main>
+
+  <!-- МАСТЕР -->
+
+  <section class="master">
+
+    <div class="master-photo">
+      <img src="liliya.jpg" alt="Лилия Белова">
+    </div>
+
+    <div class="master-info">
+
+      <div class="number">
+        MASTER 03
+      </div>
+
+      <h1>
+        Лилия<br>
+        Белова
+      </h1>
+
+      <div class="style">
+        TATTOO · DETAIL · INDIVIDUAL
+      </div>
+
+      <p class="description">
+        Лилия внимательно работает с каждой деталью,
+        создавая аккуратные и выразительные татуировки.
+        Для неё важно подобрать индивидуальное решение,
+        которое будет подходить именно вам.
+      </p>
+
+      <div class="experience">
+        Опыт работы — <span>более 6 лет</span>
+      </div>
+
+      <a href="services.html?master=liliya" class="booking-btn">
+        Записаться к Лилии
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- РАБОТЫ -->
+
+  <section>
+
+    <div class="works-title">
+
+      <span>PORTFOLIO</span>
+
+      <h2>
+        Работы Лилии
+      </h2>
+
+      <p>
+        Некоторые работы мастера
+      </p>
+
+    </div>
+
+
+    <div class="works">
+
+      <!-- РАБОТА 1 -->
+
+      <div class="card">
+
+        <div class="card-inner">
+
+          <img
+            src="liliya-work-1.jpg"
+            alt="Работа Лилии 1"
+          >
+
+          <div class="card-overlay">
+            <span>01</span>
+       
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- РАБОТА 2 -->
+
+      <div class="card">
+
+        <div class="card-inner">
+
+          <img
+            src="liliya-work-2.jpg"
+            alt="Работа Лилии 2"
+          >
+
+          <div class="card-overlay">
+            <span>02</span>
+         
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- РАБОТА 3 -->
+
+      <div class="card">
+
+        <div class="card-inner">
+
+          <img
+            src="liliya-work-3.jpg"
+            alt="Работа Лилии 3"
+          >
+
+          <div class="card-overlay">
+            <span>03</span>
+        
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- РАБОТА 4 -->
+
+     
+      <div class="card">
+
+        <div class="card-inner">
+
+          <img
+            src="liliya-work-4.jpg"
+            alt="Работа Лилии 4"
+          >
+
+          <div class="card-overlay">
+            <span>04</span>
+       
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- РАБОТА 5 -->
+
+      
+      <div class="card">
+
+        <div class="card-inner">
+
+          <img
+            src="liliya-work-5.jpg"
+            alt="Работа Лилии 5"
+          >
+
+          <div class="card-overlay">
+            <span>05</span>
+       
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- РАБОТА 6 -->
+
+      
+      <div class="card">
+
+        <div class="card-inner">
+
+          <img
+            src="liliya-work-6.jpg"
+            alt="Работа Лилии 6"
+          >
+
+          <div class="card-overlay">
+            <span>06</span>
+       
+          </div>
+
+        </div>
+
+      </div>
+
+
+  </section>
+
+
+  <!-- ЗАПИСЬ -->
+
+  <div class="bottom">
+
+    <p>
+      Понравились работы Лилии?
+    </p>
+
+    <a
+      href="services.html?master=liliya"
+      class="booking-btn"
+    >
+      Записаться к мастеру
+    </a>
+
+  </div>
+
+</main>
+
+
+<script>
+
+  const logoLink = document.getElementById("logoLink");
+
+  const loggedIn =
+    localStorage.getItem("alywawesLoggedIn") === "true";
+
+  logoLink.href =
+    loggedIn
+      ? "profile.html"
+      : "auth.html";
+
+</script>
+
+</body>
+</html>
