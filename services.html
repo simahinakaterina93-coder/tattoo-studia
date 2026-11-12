@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -10,10 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="mobile.css">
 
     <style>
 
@@ -21,527 +20,1477 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            background: #05051e;
-            color: white;
+            background: #02091d;
+            color: #f5f7ff;
             font-family: "Cormorant Garamond", serif;
+            overflow-x: hidden;
         }
 
-        /* ================= HEADER ================= */
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
 
         .header {
-            height: 153px;
-            background: #07122f;
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 112px;
+
+            z-index: 1000;
+
             display: flex;
             align-items: center;
+
             padding: 0 40px;
+
+            background: rgba(3, 12, 36, .92);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(81, 197, 233, .12);
+
+            transition: .4s ease;
         }
+
+
+        .header.scrolled {
+            height: 88px;
+
+            background: rgba(3, 12, 36, .97);
+
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, .25);
+        }
+
 
         .nav {
             width: 100%;
+
             display: grid;
+
             grid-template-columns: 1fr auto 1fr;
+
             align-items: center;
         }
+
 
         .nav-left,
         .nav-right {
             display: flex;
+
             align-items: center;
+
             gap: 55px;
         }
+
 
         .nav-right {
             justify-content: flex-end;
         }
 
+
         .nav a {
-            color: white;
+            position: relative;
+
+            color: #f5f7ff;
+
             text-decoration: none;
+
             font-size: 30px;
+
+            transition: .3s ease;
         }
+
 
         .nav a:hover {
             color: #55c9e3;
+
+            transform: translateY(-2px);
         }
 
-        /* ================= LOGO ================= */
+
+        .nav a:not(.logo)::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -7px;
+
+            width: 0;
+            height: 1px;
+
+            background: #55c9e3;
+
+            transition: .3s ease;
+        }
+
+
+        .nav a:not(.logo):hover::after {
+            width: 100%;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
 
         .logo {
             text-align: center;
+
             text-decoration: none;
+
+            transition: .4s ease;
         }
+
+
+        .logo:hover {
+            transform: translateY(-2px);
+
+            filter:
+                drop-shadow(
+                    0 0 14px
+                    rgba(73,185,214,.25)
+                );
+        }
+
 
         .logo-small {
             display: block;
-            color: white;
+
+            color: #fff;
+
             font-size: 19px;
         }
 
+
         .logo-main {
             display: block;
+
             color: #49b9d6;
+
             font-size: 43px;
-            line-height: 0.9;
+
+            line-height: .9;
         }
 
-        /* ================= SERVICES ================= */
+
+        /* =====================================================
+           SERVICES
+        ===================================================== */
 
         .services {
+            position: relative;
+
             width: 100%;
-            background: #b8d8f4;
-            padding: 35px 36px 90px;
+
+            min-height: 100vh;
+
+            padding:
+                155px
+                40px
+                110px;
+
+            background: #8fb9df;
+
+            overflow: hidden;
         }
+
+
+        /* =====================================================
+           TITLE
+        ===================================================== */
+
+        .services-heading {
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 1400px;
+
+            margin:
+                0 auto
+                60px;
+
+            text-align: center;
+        }
+
+
+        .services-label {
+            margin-bottom: 8px;
+
+            color: #234b78;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            opacity: .85;
+        }
+
 
         .title-row {
             display: flex;
+
             align-items: center;
-            justify-content: center;
-            gap: 75px;
-            margin-bottom: 55px;
+
+            gap: 55px;
         }
+
+
+        .title-row .line {
+            flex: 1;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(23,32,95,.5)
+                );
+        }
+
+
+        .title-row .line:last-child {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(23,32,95,.5),
+                    transparent
+                );
+        }
+
 
         .title-row h1 {
             margin: 0;
+
             color: #17205f;
-            font-size: 68px;
-            font-weight: 500;
+
+            font-size: 70px;
+
+            font-weight: 600;
+
+            line-height: 1;
         }
 
-        .line {
-            height: 1px;
-            background: #17205f;
-            flex: 1;
+
+        .services-intro {
+            max-width: 600px;
+
+            margin:
+                18px auto 0;
+
+            color: #315579;
+
+            font-size: 19px;
+
+            line-height: 1.4;
+
+            letter-spacing: .3px;
         }
 
-        /* ================= CARDS ================= */
+
+        /* =====================================================
+           CARDS
+        ===================================================== */
 
         .cards {
+            position: relative;
+
+            z-index: 2;
+
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 58px 148px;
-            max-width: 1310px;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 55px 80px;
+
+            max-width: 1280px;
+
             margin: 0 auto;
         }
 
+
         .service-card {
             position: relative;
-            min-height: 445px;
-            padding: 18px 16px 22px;
-            border: 1px solid #17205f;
-            border-radius: 15px;
-            background: rgba(184, 216, 244, 0.35);
-            color: #527fa5;
-            cursor: pointer;
+
+            min-height: 470px;
+
+            padding:
+                20px
+                24px
+                24px;
+
+            border:
+                1px solid
+                rgba(35,58,115,.55);
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(205,228,247,.96),
+                    rgba(177,211,240,.94)
+                );
+
+            color: #17205f;
+
             overflow: hidden;
+
+            cursor: pointer;
+
             display: flex;
+
             flex-direction: column;
+
+            box-shadow:
+                0 20px 45px
+                rgba(22,57,100,.18);
+
+            opacity: 0;
+
+            transform:
+                translateY(35px);
+
+            animation:
+                cardIn .8s ease forwards;
+
             transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                background 0.3s ease;
+                transform .45s ease,
+                box-shadow .45s ease,
+                border-color .45s ease;
         }
+
+
+        .service-card:nth-child(1) {
+            animation-delay: .15s;
+        }
+
+
+        .service-card:nth-child(2) {
+            animation-delay: .3s;
+        }
+
+
+        .service-card:nth-child(3) {
+            animation-delay: .45s;
+        }
+
 
         .service-card:nth-child(3) {
             grid-column: 1 / 3;
+
             width: 58%;
+
             justify-self: center;
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            background: rgba(184, 216, 244, 0.55);
-            box-shadow:
-                0 10px 35px rgba(23, 32, 95, 0.15);
+
+        /* декоративный блик */
+
+        .service-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            right: -150px;
+            top: -150px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,.5),
+                    transparent 68%
+                );
+
+            transition: .6s ease;
         }
 
-        .service-image {
-            display: block;
+
+        .service-card::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
             width: 100%;
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #55c9e3,
+                    transparent
+                );
+
+            opacity: .45;
+
+            transition: .4s ease;
+        }
+
+
+        .service-card:hover {
+            transform:
+                translateY(-10px);
+
+            border-color:
+                rgba(55,145,190,.8);
+
+            box-shadow:
+                0 30px 60px
+                rgba(22,57,100,.25),
+
+                0 0 35px
+                rgba(81,197,233,.16);
+        }
+
+
+        .service-card:hover::before {
+            transform: scale(1.4);
+        }
+
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+
+        /* =====================================================
+           NUMBER
+        ===================================================== */
+
+        .card-number {
+            position: absolute;
+
+            top: 18px;
+            right: 22px;
+
+            color:
+                rgba(23,32,95,.42);
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            z-index: 5;
+        }
+
+
+        /* =====================================================
+           IMAGES
+        ===================================================== */
+
+        .service-image {
+            position: relative;
+
+            z-index: 2;
+
+            display: block;
+
+            width: 100%;
+
             height: 225px;
+
             object-fit: contain;
-            margin: -5px auto 5px;
-            opacity: 0.38;
+
+            margin:
+                0 auto 3px;
+
+            opacity: .58;
 
             filter:
                 brightness(0)
                 saturate(100%)
-                invert(56%)
-                sepia(20%)
+                invert(50%)
+                sepia(30%)
                 saturate(700%)
                 hue-rotate(165deg)
-                brightness(105%)
-                contrast(80%);
+                brightness(110%)
+                contrast(90%);
 
             transition:
-                transform 0.3s ease,
-                opacity 0.3s ease;
+                transform .5s ease,
+                opacity .5s ease,
+                filter .5s ease;
         }
+
 
         .service-card:hover .service-image {
-            transform: scale(1.04);
-            opacity: 0.48;
+            transform:
+                scale(1.07)
+                translateY(-5px);
+
+            opacity: .74;
+
+            filter:
+                brightness(0)
+                saturate(100%)
+                invert(50%)
+                sepia(30%)
+                saturate(800%)
+                hue-rotate(165deg)
+                brightness(115%)
+                contrast(95%)
+
+                drop-shadow(
+                    0 0 15px
+                    rgba(73,185,214,.3)
+                );
         }
+
+
+        /* =====================================================
+           CARD TITLE
+        ===================================================== */
 
         .service-card h2 {
-            margin: -5px 0 15px;
+            position: relative;
+
+            z-index: 3;
+
+            margin:
+                0
+                0
+                12px;
+
             color: #17205f;
-            font-family: "Cormorant Garamond", serif;
-            font-size: 43px;
-            line-height: 0.95;
+
+            font-size: 42px;
+
             font-weight: 700;
+
+            line-height: .95;
+
             text-align: center;
+
+            transition: .35s ease;
         }
 
+
+        .service-card:hover h2 {
+            color: #10206d;
+
+            transform:
+                translateY(-2px);
+        }
+
+
         .card-line {
-            width: 86%;
+            position: relative;
+
+            z-index: 3;
+
+            width: 72%;
+
             height: 1px;
-            margin: 0 auto 14px;
+
+            margin:
+                0 auto 18px;
+
+            background:
+                rgba(23,32,95,.5);
+
+            transition: .4s ease;
+        }
+
+
+        .service-card:hover .card-line {
+            width: 84%;
+
             background: #17205f;
         }
 
+
+        /* =====================================================
+           CARD TEXT
+        ===================================================== */
+
         .service-card p {
-            margin: 0 0 20px;
-            padding: 0 2px;
-            color: #527fa5;
+            position: relative;
+
+            z-index: 3;
+
+            margin: 0;
+
+            padding:
+                0 8px;
+
+            color: #496f95;
+
             font-size: 18px;
-            line-height: 1.05;
+
+            line-height: 1.12;
+
             text-align: left;
+
             flex: 1;
         }
 
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
         .card-button {
-            display: block;
-            width: 85%;
-            margin: 20px auto 0;
-            padding: 10px 20px;
-            border: 1px solid #17205f;
+            position: relative;
+
+            z-index: 5;
+
+            width: 84%;
+
+            margin:
+                22px auto 0;
+
+            padding:
+                11px 20px;
+
+            border:
+                1px solid
+                rgba(23,32,95,.75);
+
             border-radius: 14px;
-            background: #36598b;
+
+            background:
+                rgba(45,72,120,.88);
+
             color: white;
-            font-family: "Cormorant Garamond", serif;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
             font-size: 22px;
+
             font-weight: 600;
+
             cursor: pointer;
-            transition: 0.3s;
+
+            transition: .35s ease;
         }
+
 
         .card-button:hover {
             background: #55c9e3;
+
             color: #07122f;
+
+            border-color: #55c9e3;
+
             box-shadow:
-                0 0 18px rgba(85, 201, 227, 0.3);
+                0 0 22px
+                rgba(85,201,227,.28);
+
+            transform:
+                translateY(-2px);
         }
 
-        /* ================= BOOKING ================= */
+
+        /* =====================================================
+           BOOKING
+        ===================================================== */
 
         .booking-page {
             width: 100%;
-            min-height: calc(100vh - 153px);
+
+            min-height:
+                calc(100vh - 112px);
+
             display: grid;
-            grid-template-columns: 50% 50%;
-            padding: 30px 40px 70px;
-            background: #05051e;
+
+            grid-template-columns:
+                50% 50%;
+
+            padding:
+                60px
+                40px
+                80px;
+
+            background: #02091d;
         }
+
 
         .service-info {
             position: relative;
-            padding: 0 40px 30px 15px;
-            border-right: 1px solid #2e78ad;
+
+            padding:
+                0
+                40px
+                30px
+                15px;
+
+            border-right:
+                1px solid #2e78ad;
+
             overflow: hidden;
         }
 
+
         .service-info::before {
             content: "";
+
             position: absolute;
+
             inset: 0;
+
             background:
                 url("images/tattoo.png")
                 center / 70% auto
                 no-repeat;
-            opacity: 0.16;
+
+            opacity: .13;
+
             pointer-events: none;
         }
 
+
         .service-info > * {
             position: relative;
+
             z-index: 1;
         }
 
+
         .service-title {
             color: #789bd2;
+
             font-size: 72px;
-            line-height: 0.92;
-            margin: 0 0 35px;
+
+            line-height: .92;
+
+            margin:
+                0 0 35px;
+
             max-width: 650px;
+
             font-weight: 600;
         }
+
 
         .service-description {
             font-size: 28px;
+
             line-height: 1.08;
+
             max-width: 650px;
-            margin: 0 0 25px;
+
+            margin:
+                0 0 25px;
         }
+
 
         .service-info h2 {
             color: #789bd2;
+
             font-size: 68px;
-            margin: 20px 0;
+
+            margin:
+                20px 0;
         }
+
 
         .price-row {
             display: flex;
+
             justify-content: space-between;
+
             gap: 20px;
-            border-bottom: 1px solid #35516f;
-            padding: 13px 8px;
+
+            border-bottom:
+                1px solid #35516f;
+
+            padding:
+                13px 8px;
+
             font-size: 27px;
+
             font-weight: 600;
+
+            transition: .3s ease;
         }
 
-        /* ================= BOOKING PANEL ================= */
+
+        .price-row:hover {
+            color: #73e6f2;
+
+            padding-left: 14px;
+            padding-right: 14px;
+        }
+
+
+        /* =====================================================
+           BOOKING PANEL
+        ===================================================== */
 
         .booking-panel {
-            padding: 0 55px 0 65px;
+            padding:
+                0
+                55px
+                0
+                65px;
         }
+
 
         .panel-inner {
             max-width: 600px;
+
             margin: auto;
         }
 
+
         .panel-title {
             text-align: center;
+
             font-size: 32px;
+
             margin: 0;
+
             padding-bottom: 10px;
-            border-bottom: 1px solid #3179ad;
+
+            border-bottom:
+                1px solid #3179ad;
         }
+
 
         .greeting {
             font-size: 28px;
-            margin: 30px 0 12px;
+
+            margin:
+                30px
+                0
+                12px;
         }
+
 
         .field-label {
             display: block;
+
             font-size: 24px;
-            margin: 18px 0 7px;
+
+            margin:
+                18px
+                0
+                7px;
         }
+
 
         .field {
             width: 100%;
+
             height: 58px;
-            border: 1px solid #3180bc;
+
+            border:
+                1px solid #3180bc;
+
             background: #05051e;
+
             color: white;
-            padding: 8px 14px;
+
+            padding:
+                8px 14px;
+
             outline: none;
-            font: 23px "Cormorant Garamond", serif;
+
+            font:
+                23px
+                "Cormorant Garamond",
+                serif;
+
+            transition: .3s ease;
         }
+
+
+        .field:focus {
+            border-color: #55c9e3;
+
+            box-shadow:
+                0 0 18px
+                rgba(85,201,227,.1);
+        }
+
 
         .field option {
             background: #05051e;
+
             color: white;
         }
+
 
         .main-btn {
             display: block;
-            margin: 32px auto 0;
+
+            margin:
+                32px auto 0;
+
             min-width: 315px;
-            padding: 13px 30px;
+
+            padding:
+                13px 30px;
+
             border-radius: 15px;
-            border: 1px solid #55a8df;
+
+            border:
+                1px solid #55a8df;
+
             background: #36598b;
+
             color: white;
-            font: 28px "Cormorant Garamond", serif;
+
+            font:
+                28px
+                "Cormorant Garamond",
+                serif;
+
             cursor: pointer;
+
+            transition: .35s ease;
         }
 
+
         .main-btn:hover {
-            background: #4270aa;
+            background: #55c9e3;
+
+            color: #07122f;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 0 20px
+                rgba(85,201,227,.2);
         }
+
 
         .note {
             text-align: center;
+
             font-size: 22px;
-            margin: 45px auto 0;
-            border-bottom: 1px solid #315b80;
+
+            margin:
+                45px auto 0;
+
+            border-bottom:
+                1px solid #315b80;
+
             padding: 15px;
         }
 
-        /* ================= AUTH ================= */
+
+        /* =====================================================
+           AUTH
+        ===================================================== */
 
         .auth-box {
             margin-top: 20px;
-            border: 1px solid #3180bc;
-            padding: 22px 28px;
-            background: rgba(2, 12, 38, 0.4);
+
+            border:
+                1px solid #3180bc;
+
+            padding:
+                22px 28px;
+
+            background:
+                rgba(2,12,38,.4);
+
+            transition: .3s ease;
         }
+
+
+        .auth-box:hover {
+            border-color:
+                rgba(85,201,227,.55);
+
+            box-shadow:
+                0 0 25px
+                rgba(81,197,233,.05);
+        }
+
 
         .auth-tabs {
             display: flex;
+
             justify-content: center;
+
             gap: 38px;
         }
 
+
         .auth-tab {
             border: 0;
+
             background: none;
+
             color: white;
-            font: 25px "Cormorant Garamond";
+
+            font:
+                25px
+                "Cormorant Garamond",
+                serif;
+
             cursor: pointer;
+
             padding-bottom: 5px;
         }
 
+
         .auth-tab.active {
             color: #55c9e3;
-            border-bottom: 1px solid #55c9e3;
+
+            border-bottom:
+                1px solid #55c9e3;
         }
+
 
         .auth-title {
             text-align: center;
+
             font-size: 30px;
         }
 
+
         .auth-message {
             text-align: center;
+
             min-height: 25px;
+
             color: #55c9e3;
+
             font-size: 19px;
+
             margin-top: 15px;
         }
 
-        /* ================= SERVICE CHOICE ================= */
+
+        /* =====================================================
+           SERVICE CHOICE
+        ===================================================== */
 
         .service-choice {
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 8px;
         }
 
+
         .choice {
-            border: 1px solid #3180bc;
+            border:
+                1px solid #3180bc;
+
             background: #0a1638;
+
             color: white;
-            padding: 7px 12px;
+
+            padding:
+                7px 12px;
+
             border-radius: 8px;
-            font: 19px "Cormorant Garamond";
+
+            font:
+                19px
+                "Cormorant Garamond",
+                serif;
+
             cursor: pointer;
+
+            transition: .3s ease;
         }
+
+
+        .choice:hover {
+            border-color: #55c9e3;
+
+            transform:
+                translateY(-2px);
+        }
+
 
         .choice.active {
             background: #35608f;
+
             color: #73e6f2;
         }
 
+
         .back-link {
             display: inline-block;
+
             margin-top: 18px;
+
             color: #7fc9dc;
+
             text-decoration: none;
+
             font-size: 20px;
+
+            transition: .3s ease;
         }
 
-        /* ================= SELECTED MASTER ================= */
+
+        .back-link:hover {
+            color: #55c9e3;
+
+            transform:
+                translateX(4px);
+        }
+
+
+        /* =====================================================
+           MASTER
+        ===================================================== */
 
         .selected-master {
             margin: 20px 0;
-            padding: 15px 20px;
-            background: rgba(81, 197, 233, 0.08);
-            border: 1px solid rgba(81, 197, 233, 0.45);
+
+            padding:
+                15px 20px;
+
+            background:
+                rgba(81,197,233,.08);
+
+            border:
+                1px solid
+                rgba(81,197,233,.45);
+
             border-radius: 12px;
+
             display: flex;
+
             flex-direction: column;
+
             gap: 4px;
         }
 
+
         .selected-master span {
             color: #8eb7ca;
-            font-family: "Inter", sans-serif;
-            font-size: 13px;
+
+            font-size: 16px;
         }
+
 
         .selected-master strong {
             color: #51c5e9;
+
             font-size: 21px;
+
             font-weight: 500;
         }
 
-        /* ================= ADAPTIVE ================= */
+
+        /* =====================================================
+           ANIMATION
+        ===================================================== */
+
+        @keyframes cardIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        .reveal {
+            opacity: 0;
+
+            transform:
+                translateY(30px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s ease;
+        }
+
+
+        .reveal.show {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
 
         @media (max-width: 1000px) {
 
             .header {
                 height: auto;
+
+                min-height: 90px;
+
                 padding: 20px;
             }
 
+
             .nav {
                 grid-template-columns: 1fr;
+
                 gap: 18px;
             }
+
 
             .nav-left,
             .nav-right {
                 justify-content: center;
+
                 flex-wrap: wrap;
+
                 gap: 25px;
             }
+
 
             .logo {
                 order: -1;
             }
 
+
+            .services {
+                padding-top: 150px;
+            }
+
+
             .cards {
                 grid-template-columns: 1fr;
             }
 
+
             .service-card:nth-child(3) {
                 grid-column: auto;
+
                 width: 100%;
             }
 
-            .booking-page {
-                grid-template-columns: 1fr;
-                padding: 25px;
-            }
-
-            .service-info {
-                border-right: 0;
-                border-bottom: 1px solid #2e78ad;
-                padding-bottom: 35px;
-            }
-
-            .booking-panel {
-                padding: 35px 0;
-            }
-
-            .service-title {
-                font-size: 55px;
-            }
 
             .title-row h1 {
-                font-size: 50px;
+                font-size: 52px;
             }
+
 
             .nav a {
                 font-size: 24px;
             }
 
-            .service-card h2 {
-                font-size: 35px;
+
+            .booking-page {
+                grid-template-columns: 1fr;
+
+                padding:
+                    35px
+                    25px
+                    70px;
             }
+
+
+            .service-info {
+                border-right: 0;
+
+                border-bottom:
+                    1px solid #2e78ad;
+
+                padding-bottom: 35px;
+            }
+
+
+            .booking-panel {
+                padding:
+                    35px 0;
+            }
+
+
+            .service-title {
+                font-size: 55px;
+            }
+
+
+            .service-card h2 {
+                font-size: 36px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 14px;
+            }
+
+
+            .nav-left,
+            .nav-right {
+                gap: 16px;
+            }
+
+
+            .nav a {
+                font-size: 19px;
+            }
+
+
+            .logo-small {
+                font-size: 15px;
+            }
+
+
+            .logo-main {
+                font-size: 34px;
+            }
+
+
+            .services {
+                padding:
+                    125px
+                    16px
+                    70px;
+            }
+
+
+            .services-heading {
+                margin-bottom: 40px;
+            }
+
+
+            .services-label {
+                font-size: 10px;
+
+                letter-spacing: 3px;
+            }
+
+
+            .title-row {
+                gap: 15px;
+            }
+
+
+            .title-row h1 {
+                font-size: 42px;
+            }
+
+
+            .cards {
+                gap: 30px;
+            }
+
+
+            .service-card {
+                min-height: 430px;
+
+                padding: 16px;
+            }
+
+
+            .service-image {
+                height: 200px;
+            }
+
+
+            .service-card h2 {
+                font-size: 33px;
+            }
+
+
+            .service-card p {
+                font-size: 16px;
+            }
+
+
+            .card-button {
+                width: 90%;
+
+                font-size: 20px;
+            }
+
+
+            .booking-page {
+                padding:
+                    45px
+                    18px
+                    60px;
+            }
+
+
+            .service-title {
+                font-size: 48px;
+            }
+
+
+            .service-description {
+                font-size: 22px;
+            }
+
+
+            .service-info h2 {
+                font-size: 50px;
+            }
+
+
+            .price-row {
+                font-size: 21px;
+            }
+
+
+            .booking-panel {
+                padding:
+                    35px
+                    0
+                    0;
+            }
+
+
+            .main-btn {
+                width: 100%;
+
+                min-width: 0;
+            }
+
         }
 
     </style>
 
-  <link rel="stylesheet" href="mobile.css">
 </head>
 
+
 <body>
+
 
 <header class="header">
 
@@ -563,6 +1512,7 @@
 
         </div>
 
+
         <a href="auth.html" class="logo">
 
             <span class="logo-small">
@@ -575,17 +1525,18 @@
 
         </a>
 
+
         <div class="nav-right">
 
-            <a href="#prices">
+            <a href="index.html#prices">
                 Цены
             </a>
 
-            <a href="#contacts">
+            <a href="index.html#contacts">
                 Контакты
             </a>
 
-            <a href="#faq">
+            <a href="index.html#faq">
                 FAQ⌒
             </a>
 
@@ -598,9 +1549,16 @@
 
 <main>
 
-    <!-- ================= УСЛУГИ ================= -->
 
-    <section class="services">
+<section class="services">
+
+
+    <div class="services-heading">
+
+        <div class="services-label">
+            ALYWAWES · SERVICES
+        </div>
+
 
         <div class="title-row">
 
@@ -615,206 +1573,239 @@
         </div>
 
 
-        <section class="cards">
+        <p class="services-intro">
+            От первой идеи до готовой работы —
+            выбери направление, которое подходит именно тебе.
+        </p>
 
-            <!-- НАНЕСЕНИЕ -->
+    </div>
 
-            <article
-                class="service-card"
-                onclick="selectService('Нанесение тату')"
+
+    <section class="cards">
+
+
+        <!-- НАНЕСЕНИЕ -->
+
+        <article
+            class="service-card"
+            onclick="selectService('Нанесение тату')"
+        >
+
+            <span class="card-number">
+                01 / TATTOO
+            </span>
+
+
+            <img
+                src="images/tattoo.png"
+                class="service-image"
+                alt="Нанесение тату"
             >
 
-                <img
-                    src="images/tattoo.png"
-                    class="service-image"
-                    alt="Нанесение тату"
-                >
-
-                <h2>
-                    Нанесение тату
-                </h2>
-
-                <div class="card-line"></div>
-
-                <p>
-                    Безопасное, стерильное и абсолютно
-                    превосходное нанесение татуировки в любом стиле:
-                    от геометрии и олдскула, до биомеханики и
-                    высококачественного реализма – всё ограничивается
-                    только Вашей фантазией!
-
-                    Мы стараемся создать атмосферу в которой вам
-                    будет комфортно, ведь тату - не пытка,
-                    а украшение вас)
-
-                    Мастер с опытом нанесёт тату любого типа и стиля.
-                </p>
-
-                <button
-                    class="card-button"
-                    onclick="
-                        event.stopPropagation();
-                        selectService('Нанесение тату')
-                    "
-                >
-                    Выбрать услугу →
-                </button>
-
-            </article>
-
-
-            <!-- СВЕДЕНИЕ -->
-
-            <article
-                class="service-card"
-                onclick="selectService('Сведение тату')"
-            >
-
-                <img
-                    src="images/removal.png"
-                    class="service-image"
-                    alt="Сведение тату"
-                >
-
-                <h2>
-                    Сведение тату
-                </h2>
-
-                <div class="card-line"></div>
-
-                <p>
-                    Все иногда о чём-то жалеют.
-                    Так же иногда происходит с татуировкой,
-                    которая была сделана в неудачное время,
-                    или в неудачном месте, либо рисунок мог
-                    с годами надоесть.
-
-                    Как бы кто не говорил, тату это не всегда
-                    навсегда.
-
-                    Качественное выведение татуировки Вы можете
-                    получить в нашей студии.
-
-                    Без адской боли, без некрасивых шрамов,
-                    без переживаний.
-                </p>
-
-                <button
-                    class="card-button"
-                    onclick="
-                        event.stopPropagation();
-                        selectService('Сведение тату')
-                    "
-                >
-                    Подробнее →
-                </button>
-
-            </article>
-
-
-            <!-- ЭСКИЗ -->
-
-            <article
-                class="service-card"
-                onclick="
-                    selectService('Создание индивидуального эскиза')
-                "
-            >
-
-                <img
-                    src="images/sketch.png"
-                    class="service-image"
-                    alt="Создание индивидуального эскиза"
-                >
-
-                <h2>
-                    Создание индивидуального<br>
-                    эскиза
-                </h2>
-
-                <div class="card-line"></div>
-
-                <p>
-                    Если у вас в голове есть идея картинки,
-                    которую вы бы хотели перенести на свое тело
-                    в виде татуировки или же вы хотите рисунок,
-                    который будет только у вас, тогда спешим
-                    вас порадовать.
-
-                    В нашей студии есть мастера готовые сделать
-                    вам индивидуальный эскиз и перенести его
-                    на вас.
-                </p>
-
-                <button
-                    class="card-button"
-                    onclick="
-                        event.stopPropagation();
-                        selectService('Создание индивидуального эскиза')
-                    "
-                >
-                    Создать эскиз →
-                </button>
-
-            </article>
-
-        </section>
-
-    </section>
-
-
-    <!-- ================= ЗАПИСЬ ================= -->
-
-    <section
-        class="booking-page"
-        id="booking"
-    >
-
-        <section class="service-info">
-
-            <h1
-                class="service-title"
-                id="serviceTitle"
-            ></h1>
-
-            <p
-                class="service-description"
-                id="serviceDescription"
-            ></p>
 
             <h2>
-                Цены
+                Нанесение тату
             </h2>
 
-            <div id="prices"></div>
 
-            <a
-                class="back-link"
-                href="services.html"
+            <div class="card-line"></div>
+
+
+            <p>
+                Безопасное, стерильное и абсолютно
+                превосходное нанесение татуировки в любом стиле:
+                от геометрии и олдскула до биомеханики
+                и высококачественного реализма.
+                Всё ограничивается только вашей фантазией.
+                Мастер с опытом поможет воплотить идею
+                и подобрать подходящий формат работы.
+            </p>
+
+
+            <button
+                class="card-button"
+                onclick="
+                    event.stopPropagation();
+                    selectService('Нанесение тату')
+                "
             >
-                ← Вернуться к услугам
-            </a>
+                Выбрать услугу →
+            </button>
 
-        </section>
+        </article>
 
 
-        <section
-            class="booking-panel"
-            id="bookingPanel"
-        ></section>
+        <!-- СВЕДЕНИЕ -->
+
+        <article
+            class="service-card"
+            onclick="selectService('Сведение тату')"
+        >
+
+            <span class="card-number">
+                02 / REMOVE
+            </span>
+
+
+            <img
+                src="images/removal.png"
+                class="service-image"
+                alt="Сведение тату"
+            >
+
+
+            <h2>
+                Сведение тату
+            </h2>
+
+
+            <div class="card-line"></div>
+
+
+            <p>
+                Иногда татуировка перестаёт быть частью
+                твоей истории. Мы поможем аккуратно
+                избавиться от нежелательного рисунка.
+                Перед процедурой мастер оценивает работу,
+                состояние кожи и подбирает подходящий
+                вариант дальнейшего удаления.
+            </p>
+
+
+            <button
+                class="card-button"
+                onclick="
+                    event.stopPropagation();
+                    selectService('Сведение тату')
+                "
+            >
+                Подробнее →
+            </button>
+
+        </article>
+
+
+        <!-- ЭСКИЗ -->
+
+        <article
+            class="service-card"
+            onclick="
+                selectService(
+                    'Создание индивидуального эскиза'
+                )
+            "
+        >
+
+            <span class="card-number">
+                03 / SKETCH
+            </span>
+
+
+            <img
+                src="images/sketch.png"
+                class="service-image"
+                alt="Создание индивидуального эскиза"
+            >
+
+
+            <h2>
+                Создание индивидуального<br>
+                эскиза
+            </h2>
+
+
+            <div class="card-line"></div>
+
+
+            <p>
+                Есть идея, но нет готового рисунка?
+                Создадим индивидуальный эскиз именно
+                под тебя. Обсудим задумку, стиль,
+                размер и расположение, чтобы итоговая
+                работа выглядела гармонично и
+                действительно была только твоей.
+            </p>
+
+
+            <button
+                class="card-button"
+                onclick="
+                    event.stopPropagation();
+                    selectService(
+                        'Создание индивидуального эскиза'
+                    )
+                "
+            >
+                Создать эскиз →
+            </button>
+
+        </article>
+
 
     </section>
+
+</section>
+
+
+<!-- =====================================================
+     ЗАПИСЬ
+===================================================== -->
+
+<section
+    class="booking-page"
+    id="booking"
+>
+
+
+    <section class="service-info">
+
+        <h1
+            class="service-title reveal"
+            id="serviceTitle"
+        ></h1>
+
+
+        <p
+            class="service-description reveal"
+            id="serviceDescription"
+        ></p>
+
+
+        <h2 class="reveal">
+            Цены
+        </h2>
+
+
+        <div id="prices"></div>
+
+
+        <a
+            class="back-link reveal"
+            href="services.html"
+        >
+            ← Вернуться к услугам
+        </a>
+
+    </section>
+
+
+    <section
+        class="booking-panel reveal"
+        id="bookingPanel"
+    ></section>
+
+
+</section>
+
 
 </main>
 
 
-
-
-
 <script>
 
+
 /* =====================================================
-   ДАННЫЕ УСЛУГ
+   УСЛУГИ
 ===================================================== */
 
 const data = {
@@ -851,7 +1842,8 @@ const data = {
 
     "Создание индивидуального эскиза": {
 
-        title: "Создание<br>индивидуального<br>эскиза",
+        title:
+            "Создание<br>индивидуального<br>эскиза",
 
         text:
             "Если у вас в голове есть идея картинки, которую вы хотите перенести на тело, мастер создаст индивидуальный эскиз специально для вас.",
@@ -867,13 +1859,14 @@ const data = {
 
 
 /* =====================================================
-   ПОЛУЧАЕМ МАСТЕРА ИЗ URL
+   МАСТЕРА
 ===================================================== */
 
 const urlParams =
     new URLSearchParams(
         window.location.search
     );
+
 
 const masterCode =
     urlParams.get("master");
@@ -899,20 +1892,9 @@ const masters = {
 };
 
 
-/*
-    Если мастер передан через URL —
-    используем его.
-
-    Например:
-
-    services.html?master=lina
-
-    Если мастер не указан,
-    временно используем Лину.
-*/
-
 const selectedMaster =
-    masters[masterCode] || masters.lina;
+    masters[masterCode]
+    || masters.lina;
 
 
 /* =====================================================
@@ -926,20 +1908,21 @@ let selected =
 
 if (!data[selected]) {
 
-    selected = "Сведение тату";
+    selected =
+        "Сведение тату";
 
 }
 
 
 /* =====================================================
-   СВОБОДНЫЕ СЛОТЫ
+   СЛОТЫ
 ===================================================== */
 
 let availableSlots = [];
 
 
 /* =====================================================
-   ЗАГРУЗКА СЛОТОВ С СЕРВЕРА
+   ЗАГРУЗКА СЛОТОВ
 ===================================================== */
 
 async function loadSlots() {
@@ -954,11 +1937,9 @@ async function loadSlots() {
 
 
     dateSelect.innerHTML = `
-
         <option value="">
             Загрузка свободного времени...
         </option>
-
     `;
 
 
@@ -976,24 +1957,18 @@ async function loadSlots() {
             await response.json();
 
 
-        console.log(
-            "Свободные слоты:",
-            result
-        );
-
-
-        if (!response.ok || !result.success) {
+        if (
+            !response.ok ||
+            !result.success
+        ) {
 
             dateSelect.innerHTML = `
-
                 <option value="">
                     Не удалось загрузить время
                 </option>
-
             `;
 
             return;
-
         }
 
 
@@ -1003,23 +1978,17 @@ async function loadSlots() {
 
         renderSlots();
 
-
     }
 
     catch (error) {
 
-        console.error(
-            "Ошибка загрузки слотов:",
-            error
-        );
+        console.error(error);
 
 
         dateSelect.innerHTML = `
-
             <option value="">
                 Ошибка подключения к серверу
             </option>
-
         `;
 
     }
@@ -1028,7 +1997,7 @@ async function loadSlots() {
 
 
 /* =====================================================
-   ПОКАЗЫВАЕМ СЛОТЫ
+   ОТРИСОВКА СЛОТОВ
 ===================================================== */
 
 function renderSlots() {
@@ -1042,60 +2011,58 @@ function renderSlots() {
     }
 
 
-    if (
-        !availableSlots ||
-        availableSlots.length === 0
-    ) {
+    if (!availableSlots.length) {
 
         dateSelect.innerHTML = `
-
             <option value="">
                 У мастера пока нет свободного времени
             </option>
-
         `;
 
         return;
-
     }
 
 
     dateSelect.innerHTML = `
-
         <option value="">
             Выберите свободное время
         </option>
-
     `;
 
 
-    availableSlots.forEach(function(slot) {
+    availableSlots.forEach(
+        function(slot) {
 
-        const option =
-            document.createElement("option");
-
-
-        option.value =
-            slot.slot_date
-            + " — "
-            + slot.slot_time;
+            const option =
+                document.createElement(
+                    "option"
+                );
 
 
-        option.textContent =
-            slot.slot_date
-            + " — "
-            + slot.slot_time;
+            option.value =
+                slot.slot_date
+                + " — "
+                + slot.slot_time;
 
 
-        dateSelect.appendChild(option);
+            option.textContent =
+                slot.slot_date
+                + " — "
+                + slot.slot_time;
 
-    });
+
+            dateSelect.appendChild(
+                option
+            );
+
+        }
+    );
 
 }
 
 
 /* =====================================================
-   ИНФОРМАЦИЯ ОБ УСЛУГЕ
+   ИНФОРМАЦИЯ
 ===================================================== */
 
 function updateServiceInfo() {
@@ -1117,11 +2084,12 @@ function updateServiceInfo() {
     ).innerHTML =
 
         data[selected].prices
-            .map(function(price) {
+        .map(
+            function(price) {
 
                 return `
 
-                    <div class="price-row">
+                    <div class="price-row reveal">
 
                         <span>
                             ${price[0]}
@@ -1135,8 +2103,9 @@ function updateServiceInfo() {
 
                 `;
 
-            })
-            .join("");
+            }
+        )
+        .join("");
 
 }
 
@@ -1162,7 +2131,9 @@ function selectService(service) {
             masterCode || "lina"
         )
         + "&service="
-        + encodeURIComponent(service);
+        + encodeURIComponent(
+            service
+        );
 
 
     history.replaceState(
@@ -1178,11 +2149,17 @@ function selectService(service) {
         behavior: "smooth"
     });
 
+
+    setTimeout(
+        initReveal,
+        100
+    );
+
 }
 
 
 /* =====================================================
-   ПОЛЬЗОВАТЕЛЬ
+   USER
 ===================================================== */
 
 function user() {
@@ -1206,11 +2183,6 @@ function user() {
 
     catch (error) {
 
-        console.error(
-            "Ошибка пользователя:",
-            error
-        );
-
         return null;
 
     }
@@ -1219,7 +2191,7 @@ function user() {
 
 
 /* =====================================================
-   ПРОВЕРКА ВХОДА
+   LOGIN CHECK
 ===================================================== */
 
 function logged() {
@@ -1240,7 +2212,7 @@ function logged() {
 
 
 /* =====================================================
-   ЗАЩИТА HTML
+   ESCAPE
 ===================================================== */
 
 function esc(text) {
@@ -1268,7 +2240,7 @@ function esc(text) {
 
 
 /* =====================================================
-   ОТРИСОВКА
+   RENDER
 ===================================================== */
 
 function render() {
@@ -1289,7 +2261,7 @@ function render() {
 
 
 /* =====================================================
-   ФОРМА ЗАПИСИ
+   BOOKING
 ===================================================== */
 
 function showBooking() {
@@ -1320,11 +2292,9 @@ function showBooking() {
             <div class="greeting">
 
                 Здравствуйте,
-
                 <strong>
                     ${esc(u.name)}
                 </strong>,
-
                 выберите услугу
 
             </div>
@@ -1347,31 +2317,31 @@ function showBooking() {
 
                 ${
                     Object.keys(data)
-                    .map(function(service) {
+                    .map(
+                        function(service) {
 
-                        return `
+                            return `
 
-                            <button
-                                class="choice ${
-                                    service === selected
-                                    ? "active"
-                                    : ""
-                                }"
+                                <button
+                                    class="choice ${
+                                        service === selected
+                                        ? "active"
+                                        : ""
+                                    }"
 
-                                onclick="
-                                    selectService(
-                                        '${service}'
-                                    )
-                                "
-                            >
+                                    onclick="
+                                        selectService(
+                                            '${service}'
+                                        )
+                                    "
+                                >
+                                    ${esc(service)}
+                                </button>
 
-                                ${esc(service)}
+                            `;
 
-                            </button>
-
-                        `;
-
-                    })
+                        }
+                    )
                     .join("")
                 }
 
@@ -1379,9 +2349,7 @@ function showBooking() {
 
 
             <label class="field-label">
-
                 Выберите свободную дату
-
             </label>
 
 
@@ -1398,9 +2366,7 @@ function showBooking() {
 
 
             <label class="field-label">
-
                 Ваш телефон
-
             </label>
 
 
@@ -1416,9 +2382,7 @@ function showBooking() {
                 class="main-btn"
                 onclick="saveAppointment()"
             >
-
                 Закончить запись
-
             </button>
 
 
@@ -1426,7 +2390,6 @@ function showBooking() {
 
                 За 2 дня, мы позвоним,
                 чтобы подтвердить<br>
-
                 вашу запись, спасибо
 
             </div>
@@ -1442,9 +2405,7 @@ function showBooking() {
                 class="back-link"
                 href="profile.html"
             >
-
                 Перейти в личный кабинет →
-
             </a>
 
         </div>
@@ -1452,19 +2413,15 @@ function showBooking() {
     `;
 
 
-    /*
-        После создания формы
-        загружаем реальные даты
-        из базы Flask.
-    */
-
     loadSlots();
+
+    initReveal();
 
 }
 
 
 /* =====================================================
-   ВХОД / РЕГИСТРАЦИЯ
+   AUTH
 ===================================================== */
 
 function showAuth(mode) {
@@ -1482,6 +2439,7 @@ function showAuth(mode) {
 
             <div class="auth-box">
 
+
                 <div class="auth-tabs">
 
                     <button
@@ -1495,9 +2453,7 @@ function showAuth(mode) {
                             showAuth('login')
                         "
                     >
-
                         Вход
-
                     </button>
 
 
@@ -1512,9 +2468,7 @@ function showAuth(mode) {
                             showAuth('register')
                         "
                     >
-
                         Регистрация
-
                     </button>
 
                 </div>
@@ -1566,9 +2520,7 @@ function showAuth(mode) {
                             class="main-btn"
                             onclick="login()"
                         >
-
                             Войти
-
                         </button>
 
                     `
@@ -1620,13 +2572,10 @@ function showAuth(mode) {
                             class="main-btn"
                             onclick="register()"
                         >
-
                             Зарегистрироваться
-
                         </button>
 
                     `
-
                 }
 
 
@@ -1635,6 +2584,7 @@ function showAuth(mode) {
                     id="msg"
                 ></div>
 
+
             </div>
 
 
@@ -1642,10 +2592,10 @@ function showAuth(mode) {
 
                 Чтобы записаться,
                 войдите в аккаунт<br>
-
                 или зарегистрируйтесь
 
             </div>
+
 
         </div>
 
@@ -1655,7 +2605,7 @@ function showAuth(mode) {
 
 
 /* =====================================================
-   ВХОД
+   LOGIN
 ===================================================== */
 
 async function login() {
@@ -1727,12 +2677,6 @@ async function login() {
             await response.json();
 
 
-        console.log(
-            "Ответ входа:",
-            result
-        );
-
-
         if (
             !response.ok ||
             !result.success
@@ -1747,26 +2691,11 @@ async function login() {
         }
 
 
-        /*
-            ВАЖНО:
-
-            Новый Flask возвращает:
-
-            result.id
-            result.name
-            result.username
-            result.role
-
-            а не result.user
-        */
-
         const currentUser = {
 
-            id:
-                result.id,
+            id: result.id,
 
-            name:
-                result.name,
+            name: result.name,
 
             username:
                 result.username,
@@ -1812,7 +2741,7 @@ async function login() {
 
 
 /* =====================================================
-   РЕГИСТРАЦИЯ
+   REGISTER
 ===================================================== */
 
 async function register() {
@@ -1946,7 +2875,7 @@ async function register() {
 
 
 /* =====================================================
-   СОЗДАНИЕ ЗАПИСИ
+   SAVE APPOINTMENT
 ===================================================== */
 
 async function saveAppointment() {
@@ -1967,16 +2896,6 @@ async function saveAppointment() {
         document.getElementById(
             "msg"
         );
-
-
-    if (!selectedMaster) {
-
-        message.textContent =
-            "Сначала выберите мастера.";
-
-        return;
-
-    }
 
 
     if (!date) {
@@ -2038,10 +2957,8 @@ async function saveAppointment() {
                     method: "POST",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
                     body: JSON.stringify({
@@ -2074,12 +2991,6 @@ async function saveAppointment() {
             await response.json();
 
 
-        console.log(
-            "Ответ записи:",
-            result
-        );
-
-
         if (
             !response.ok ||
             !result.success
@@ -2098,23 +3009,18 @@ async function saveAppointment() {
             "Запись успешно создана!";
 
 
-        /*
-            Удаляем использованный слот
-            из списка на странице.
-        */
-
         availableSlots =
             availableSlots.filter(
                 function(slot) {
 
                     return !(
                         slot.slot_date ===
-                            appointmentDate
+                        appointmentDate
 
                         &&
 
                         slot.slot_time ===
-                            appointmentTime
+                        appointmentTime
                     );
 
                 }
@@ -2122,7 +3028,6 @@ async function saveAppointment() {
 
 
         renderSlots();
-
 
     }
 
@@ -2139,16 +3044,117 @@ async function saveAppointment() {
 
 
 /* =====================================================
-   ЗАПУСК
+   REVEAL
+===================================================== */
+
+function initReveal() {
+
+    const elements =
+        document.querySelectorAll(
+            ".reveal"
+        );
+
+
+    if (!elements.length) {
+        return;
+    }
+
+
+    const observer =
+        new IntersectionObserver(
+            function(entries) {
+
+                entries.forEach(
+                    function(entry) {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "show"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: .12
+            }
+        );
+
+
+    elements.forEach(
+        function(element) {
+
+            observer.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   HEADER SCROLL
+===================================================== */
+
+window.addEventListener(
+    "scroll",
+    function() {
+
+        const header =
+            document.querySelector(
+                ".header"
+            );
+
+
+        if (
+            window.scrollY > 30
+        ) {
+
+            header.classList.add(
+                "scrolled"
+            );
+
+        }
+
+        else {
+
+            header.classList.remove(
+                "scrolled"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   START
 ===================================================== */
 
 updateServiceInfo();
 
 render();
 
+initReveal();
+
 </script>
 
+
 <script src="nav-mobile.js"></script>
+
 </body>
 
 </html>
